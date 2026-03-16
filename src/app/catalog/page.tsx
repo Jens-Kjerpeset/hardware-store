@@ -1,0 +1,54 @@
+"use client";
+
+import Link from 'next/link';
+import { Cpu, HardDrive, LayoutGrid, Monitor, Power, Server, Fan, Disc } from 'lucide-react';
+import { useStore } from '@/lib/store';
+
+const CATEGORIES = [
+  { name: 'CPU', path: 'CPU', icon: Cpu, desc: 'Processors' },
+  { name: 'Motherboard', path: 'Motherboard', icon: Server, desc: 'Mainboards' },
+  { name: 'GPU', path: 'GPU', icon: Monitor, desc: 'Graphics Cards' },
+  { name: 'RAM', path: 'RAM', icon: LayoutGrid, desc: 'Memory' },
+  { name: 'Primary Storage', path: 'Primary Storage', icon: HardDrive, desc: 'NVMe & M.2 SSDs' },
+  { name: 'Additional Storage', path: 'Additional Storage', icon: HardDrive, desc: 'SATA SSDs & HDDs' },
+  { name: 'Power Supply', path: 'Power Supply', icon: Power, desc: 'PSUs' },
+  { name: 'Case', path: 'Case', icon: Server, desc: 'Chassis' },
+  { name: 'CPU Cooler', path: 'CPU Cooler', icon: Fan, desc: 'Cooling Solutions' },
+  { name: 'OS', path: 'OS', icon: Disc, desc: 'Operating Systems' },
+];
+
+export default function CategoryHub() {
+  const { mode } = useStore();
+
+  return (
+    <div className="flex flex-col gap-8 animate-in fade-in duration-500">
+      <div className="relative w-full h-48 overflow-hidden glass border-brand-500/20 shadow-2xl shadow-brand-500/10 flex items-center justify-center group">
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-900/40 via-purple-900/40 to-dark-bg z-0" />
+        <div className="absolute -inset-x-20 top-0 h-px bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-50 shadow-[0_0_15px_rgba(59,130,246,0.8)]" />
+        <div className="relative z-10 text-center space-y-2 px-4">
+          <h1 className="text-4xl md:text-5xl font-black tracking-tighter bg-gradient-to-br from-white to-gray-400 bg-clip-text text-transparent pb-2">
+            Select a Component Category
+          </h1>
+          <p className="text-brand-100/80 font-medium">
+            {mode === 'build' ? "Pick a category to select a part for your system build." : "Browse parts by category."}
+          </p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+        {CATEGORIES.map((cat) => (
+          <Link href={`/catalog/${cat.path}`} key={cat.name} className="group">
+            <div className="glass p-8 flex flex-col items-center justify-center gap-4 border border-dark-border hover:border-brand-500/50 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.2)] transition-all duration-300 h-48 relative overflow-hidden">
+               <div className="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+               <cat.icon className="w-16 h-16 text-gray-500 group-hover:text-brand-400 transition-colors drop-shadow-md z-10" />
+               <div className="text-center z-10">
+                 <h2 className="text-xl font-bold text-white mb-1 group-hover:text-brand-300 transition-colors">{cat.name}</h2>
+                 <p className="text-sm text-gray-500 group-hover:text-gray-400 transition-colors">{cat.desc}</p>
+               </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}

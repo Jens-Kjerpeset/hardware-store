@@ -1,0 +1,29 @@
+datasource db {
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  products Product[]
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Float
+  imageUrl    String
+  brand       String
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  
+  specsJson   String   // JSON string storing spec info (socket, memoryType, wattage, etc)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

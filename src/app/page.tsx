@@ -1,65 +1,75 @@
-import Image from "next/image";
+"use client";
+
+import { useStore } from '@/lib/store';
+import { Cpu, Wrench, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const setMode = useStore(state => state.setMode);
+  const router = useRouter();
+
+  const handleModeSelect = (mode: 'loose' | 'build', path: string) => {
+    setMode(mode);
+    router.push(path);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="flex flex-col items-center justify-center min-h-[75vh] w-full animate-in fade-in zoom-in duration-500">
+      
+      <div className="text-center mb-16 space-y-4">
+        <h1 className="text-5xl md:text-7xl font-black bg-gradient-to-br from-white via-gray-200 to-gray-500 bg-clip-text text-transparent tracking-tight">
+          Welcome to <span className="bg-gradient-to-r from-brand-500 to-amber-400 bg-clip-text text-transparent">Hardware Store</span>
+        </h1>
+        <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light">
+          Whether you&apos;re upgrading a single component or forging an entirely new rig from scratch, we have the arsenal you need.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-8 w-full max-w-5xl">
+        
+        {/* Loose Parts Mode */}
+        <button 
+          onClick={() => handleModeSelect('loose', '/catalog')}
+          className="group relative flex flex-col h-full glass p-8 border border-dark-border hover:border-brand-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-500/20 text-left overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          
+          <div className="h-16 w-16 bg-dark-surface flex items-center justify-center mb-6 border border-dark-border group-hover:border-brand-500/30 group-hover:bg-brand-500/10 transition-colors">
+            <Cpu className="w-8 h-8 text-gray-400 group-hover:text-brand-400 transition-colors" />
+          </div>
+          
+          <h2 className="text-3xl font-bold text-white mb-4">Browse Loose Parts</h2>
+          <p className="text-gray-400 mb-8 flex-1 text-lg">
+            Looking for a specific upgrade? Browse our massive catalog of individual components and add them directly to your cart.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          
+          <div className="flex items-center text-brand-400 font-bold group-hover:translate-x-2 transition-transform">
+            Shop Catalog <ArrowRight className="ml-2 w-5 h-5" />
+          </div>
+        </button>
+
+        {/* Build a System Mode */}
+        <button 
+          onClick={() => handleModeSelect('build', '/catalog')}
+          className="group relative flex flex-col h-full glass p-8 border border-dark-border hover:border-amber-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/20 text-left overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-bl from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          
+          <div className="h-16 w-16 bg-dark-surface flex items-center justify-center mb-6 border border-dark-border group-hover:border-amber-500/30 group-hover:bg-amber-500/10 transition-colors">
+            <Wrench className="w-8 h-8 text-gray-400 group-hover:text-amber-400 transition-colors" />
+          </div>
+          
+          <h2 className="text-3xl font-bold text-white mb-4">Build a System</h2>
+          <p className="text-gray-400 mb-8 flex-1 text-lg">
+            Select parts for a complete custom rig. Our intelligent engine will verify compatibility and ensure you aren&apos;t missing any crucial components.
+          </p>
+          
+          <div className="flex items-center text-amber-500 font-bold group-hover:translate-x-2 transition-transform">
+            Enter PC Builder <ArrowRight className="ml-2 w-5 h-5" />
+          </div>
+        </button>
+
+      </div>
     </div>
   );
 }
