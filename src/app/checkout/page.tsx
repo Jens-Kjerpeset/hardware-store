@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { ShoppingCart, CheckCircle2, ChevronRight, Truck, CreditCard, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
+import { formatCurrency } from '@/lib/utils';
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -65,8 +66,8 @@ export default function CheckoutPage() {
   // but we'll show the MVA breakdown explicitly as "Includes 25% MVA".
   // MVA Amount = Total * (0.25 / 1.25)
   const mvaAmount = subtotal * (0.25 / 1.25);
-  // Free shipping for orders over $1500 (or equivalent NOK), else $50
-  const shipping = subtotal > 1500 ? 0 : 50;
+  // Free shipping for orders over 1500 Kr, else 99 Kr
+  const shipping = subtotal > 1500 ? 0 : 99;
   const total = subtotal + shipping;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -270,7 +271,7 @@ export default function CheckoutPage() {
                 disabled={isSubmitting}
                 className="w-full py-4 bg-amber-500 hover:bg-amber-400 text-dark-bg font-black text-lg transition-colors flex justify-center items-center gap-2 rounded shadow-xl hover:shadow-amber-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? 'Processing...' : `Pay $${total.toFixed(2)}`}
+                {isSubmitting ? 'Processing...' : `Pay ${formatCurrency(total)}`}
               </button>
             </div>
             
@@ -292,7 +293,7 @@ export default function CheckoutPage() {
                       <div className="text-xs text-gray-500 mt-1">Qty: {item.quantity || 1}</div>
                     </div>
                     <div className="text-sm font-mono text-white whitespace-nowrap">
-                      ${((item.quantity || 1) * item.price).toFixed(2)}
+                      {formatCurrency(((item.quantity || 1) * item.price))}
                     </div>
                   </div>
                 ))}
@@ -301,24 +302,24 @@ export default function CheckoutPage() {
               <div className="space-y-3 pt-6 border-t border-dark-border">
                 <div className="flex justify-between text-sm text-gray-400">
                   <span>Subtotal</span>
-                  <span className="font-mono">${subtotal.toFixed(2)}</span>
+                  <span className="font-mono">{formatCurrency(subtotal)}</span>
                 </div>
                 
                 <div className="flex justify-between text-sm text-gray-400">
                   <span>Shipping (Posten/Bring)</span>
-                  <span className="font-mono text-white">{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                  <span className="font-mono text-white">{shipping === 0 ? 'FREE' : formatCurrency(shipping)}</span>
                 </div>
 
                 {/* Explicit MVA Breakdown */}
                  <div className="flex justify-between text-xs text-gray-500 border-t border-dark-border/50 pt-3">
                   <span>Included 25% MVA (VAT)</span>
-                  <span className="font-mono">${mvaAmount.toFixed(2)}</span>
+                  <span className="font-mono">{formatCurrency(mvaAmount)}</span>
                 </div>
 
                 <div className="flex justify-between items-center pt-4 mt-2 border-t border-dark-border">
                   <span className="text-lg font-bold text-white">Total</span>
                   <div className="text-right">
-                    <span className="text-2xl font-black text-amber-500 font-mono tracking-tighter">${total.toFixed(2)}</span>
+                    <span className="text-2xl font-black text-amber-500 font-mono tracking-tighter">{formatCurrency(total)}</span>
                     <div className="text-[10px] text-gray-500 uppercase tracking-widest mt-0.5">Incl. Taxes & Fees</div>
                   </div>
                 </div>

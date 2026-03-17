@@ -3,6 +3,7 @@
 import { useStore } from '@/lib/store';
 import { ShoppingCart, X, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { formatCurrency } from '@/lib/utils';
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -71,7 +72,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                      </div>
                      <div className="flex-1">
                        <h4 className="font-bold text-gray-200 text-sm leading-tight mb-1">{item.name}</h4>
-                       <div className="font-black text-brand-400 text-sm">${item.price.toFixed(2)}</div>
+                       <div className="font-black text-brand-400 text-sm">{formatCurrency(item.price)}</div>
                      </div>
                      <div className="flex flex-col items-end gap-2">
                        <div className="flex items-center gap-2 bg-dark-bg border border-dark-border p-1">
@@ -89,7 +90,7 @@ export function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             <div className="p-6 border-t border-dark-border bg-dark-bg">
                <div className="flex justify-between text-gray-400 text-sm mb-2">
                  <span>Subtotal ({looseItemCount} items)</span>
-                 <span className="font-mono text-white">${looseTotal.toFixed(2)}</span>
+                 <span className="font-mono text-white">{formatCurrency(looseTotal)}</span>
                </div>
                <button 
                   onClick={() => { onClose(); router.push('/checkout'); }}

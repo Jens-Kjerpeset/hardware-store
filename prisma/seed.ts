@@ -12,8 +12,10 @@ const adapter = new PrismaLibSql({ url, authToken });
 const prisma = new PrismaClient({ adapter })
 
 async function main() {
+  await prisma.expenditure.deleteMany()
+  await prisma.orderItem.deleteMany()
+  await prisma.order.deleteMany()
   await prisma.product.deleteMany()
-  await prisma.category.deleteMany()
 
   const categories = [
     { name: 'CPU' },
@@ -22,8 +24,7 @@ async function main() {
     { name: 'GPU' },
     { name: 'Power Supply' },
     { name: 'Case' },
-    { name: 'Primary Storage' },
-    { name: 'Additional Storage' },
+    { name: 'Storage' },
     { name: 'CPU Cooler' },
     { name: 'OS' },
   ]
@@ -483,15 +484,15 @@ async function main() {
       specsJson: JSON.stringify({ type: 'case', formFactor: 'Mini-ITX', maxMainboard: 'Mini-ITX', color: 'Black', sidePanel: 'Solid' })
     },
 
-    // Primary Storage
+    // Storage
     {
       name: 'Samsung 990 PRO 2TB',
       description: 'Internal PCIe Gen 4.0 x4, NVMe 2.0 SSD for ultimate performance.',
       price: 169.99,
       imageUrl: '/placeholder.svg',
       brand: 'Samsung',
-      categoryId: categoryMap.get('Primary Storage'),
-      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 2000, interface: 'PCIe 4.0', readSpeed: 7450, writeSpeed: 6900, type: 'primary_storage' })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 2000, interface: 'PCIe 4.0', readSpeed: 7450, writeSpeed: 6900, type: 'storage', storageType: 'SSD' })
     },
     {
       name: 'Western Digital WD_BLACK SN850X 1TB',
@@ -499,8 +500,8 @@ async function main() {
       price: 84.99,
       imageUrl: '/placeholder.svg',
       brand: 'Western Digital',
-      categoryId: categoryMap.get('Primary Storage'),
-      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 1000, interface: 'PCIe 4.0', readSpeed: 7300, writeSpeed: 6300, type: 'primary_storage' })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 1000, interface: 'PCIe 4.0', readSpeed: 7300, writeSpeed: 6300, type: 'storage', storageType: 'SSD' })
     },
     {
       name: 'Crucial T700 2TB Gen5',
@@ -508,8 +509,8 @@ async function main() {
       price: 269.99,
       imageUrl: '/placeholder.svg',
       brand: 'Crucial',
-      categoryId: categoryMap.get('Primary Storage'),
-      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 2000, interface: 'PCIe 5.0', readSpeed: 12400, writeSpeed: 11800, type: 'primary_storage' })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 2000, interface: 'PCIe 5.0', readSpeed: 12400, writeSpeed: 11800, type: 'storage', storageType: 'SSD' })
     },
     {
       name: 'Corsair MP700 PRO 2TB Gen5',
@@ -517,8 +518,8 @@ async function main() {
       price: 299.99,
       imageUrl: '/placeholder.svg',
       brand: 'Corsair',
-      categoryId: categoryMap.get('Primary Storage'),
-      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 2000, interface: 'PCIe 5.0', readSpeed: 12400, writeSpeed: 11800, type: 'primary_storage' })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 2000, interface: 'PCIe 5.0', readSpeed: 12400, writeSpeed: 11800, type: 'storage', storageType: 'SSD' })
     },
     {
       name: 'Kingston FURY Renegade 2TB',
@@ -526,8 +527,8 @@ async function main() {
       price: 154.99,
       imageUrl: '/placeholder.svg',
       brand: 'Kingston',
-      categoryId: categoryMap.get('Primary Storage'),
-      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 2000, interface: 'PCIe 4.0', readSpeed: 7300, writeSpeed: 7000, type: 'primary_storage' })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 2000, interface: 'PCIe 4.0', readSpeed: 7300, writeSpeed: 7000, type: 'storage', storageType: 'SSD' })
     },
     {
       name: 'Samsung 980 PRO 1TB',
@@ -535,19 +536,18 @@ async function main() {
       price: 89.99,
       imageUrl: '/placeholder.svg',
       brand: 'Samsung',
-      categoryId: categoryMap.get('Primary Storage'),
-      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 1000, interface: 'PCIe 4.0', readSpeed: 7000, writeSpeed: 5000, type: 'primary_storage' })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: 'M.2 2280', capacity: 1000, interface: 'PCIe 4.0', readSpeed: 7000, writeSpeed: 5000, type: 'storage', storageType: 'SSD' })
     },
 
-    // Additional Storage
     {
       name: 'Seagate IronWolf Pro 20TB',
       description: 'High-capacity 7200 RPM SATA 6Gb/s HDD for massive storage arrays.',
       price: 369.99,
       imageUrl: '/placeholder.svg',
       brand: 'Seagate',
-      categoryId: categoryMap.get('Additional Storage'),
-      specsJson: JSON.stringify({ formFactor: '3.5"', capacity: 20000, type: 'additional_storage', storageType: 'HDD', interface: 'SATA', cache: 256, rpm: 7200 })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: '3.5"', capacity: 20000, type: 'storage', storageType: 'HDD', interface: 'SATA', cache: 256, rpm: 7200 })
     },
     {
       name: 'Western Digital WD Blue 4TB',
@@ -555,8 +555,8 @@ async function main() {
       price: 79.99,
       imageUrl: '/placeholder.svg',
       brand: 'Western Digital',
-      categoryId: categoryMap.get('Additional Storage'),
-      specsJson: JSON.stringify({ formFactor: '3.5"', capacity: 4000, type: 'additional_storage', storageType: 'HDD', interface: 'SATA', cache: 256, rpm: 5400 })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: '3.5"', capacity: 4000, type: 'storage', storageType: 'HDD', interface: 'SATA', cache: 256, rpm: 5400 })
     },
     {
       name: 'Crucial MX500 2TB',
@@ -564,8 +564,8 @@ async function main() {
       price: 119.99,
       imageUrl: '/placeholder.svg',
       brand: 'Crucial',
-      categoryId: categoryMap.get('Additional Storage'),
-      specsJson: JSON.stringify({ formFactor: '2.5"', capacity: 2000, type: 'additional_storage', storageType: 'SSD', interface: 'SATA', readSpeed: 560, writeSpeed: 510 })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: '2.5"', capacity: 2000, type: 'storage', storageType: 'SSD', interface: 'SATA', readSpeed: 560, writeSpeed: 510 })
     },
     {
       name: 'Samsung 870 EVO 4TB',
@@ -573,8 +573,8 @@ async function main() {
       price: 249.99,
       imageUrl: '/placeholder.svg',
       brand: 'Samsung',
-      categoryId: categoryMap.get('Additional Storage'),
-      specsJson: JSON.stringify({ formFactor: '2.5"', capacity: 4000, type: 'additional_storage', storageType: 'SSD', interface: 'SATA', readSpeed: 560, writeSpeed: 530 })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: '2.5"', capacity: 4000, type: 'storage', storageType: 'SSD', interface: 'SATA', readSpeed: 560, writeSpeed: 530 })
     },
     {
       name: 'Seagate Barracuda 8TB',
@@ -582,8 +582,8 @@ async function main() {
       price: 129.99,
       imageUrl: '/placeholder.svg',
       brand: 'Seagate',
-      categoryId: categoryMap.get('Additional Storage'),
-      specsJson: JSON.stringify({ formFactor: '3.5"', capacity: 8000, type: 'additional_storage', storageType: 'HDD', interface: 'SATA', cache: 256, rpm: 5400 })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: '3.5"', capacity: 8000, type: 'storage', storageType: 'HDD', interface: 'SATA', cache: 256, rpm: 5400 })
     },
     {
       name: 'Toshiba X300 14TB',
@@ -591,8 +591,8 @@ async function main() {
       price: 269.99,
       imageUrl: '/placeholder.svg',
       brand: 'Toshiba',
-      categoryId: categoryMap.get('Additional Storage'),
-      specsJson: JSON.stringify({ formFactor: '3.5"', capacity: 14000, type: 'additional_storage', storageType: 'HDD', interface: 'SATA', cache: 512, rpm: 7200 })
+      categoryId: categoryMap.get('Storage'),
+      specsJson: JSON.stringify({ formFactor: '3.5"', capacity: 14000, type: 'storage', storageType: 'HDD', interface: 'SATA', cache: 512, rpm: 7200 })
     },
 
     // CPU Coolers
@@ -663,9 +663,121 @@ async function main() {
     }
   ]
 
+  const createdProducts = [];
+
   for (const product of products) {
-    await prisma.product.create({
-      data: product
+    // Convert USD prices roughly to realistic Norwegian retail prices (incl. VAT)
+    // Roughly 11.5x USD, rounded to the nearest 10, minus 1 for psychological pricing
+    const rawNok = product.price * 11.5;
+    const nokPrice = Math.max(99, Math.round(rawNok / 10) * 10 - 1);
+    
+    // Simulate cost (60% to 85% of retail price)
+    const costMultiplier = 0.6 + (Math.random() * 0.25);
+    const cost = Math.round(nokPrice * costMultiplier);
+
+    // Simulate stock
+    const stock = Math.floor(Math.random() * 95) + 5; // 5 to 100
+
+    const dbProduct = await prisma.product.create({
+      data: {
+        ...product,
+        price: nokPrice,
+        cost,
+        stock
+      }
+    });
+
+    createdProducts.push(dbProduct);
+  }
+
+  console.log('Generating dummy historical orders...')
+
+  // Generate ~1300 dummy orders evenly distributed back to roughly Dec 2024
+  const now = new Date()
+  let orderDayOffset = 0;
+  const orderDayIncrement = 480 / 1300; // Evenly space orders across 480 days
+
+  for (let i = 0; i < 1300; i++) {
+    // Deterministic date backwards in time with randomized varied spacing
+    const pastDate = new Date(now.getTime() - orderDayOffset * 24 * 60 * 60 * 1000)
+    orderDayOffset += orderDayIncrement * (0.5 + Math.random()); // Add random noise to gaps
+    
+    // Random number of items in this order (1 to 5)
+    const numItems = Math.floor(Math.random() * 5) + 1
+    const orderItemsData = []
+    let totalAmount = 0
+    
+    for (let j = 0; j < numItems; j++) {
+      // Pick random product
+      const product = createdProducts[Math.floor(Math.random() * createdProducts.length)]
+      const quantity = Math.floor(Math.random() * 2) + 1 // 1 or 2 of this item
+      
+      orderItemsData.push({
+        productId: product.id,
+        quantity,
+        priceAtTime: product.price,
+        costAtTime: product.cost
+      })
+      totalAmount += product.price * quantity
+    }
+
+    await prisma.order.create({
+      data: {
+        totalAmount,
+        status: Math.random() > 0.1 ? 'completed' : 'pending',
+        createdAt: pastDate,
+        updatedAt: pastDate,
+        items: {
+          create: orderItemsData
+        }
+      }
+    })
+  }
+
+  console.log('Generating dummy company expenditures...')
+
+  const expenditureCategories = ['rent', 'marketing', 'server hosting', 'restock']
+  // Generate ~185 dummy expenditures evenly distributed over the last ~480 days
+  let expDayOffset = 0;
+  const expDayIncrement = 480 / 185;
+
+  for (let i = 0; i < 185; i++) {
+    // Deterministic date backwards in time with randomized varied spacing
+    const pastDate = new Date(now.getTime() - expDayOffset * 24 * 60 * 60 * 1000)
+    expDayOffset += expDayIncrement * (0.5 + Math.random()); // Add random noise to gaps
+    const category = expenditureCategories[Math.floor(Math.random() * expenditureCategories.length)]
+    
+    // Rent is high, marketing/servers are medium, restock is variable
+    let amount = 0
+    let description = ''
+    
+    switch (category) {
+      case 'rent':
+        amount = 15000 + (Math.random() * 5000) // 15k - 20k NOK
+        description = 'Monthly Warehouse & Office Rent'
+        break
+      case 'marketing':
+        amount = 2000 + (Math.random() * 8000) // 2k - 10k NOK
+        description = 'Facebook / Google Ad Spend'
+        break
+      case 'server hosting':
+        amount = 800 + (Math.random() * 400) // 800 - 1200 NOK
+        description = 'AWS / Vercel Cloud Architecture'
+        break
+      case 'restock':
+        amount = 25000 + (Math.random() * 75000) // 25k - 100k NOK
+        description = 'Wholesale Bulk Inventory Restock'
+        break
+    }
+
+    await prisma.expenditure.create({
+      data: {
+        amount,
+        description,
+        category,
+        createdAt: pastDate,
+        updatedAt: pastDate
+      }
     })
   }
 

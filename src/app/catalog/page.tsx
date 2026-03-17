@@ -9,8 +9,7 @@ const CATEGORIES = [
   { name: 'Motherboard', path: 'Motherboard', icon: Server, desc: 'Mainboards' },
   { name: 'GPU', path: 'GPU', icon: Monitor, desc: 'Graphics Cards' },
   { name: 'RAM', path: 'RAM', icon: LayoutGrid, desc: 'Memory' },
-  { name: 'Primary Storage', path: 'Primary Storage', icon: HardDrive, desc: 'NVMe & M.2 SSDs' },
-  { name: 'Additional Storage', path: 'Additional Storage', icon: HardDrive, desc: 'SATA SSDs & HDDs' },
+  { name: 'Storage', path: 'Storage', icon: HardDrive, desc: 'NVMe, SSDs & HDDs' },
   { name: 'Power Supply', path: 'Power Supply', icon: Power, desc: 'PSUs' },
   { name: 'Case', path: 'Case', icon: Server, desc: 'Chassis' },
   { name: 'CPU Cooler', path: 'CPU Cooler', icon: Fan, desc: 'Cooling Solutions' },
@@ -35,7 +34,7 @@ export default function CategoryHub() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
         {CATEGORIES.map((cat) => (
           <Link href={`/catalog/${cat.path}`} key={cat.name} className="group">
             <div className="glass p-8 flex flex-col items-center justify-center gap-4 border border-dark-border hover:border-brand-500/50 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.2)] transition-all duration-300 h-48 relative overflow-hidden">

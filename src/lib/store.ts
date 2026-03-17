@@ -37,6 +37,13 @@ interface StoreState {
   setBuildComponent: (category: string, product: Product) => void;
   removeBuildComponent: (category: string) => void;
   clearBuild: () => void;
+
+  // Build a System Storage State (Array-based for multiple items)
+  buildStorage: CartItem[];
+  addBuildStorageComponent: (product: Product) => void;
+  removeBuildStorageComponent: (productId: string) => void;
+  updateBuildStorageQuantity: (productId: string, quantity: number) => void;
+  clearBuildStorage: () => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -78,7 +85,30 @@ export const useStore = create<StoreState>()(
         delete next[category]
         return { buildSystem: next }
       }),
-      clearBuild: () => set({ buildSystem: {} })
+      clearBuild: () => set({ buildSystem: {}, buildStorage: [] }),
+
+      // --- Build Storage Array State ---
+      buildStorage: [],
+      addBuildStorageComponent: (product: Product) => set((state) => {
+        const existing = state.buildStorage.find(item => item.id === product.id)
+        if (existing) {
+          return {
+            buildStorage: state.buildStorage.map(item => 
+              item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+            )
+          } 
+        }
+        return { buildStorage: [...state.buildStorage, { ...product, quantity: 1 }] }
+      }),
+      removeBuildStorageComponent: (productId: string) => set((state) => ({
+        buildStorage: state.buildStorage.filter(item => item.id !== productId)
+      })),
+      updateBuildStorageQuantity: (productId, quantity) => set((state) => ({
+        buildStorage: quantity <= 0 
+          ? state.buildStorage.filter(item => item.id !== productId)
+          : state.buildStorage.map(item => item.id === productId ? { ...item, quantity } : item)
+      })),
+      clearBuildStorage: () => set({ buildStorage: [] })
     }),
     {
       name: 'hardware-store-storage',

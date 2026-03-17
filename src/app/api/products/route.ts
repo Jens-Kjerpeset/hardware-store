@@ -1,26 +1,33 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-
+import {
+  CPU_MIN_SPEED, CPU_MAX_SPEED, CPU_MIN_CORES, CPU_MAX_CORES, CPU_MAX_TDP,
+  GPU_MIN_VRAM, GPU_MAX_VRAM, GPU_MIN_PSU, GPU_MAX_PSU, GPU_MAX_LENGTH,
+  RAM_MIN_SPEED, RAM_MAX_SPEED, RAM_MAX_CAS,
+  STORAGE_MIN_READ_SPEED, STORAGE_MAX_READ_SPEED,
+  PSU_MIN_WATTAGE, PSU_MAX_WATTAGE,
+  MIN_COOLER_NOISE, MAX_COOLER_NOISE, MIN_COOLER_HEIGHT, MAX_COOLER_HEIGHT
+} from '@/lib/constants';
 export async function GET(request: Request) {
   const searchParams = new URL(request.url).searchParams;
   const q = searchParams.get('q') || '';
   const categoriesParam = searchParams.get('category');
   const brandsParam = searchParams.get('brand');
   const sort = searchParams.get('sort'); // price_asc, price_desc
-  const minSpeed = parseFloat(searchParams.get('minSpeed') || '0');
-  const maxSpeed = parseFloat(searchParams.get('maxSpeed') || '10');
-  const minCores = parseInt(searchParams.get('minCores') || '0', 10);
-  const maxCores = parseInt(searchParams.get('maxCores') || '128', 10);
-  const maxTDP = parseInt(searchParams.get('maxTDP') || '500', 10);
+  const minSpeed = parseFloat(searchParams.get('minSpeed') || CPU_MIN_SPEED.toString());
+  const maxSpeed = parseFloat(searchParams.get('maxSpeed') || CPU_MAX_SPEED.toString());
+  const minCores = parseInt(searchParams.get('minCores') || CPU_MIN_CORES.toString(), 10);
+  const maxCores = parseInt(searchParams.get('maxCores') || CPU_MAX_CORES.toString(), 10);
+  const maxTDP = parseInt(searchParams.get('maxTDP') || CPU_MAX_TDP.toString(), 10);
   const socketsParam = searchParams.get('sockets');
 
-  const minVram = parseInt(searchParams.get('minVram') || '0', 10);
-  const maxVram = parseInt(searchParams.get('maxVram') || '128', 10);
-  const minPsu = parseInt(searchParams.get('minPsu') || '0', 10);
-  const maxPsu = parseInt(searchParams.get('maxPsu') || '2000', 10);
+  const minVram = parseInt(searchParams.get('minVram') || GPU_MIN_VRAM.toString(), 10);
+  const maxVram = parseInt(searchParams.get('maxVram') || GPU_MAX_VRAM.toString(), 10);
+  const minPsu = parseInt(searchParams.get('minPsu') || GPU_MIN_PSU.toString(), 10);
+  const maxPsu = parseInt(searchParams.get('maxPsu') || GPU_MAX_PSU.toString(), 10);
   const interfacesParam = searchParams.get('interfaces');
   const chipsetsParam = searchParams.get('chipsets');
-  const maxLength = parseInt(searchParams.get('maxLength') || '500', 10);
+  const maxLength = parseInt(searchParams.get('maxLength') || GPU_MAX_LENGTH.toString(), 10);
   
   const categories = categoriesParam ? categoriesParam.split(',').map(s => s.trim()).filter(Boolean) : [];
   const brands = brandsParam ? brandsParam.split(',').map(s => s.trim()).filter(Boolean) : [];
@@ -38,9 +45,9 @@ export async function GET(request: Request) {
   const minMaxMemory = parseInt(searchParams.get('minMaxMemory') || '0', 10);
   
   // RAM specifics
-  const minRamSpeed = parseInt(searchParams.get('minRamSpeed') || '0', 10);
-  const maxRamSpeed = parseInt(searchParams.get('maxRamSpeed') || '10000', 10);
-  const maxCasLatency = parseInt(searchParams.get('maxCasLatency') || '50', 10);
+  const minRamSpeed = parseInt(searchParams.get('minRamSpeed') || RAM_MIN_SPEED.toString(), 10);
+  const maxRamSpeed = parseInt(searchParams.get('maxRamSpeed') || RAM_MAX_SPEED.toString(), 10);
+  const maxCasLatency = parseInt(searchParams.get('maxCasLatency') || RAM_MAX_CAS.toString(), 10);
   const capacitiesParam = searchParams.get('capacities');
   const modulesParam = searchParams.get('modules');
   const capacities = capacitiesParam ? capacitiesParam.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n)) : [];
@@ -51,16 +58,16 @@ export async function GET(request: Request) {
   const storageCapacitiesParam = searchParams.get('storageCapacities');
   const storageInterfaces = storageInterfacesParam ? storageInterfacesParam.split(',').map(s => s.trim()).filter(Boolean) : [];
   const storageCapacities = storageCapacitiesParam ? storageCapacitiesParam.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n)) : [];
-  const minReadSpeed = parseInt(searchParams.get('minReadSpeed') || '0', 10);
-  const maxReadSpeed = parseInt(searchParams.get('maxReadSpeed') || '20000', 10);
+  const minReadSpeed = parseInt(searchParams.get('minReadSpeed') || STORAGE_MIN_READ_SPEED.toString(), 10);
+  const maxReadSpeed = parseInt(searchParams.get('maxReadSpeed') || STORAGE_MAX_READ_SPEED.toString(), 10);
 
   const storageTypesParam = searchParams.get('storageTypes');
   const storageFormFactorsParam = searchParams.get('storageFormFactors');
   const storageTypes = storageTypesParam ? storageTypesParam.split(',').map(s => s.trim()).filter(Boolean) : [];
   const storageFormFactors = storageFormFactorsParam ? storageFormFactorsParam.split(',').map(s => s.trim()).filter(Boolean) : [];
   
-  const minWattage = parseInt(searchParams.get('minWattage') || '0', 10);
-  const maxWattage = parseInt(searchParams.get('maxWattage') || '5000', 10);
+  const minWattage = parseInt(searchParams.get('minWattage') || PSU_MIN_WATTAGE.toString(), 10);
+  const maxWattage = parseInt(searchParams.get('maxWattage') || PSU_MAX_WATTAGE.toString(), 10);
   const psuEfficienciesParam = searchParams.get('psuEfficiencies');
   const psuModularitiesParam = searchParams.get('psuModularities');
   const psuFormFactorsParam = searchParams.get('psuFormFactors');
@@ -83,10 +90,10 @@ export async function GET(request: Request) {
   const coolerTypes = coolerTypesParam ? coolerTypesParam.split(',').map(s => s.trim()).filter(Boolean) : [];
   const coolerRadiatorSizes = coolerRadiatorSizesParam ? coolerRadiatorSizesParam.split(',').map(Number).filter(n => !isNaN(n)) : [];
   const coolerColors = coolerColorsParam ? coolerColorsParam.split(',').map(s => s.trim()).filter(Boolean) : [];
-  const minCoolerNoise = parseInt(searchParams.get('minCoolerNoise') || '0', 10);
-  const maxCoolerNoise = parseInt(searchParams.get('maxCoolerNoise') || '50', 10);
-  const minCoolerHeight = parseInt(searchParams.get('minCoolerHeight') || '0', 10);
-  const maxCoolerHeight = parseInt(searchParams.get('maxCoolerHeight') || '200', 10);
+  const minCoolerNoise = parseInt(searchParams.get('minCoolerNoise') || MIN_COOLER_NOISE.toString(), 10);
+  const maxCoolerNoise = parseInt(searchParams.get('maxCoolerNoise') || MAX_COOLER_NOISE.toString(), 10);
+  const minCoolerHeight = parseInt(searchParams.get('minCoolerHeight') || MIN_COOLER_HEIGHT.toString(), 10);
+  const maxCoolerHeight = parseInt(searchParams.get('maxCoolerHeight') || MAX_COOLER_HEIGHT.toString(), 10);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const whereClause: any = {};
@@ -128,35 +135,35 @@ export async function GET(request: Request) {
     let filtered = products;
 
     // Apply JSON-based deep filtering in memory
-    if (minSpeed > 0 || maxSpeed < 10 || minCores > 0 || maxCores < 128 || maxTDP < 500 || sockets.length > 0 || minVram > 0 || maxVram < 128 || minPsu > 0 || maxPsu < 2000 || interfaces.length > 0 || maxLength < 500 || minRamSpeed > 0 || maxRamSpeed < 10000 || maxCasLatency < 50 || capacities.length > 0 || modules.length > 0 || formFactors.length > 0 || memoryTypes.length > 0 || minMemorySlots > 0 || maxMemorySlots < 16 || minMaxMemory > 0 || chipsets.length > 0 || storageInterfaces.length > 0 || storageCapacities.length > 0 || minReadSpeed > 0 || maxReadSpeed < 20000 || storageTypes.length > 0 || storageFormFactors.length > 0 || minWattage > 0 || maxWattage < 5000 || psuEfficiencies.length > 0 || psuModularities.length > 0 || psuFormFactors.length > 0 || caseFormFactors.length > 0 || caseMaxMainboards.length > 0 || caseColors.length > 0 || caseSidePanels.length > 0 || coolerTypes.length > 0 || coolerRadiatorSizes.length > 0 || coolerColors.length > 0 || minCoolerNoise > 0 || maxCoolerNoise < 50 || minCoolerHeight > 0 || maxCoolerHeight < 200) {
+    if (minSpeed > CPU_MIN_SPEED || maxSpeed < CPU_MAX_SPEED || minCores > CPU_MIN_CORES || maxCores < CPU_MAX_CORES || maxTDP < CPU_MAX_TDP || sockets.length > 0 || minVram > GPU_MIN_VRAM || maxVram < GPU_MAX_VRAM || minPsu > GPU_MIN_PSU || maxPsu < GPU_MAX_PSU || interfaces.length > 0 || maxLength < GPU_MAX_LENGTH || minRamSpeed > RAM_MIN_SPEED || maxRamSpeed < RAM_MAX_SPEED || maxCasLatency < RAM_MAX_CAS || capacities.length > 0 || modules.length > 0 || formFactors.length > 0 || memoryTypes.length > 0 || minMemorySlots > 0 || maxMemorySlots < 16 || minMaxMemory > 0 || chipsets.length > 0 || storageInterfaces.length > 0 || storageCapacities.length > 0 || minReadSpeed > STORAGE_MIN_READ_SPEED || maxReadSpeed < STORAGE_MAX_READ_SPEED || storageTypes.length > 0 || storageFormFactors.length > 0 || minWattage > PSU_MIN_WATTAGE || maxWattage < PSU_MAX_WATTAGE || psuEfficiencies.length > 0 || psuModularities.length > 0 || psuFormFactors.length > 0 || caseFormFactors.length > 0 || caseMaxMainboards.length > 0 || caseColors.length > 0 || caseSidePanels.length > 0 || coolerTypes.length > 0 || coolerRadiatorSizes.length > 0 || coolerColors.length > 0 || minCoolerNoise > MIN_COOLER_NOISE || maxCoolerNoise < MAX_COOLER_NOISE || minCoolerHeight > MIN_COOLER_HEIGHT || maxCoolerHeight < MAX_COOLER_HEIGHT) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       filtered = products.filter((p: any) => {
         try {
           const specs = JSON.parse(p.specsJson || '{}');
           
           if (specs.type === 'cpu') {
-            if (minSpeed > 0 && (specs.speedGhz || 0) < minSpeed) return false;
-            if (maxSpeed < 10 && (specs.speedGhz || 10) > maxSpeed) return false;
-            if (minCores > 0 && (specs.cores || 0) < minCores) return false;
-            if (maxCores < 128 && (specs.cores || 128) > maxCores) return false;
-            if (maxTDP < 500 && (specs.tdp || 500) > maxTDP) return false;
+            if (minSpeed > CPU_MIN_SPEED && (specs.speedGhz || 0) < minSpeed) return false;
+            if (maxSpeed < CPU_MAX_SPEED && (specs.speedGhz || CPU_MAX_SPEED) > maxSpeed) return false;
+            if (minCores > CPU_MIN_CORES && (specs.cores || 0) < minCores) return false;
+            if (maxCores < CPU_MAX_CORES && (specs.cores || CPU_MAX_CORES) > maxCores) return false;
+            if (maxTDP < CPU_MAX_TDP && (specs.tdp || CPU_MAX_TDP) > maxTDP) return false;
             if (sockets.length > 0 && !sockets.includes(specs.socket)) return false;
           }
           
           if (specs.type === 'gpu') {
             const vram = specs.memory ? parseInt(specs.memory) : 0;
-            if (minVram > 0 && vram < minVram) return false;
-            if (maxVram < 128 && vram > maxVram) return false;
+            if (minVram > GPU_MIN_VRAM && vram < minVram) return false;
+            if (maxVram < GPU_MAX_VRAM && vram > maxVram) return false;
             
             const psu = specs.recommendedPsu || 0;
-            if (minPsu > 0 && psu < minPsu) return false;
-            if (maxPsu < 2000 && psu > maxPsu) return false;
+            if (minPsu > GPU_MIN_PSU && psu < minPsu) return false;
+            if (maxPsu < GPU_MAX_PSU && psu > maxPsu) return false;
             
             if (interfaces.length > 0 && !interfaces.includes(specs.interface)) return false;
             if (chipsets.length > 0 && !chipsets.includes(specs.chipset)) return false;
             
             const lengthMm = specs.lengthMm || 0;
-            if (maxLength < 500 && lengthMm > maxLength) return false;
+            if (maxLength < GPU_MAX_LENGTH && lengthMm > maxLength) return false;
           }
 
           if (specs.type === 'motherboard') {
@@ -179,11 +186,11 @@ export async function GET(request: Request) {
             if (capacities.length > 0 && !capacities.includes(specs.capacity)) return false;
             
             const rSpeed = specs.speed || 0;
-            if (minRamSpeed > 0 && rSpeed < minRamSpeed) return false;
-            if (maxRamSpeed < 10000 && rSpeed > maxRamSpeed) return false;
+            if (minRamSpeed > RAM_MIN_SPEED && rSpeed < minRamSpeed) return false;
+            if (maxRamSpeed < RAM_MAX_SPEED && rSpeed > maxRamSpeed) return false;
             
             const cl = specs.casLatency || 0;
-            if (maxCasLatency < 50 && cl > maxCasLatency) return false;
+            if (maxCasLatency < RAM_MAX_CAS && cl > maxCasLatency) return false;
             
             if (modules.length > 0 && !modules.includes(specs.modules)) return false;
           }
@@ -195,14 +202,14 @@ export async function GET(request: Request) {
             if (storageFormFactors.length > 0 && !storageFormFactors.includes(specs.formFactor)) return false;
 
             const readSpeed = specs.readSpeed || 0;
-            if (minReadSpeed > 0 && readSpeed < minReadSpeed) return false;
-            if (maxReadSpeed < 20000 && readSpeed > maxReadSpeed) return false;
+            if (minReadSpeed > STORAGE_MIN_READ_SPEED && readSpeed < minReadSpeed) return false;
+            if (maxReadSpeed < STORAGE_MAX_READ_SPEED && readSpeed > maxReadSpeed) return false;
           }
 
           if (specs.type === 'psu') {
             const wattage = specs.wattage || 0;
-            if (minWattage > 0 && wattage < minWattage) return false;
-            if (maxWattage < 5000 && wattage > maxWattage) return false;
+            if (minWattage > PSU_MIN_WATTAGE && wattage < minWattage) return false;
+            if (maxWattage < PSU_MAX_WATTAGE && wattage > maxWattage) return false;
             if (psuEfficiencies.length > 0 && !psuEfficiencies.includes(specs.efficiency)) return false;
             if (psuModularities.length > 0 && !psuModularities.includes(specs.modular)) return false;
             if (psuFormFactors.length > 0 && !psuFormFactors.includes(specs.formFactor)) return false;

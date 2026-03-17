@@ -24,6 +24,46 @@ model Product {
   
   specsJson   String   // JSON string storing spec info (socket, memoryType, wattage, etc)
   
+  stock       Int      @default(10)
+  cost        Float    @default(0) // Internal cost used to calculate margins
+
+  orderItems  OrderItem[]
+  
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Order {
+  id          String   @id @default(uuid())
+  totalAmount Float
+  status      String   @default("completed") // e.g., 'pending', 'completed', 'refunded'
+  
+  items       OrderItem[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Expenditure {
+  id          String   @id @default(uuid())
+  amount      Float
+  description String
+  category    String   // e.g., 'marketing', 'rent', 'restock'
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model OrderItem {
+  id          String   @id @default(uuid())
+  
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])
+  
+  quantity    Int
+  priceAtTime Float    // The price the user paid
+  costAtTime  Float    // The cost of the item at the time (to preserve historical profit margin even if current cost changes)
 }

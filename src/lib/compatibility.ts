@@ -27,12 +27,12 @@ export interface SelectedProduct {
 
 // Map form factors to an integer scale for easy physical clearance comparisons
 const FORM_FACTOR_SCALE: Record<string, number> = {
-  'E-ATX': 4,
-  'ATX': 3,
-  'Micro-ATX': 2,
-  'mATX': 2,
-  'Mini-ITX': 1,
-  'ITX': 1
+  'e-atx': 4,
+  'atx': 3,
+  'micro-atx': 2,
+  'matx': 2,
+  'mini-itx': 1,
+  'itx': 1
 };
 
 export function checkCompatibility(products: SelectedProduct[]): string[] {
@@ -91,13 +91,21 @@ export function checkCompatibility(products: SelectedProduct[]): string[] {
     }
   }
 
-  // 5. Motherboard Form Factor vs Case Physical Dimensions
+  // 5. Motherboard/PSU Form Factor vs Case Physical Dimensions
   if (motherboard && caseItem && motherboard.formFactor && caseItem.maxMainboard) {
-    const moboSize = FORM_FACTOR_SCALE[motherboard.formFactor] || 99;
-    const caseMaxSize = FORM_FACTOR_SCALE[caseItem.maxMainboard] || 99;
+    const moboSize = FORM_FACTOR_SCALE[motherboard.formFactor.toLowerCase()] || 99;
+    const caseMaxSize = FORM_FACTOR_SCALE[caseItem.maxMainboard.toLowerCase()] || 99;
 
     if (moboSize > caseMaxSize) {
        warnings.push(`Incompatible Dimensions: Motherboard ${motherboard.productName} is ${motherboard.formFactor}, but Case ${caseItem.productName} only supports up to ${caseItem.maxMainboard}.`);
+    }
+  }
+
+  // 5.5 PSU Form Factor vs Case Support
+  if (psu && caseItem && psu.formFactor && caseItem.maxMainboard) {
+    // If the case is ITX, it generally requires SFX PSUs unless stated otherwise.
+    if (caseItem.maxMainboard.toLowerCase() === 'mini-itx' && psu.formFactor.toLowerCase() === 'atx') {
+       warnings.push(`Incompatible PSU: Case ${caseItem.productName} is an ITX case, but Power Supply ${psu.productName} is a full ATX form factor. This case requires an SFX power supply.`);
     }
   }
 
@@ -110,6 +118,18 @@ export function checkCompatibility(products: SelectedProduct[]): string[] {
 }
 
 export function checkPotentialCompatibility(buildProducts: SelectedProduct[], potentialProduct: SelectedProduct): string[] {
+  const isCurrentlySelected = buildProducts.some(p => p.id === potentialProduct.id);
+  
+  if (isCurrentlySelected) {
+    // If the product is already in the build, the warnings it causes are the warnings 
+    // present in the current build that would disappear if it were removed.
+    const buildWithout = buildProducts.filter(p => p.id !== potentialProduct.id);
+    const warningsWithout = checkCompatibility(buildWithout);
+    const currentWarnings = checkCompatibility(buildProducts);
+    
+    return currentWarnings.filter(w => !warningsWithout.includes(w) && !w.startsWith('Notice:'));
+  }
+
   // Check compatibility of the build WITH the potential product replacing any existing product of same category
   const combined = [...buildProducts.filter(p => p.categoryId !== potentialProduct.categoryId), potentialProduct];
   const allWarnings = checkCompatibility(combined);
@@ -154,9 +174,9 @@ export function getIncompatibleFilterOptions(buildProducts: SelectedProduct[], c
       incompatible.memoryTypes = ALL_MEMORY_TYPES.filter(m => m !== ram.memoryType);
     }
     if (caseItem && caseItem.maxMainboard) {
-      const maxAllowed = FORM_FACTOR_SCALE[caseItem.maxMainboard] || 99;
+      const maxAllowed = FORM_FACTOR_SCALE[caseItem.maxMainboard.toLowerCase()] || 99;
       incompatible.formFactors = ALL_FORM_FACTORS.filter(f => {
-        const size = FORM_FACTOR_SCALE[f] || 0;
+        const size = FORM_FACTOR_SCALE[f.toLowerCase()] || 0;
         return size > maxAllowed;
       });
     }
@@ -170,9 +190,9 @@ export function getIncompatibleFilterOptions(buildProducts: SelectedProduct[], c
 
   if (category === 'Case') {
     if (motherboard && motherboard.formFactor) {
-      const requiredSize = FORM_FACTOR_SCALE[motherboard.formFactor] || 0;
+      const requiredSize = FORM_FACTOR_SCALE[motherboard.formFactor.toLowerCase()] || 0;
       incompatible.caseMaxMainboards = ALL_CASE_MAINBOARDS.filter(f => {
-        const maxSupported = FORM_FACTOR_SCALE[f] || 0;
+        const maxSupported = FORM_FACTOR_SCALE[f.toLowerCase()] || 0;
         return maxSupported < requiredSize;
       });
     }
