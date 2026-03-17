@@ -219,10 +219,21 @@ export default function CategoryGrid({ params }: { params: Promise<{ category: s
     
     try {
       const res = await fetch(url);
+      if (!res.ok) {
+        console.error("API returned a non-200 status:", res.status);
+        setProducts([]);
+        return;
+      }
       const data = await res.json();
-      setProducts(data);
+      if (Array.isArray(data)) {
+        setProducts(data);
+      } else {
+        console.error("API returned non-array data:", data);
+        setProducts([]);
+      }
     } catch (e) {
-      console.error(e);
+      console.error("Network or parsing error:", e);
+      setProducts([]);
     } finally {
       setLoading(false);
     }

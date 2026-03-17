@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma';
 import { formatCurrency } from '@/lib/utils';
-import { DollarSign, TrendingUp, PackageSearch, Activity } from 'lucide-react';
+import { DollarSign, TrendingUp, PackageSearch, Activity, AlertTriangle } from 'lucide-react';
 import { TimeframeSelector } from './TimeframeSelector';
 import { TransactionsList } from './TransactionsList';
 
@@ -36,42 +36,55 @@ export default async function AdminDashboardPage({
       break;
   }
 
-  const [orders, expenditures] = await Promise.all([
-    prisma.order.findMany({
-      where: dateLimit ? { createdAt: { gte: dateLimit } } : undefined,
-      include: { items: { include: { product: true } } },
-      orderBy: { createdAt: 'desc' },
-      take: dateLimit ? undefined : 1500 // Cap 'All Time' so browser doesn't freeze
-    }),
-    prisma.expenditure.findMany({
-      where: dateLimit ? { createdAt: { gte: dateLimit } } : undefined,
-      orderBy: { createdAt: 'desc' },
-      take: dateLimit ? undefined : 1500 // Cap 'All Time'
-    })
-  ]);
+  let orders: any[] = [];
+  let expenditures: any[] = [];
+  let transactions: any[] = [];
+  let totalOrderSum: any = { _sum: { totalAmount: 0 } };
+  let totalExtCostSum: any = { _sum: { amount: 0 } };
+  let orderItems: any[] = [];
+  let dbError = false;
 
-  // Merge and sort chronological transactions (both incoming orders and outgoing expenditures)
-  const transactions = [
-    ...orders.map(o => ({ ...o, type: 'order' as const })),
-    ...expenditures.map(e => ({ ...e, type: 'expenditure' as const }))
-  ].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  try {
+    [orders, expenditures] = await Promise.all([
+      prisma.order.findMany({
+        where: dateLimit ? { createdAt: { gte: dateLimit } } : undefined,
+        include: { items: { include: { product: true } } },
+        orderBy: { createdAt: 'desc' },
+        take: dateLimit ? undefined : 1500 // Cap 'All Time' so browser doesn't freeze
+      }),
+      prisma.expenditure.findMany({
+        where: dateLimit ? { createdAt: { gte: dateLimit } } : undefined,
+        orderBy: { createdAt: 'desc' },
+        take: dateLimit ? undefined : 1500 // Cap 'All Time'
+      })
+    ]);
 
-  // Calculate KPIs (We must execute separate fast aggregates for Total Math to bypass the `take: 20` bounds on table rows)
-  const [totalOrderSum, totalExtCostSum] = await Promise.all([
-    prisma.order.aggregate({
-      _sum: { totalAmount: true },
-      where: dateLimit ? { createdAt: { gte: dateLimit } } : undefined,
-    }),
-    prisma.expenditure.aggregate({
-      _sum: { amount: true },
-      where: dateLimit ? { createdAt: { gte: dateLimit } } : undefined,
-    })
-  ]);
-  
-  // To get cost of goods sold, we fetch all order items in timeframe
-  const orderItems = await prisma.orderItem.findMany({
-    where: dateLimit ? { order: { createdAt: { gte: dateLimit } } } : undefined,
-  });
+    // Merge and sort chronological transactions (both incoming orders and outgoing expenditures)
+    transactions = [
+      ...orders.map(o => ({ ...o, type: 'order' as const })),
+      ...expenditures.map(e => ({ ...e, type: 'expenditure' as const }))
+    ].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
+    // Calculate KPIs (We must execute separate fast aggregates for Total Math to bypass the `take: 20` bounds on table rows)
+    [totalOrderSum, totalExtCostSum] = await Promise.all([
+      prisma.order.aggregate({
+        _sum: { totalAmount: true },
+        where: dateLimit ? { createdAt: { gte: dateLimit } } : undefined,
+      }),
+      prisma.expenditure.aggregate({
+        _sum: { amount: true },
+        where: dateLimit ? { createdAt: { gte: dateLimit } } : undefined,
+      })
+    ]);
+    
+    // To get cost of goods sold, we fetch all order items in timeframe
+    orderItems = await prisma.orderItem.findMany({
+      where: dateLimit ? { order: { createdAt: { gte: dateLimit } } } : undefined,
+    });
+  } catch (error) {
+    console.error("Admin Dashboard DB Error:", error);
+    dbError = true;
+  }
 
   let totalRevenue = totalOrderSum._sum.totalAmount || 0;
   let totalCostOfGoods = 0;
@@ -86,6 +99,22 @@ export default async function AdminDashboardPage({
   const totalExpenses = totalCostOfGoods + totalOtherExpenses;
   const totalProfit = totalRevenue - totalExpenses;
   const profitMargin = totalRevenue > 0 ? (totalProfit / totalRevenue) * 100 : 0;
+
+  if (dbError) {
+    return (
+      <div className="space-y-6 animate-in fade-in duration-500">
+        <div className="p-6 glass border border-red-500/50 bg-red-500/10 rounded-xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-1 h-full bg-red-500" />
+          <h2 className="text-xl font-bold tracking-tight text-white mb-2 flex items-center gap-2">
+            <AlertTriangle className="w-5 h-5 text-red-500" /> Database Connection Error
+          </h2>
+          <p className="text-sm text-red-200 leading-relaxed max-w-3xl">
+            The server failed to connect to the database. If you deployed this to Vercel, please ensure that you have configured <strong>TURSO_DATABASE_URL</strong> and <strong>TURSO_AUTH_TOKEN</strong> in your Vercel Project Settings &gt; Environment Variables.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
