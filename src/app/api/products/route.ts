@@ -299,6 +299,41 @@ export async function GET(request: Request) {
         const specsB = JSON.parse(b.specsJson || '{}');
         return (specsB.memorySlots || 0) - (specsA.memorySlots || 0);
       });
+    } else if (sort === 'cores_desc') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filtered.sort((a: any, b: any) => {
+        const specsA = JSON.parse(a.specsJson || '{}');
+        const specsB = JSON.parse(b.specsJson || '{}');
+        return (specsB.cores || 0) - (specsA.cores || 0);
+      });
+    } else if (sort === 'speed_desc') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filtered.sort((a: any, b: any) => {
+        const specsA = JSON.parse(a.specsJson || '{}');
+        const specsB = JSON.parse(b.specsJson || '{}');
+        return (specsB.speedGhz || 0) - (specsA.speedGhz || 0);
+      });
+    } else if (sort === 'tdp_desc') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filtered.sort((a: any, b: any) => {
+        const specsA = JSON.parse(a.specsJson || '{}');
+        const specsB = JSON.parse(b.specsJson || '{}');
+        return (specsB.tdp || 0) - (specsA.tdp || 0);
+      });
+    } else if (sort === 'vram_desc') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filtered.sort((a: any, b: any) => {
+        const specsA = JSON.parse(a.specsJson || '{}');
+        const specsB = JSON.parse(b.specsJson || '{}');
+        return (specsB.memoryGb || 0) - (specsA.memoryGb || 0);
+      });
+    } else if (sort === 'psu_desc') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      filtered.sort((a: any, b: any) => {
+        const specsA = JSON.parse(a.specsJson || '{}');
+        const specsB = JSON.parse(b.specsJson || '{}');
+        return (specsB.recommendedPsu || 0) - (specsA.recommendedPsu || 0);
+      });
     } else if (sort === 'max_memory_desc') {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       filtered.sort((a: any, b: any) => {

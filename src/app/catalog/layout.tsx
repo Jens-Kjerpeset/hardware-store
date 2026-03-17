@@ -2,7 +2,7 @@
 
 import { useStore } from '@/lib/store';
 import { checkCompatibility, checkPotentialCompatibility, SelectedProduct } from '@/lib/compatibility';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { AlertTriangle, CheckCircle2, ChevronRight, X, Plus, Minus, Trash2, Info, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,11 @@ export default function CatalogLayout({
 }>) {
   const { mode, buildSystem, buildStorage, updateBuildStorageQuantity, removeBuildComponent, removeBuildStorageComponent, cart, removeFromCart, updateQuantity, addToCart, clearBuild, clearCart, setMode } = useStore();
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const buildParts = [...Object.values(buildSystem), ...buildStorage];
   
@@ -74,7 +79,7 @@ export default function CatalogLayout({
         {children}
       </div>
 
-      {(mode === 'build' || mode === 'loose') && (
+      {isMounted && (mode === 'build' || mode === 'loose') && (
         <aside className="w-full lg:w-80 shrink-0 glass h-fit lg:sticky top-24 border-dark-border shadow-2xl flex flex-col overflow-hidden bg-dark-bg/90">
             <div className="flex items-center justify-between p-4 border-b border-dark-border bg-dark-surface/50">
                 <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
