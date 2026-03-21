@@ -15,6 +15,7 @@ import {
   Minus,
   Plus,
 } from "lucide-react";
+import Image from "next/image";
 
 export interface ProductCardType {
   id: string;
@@ -115,7 +116,17 @@ export function ProductCard({ product }: { product: ProductCardType }) {
           </div>
         )}
         <div className="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-        {product.categoryId && (
+        {product.imageUrl && product.imageUrl.startsWith("/products/") ? (
+          <div className="relative w-[85%] h-[85%] flex items-center justify-center group-hover:scale-110 transition-transform duration-500 ease-out">
+            <Image 
+              src={product.imageUrl} 
+              alt={product.name} 
+              fill
+              className="object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.4)]"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </div>
+        ) : (
           <Cpu className="w-24 h-24 text-gray-600/50 group-hover:scale-110 transition-transform duration-500 ease-out drop-shadow-2xl" />
         )}
       </div>
