@@ -37,10 +37,9 @@ export default function CategoryHubClient({ categories }: CategoryClientProps) {
         {categories.map((cat) => {
           const iconRef = cat.icon || "LayoutGrid";
           const isUrl = iconRef.startsWith("/") || iconRef.startsWith("http");
-          // @ts-expect-error LucideIcons strict typings do not include dynamic string properties
-          const IconComp = !isUrl
-            ? LucideIcons[iconRef] || LucideIcons.LayoutGrid
-            : null;
+          const IconComp = (!isUrl
+            ? LucideIcons[iconRef as keyof typeof LucideIcons] || LucideIcons.LayoutGrid
+            : LucideIcons.LayoutGrid) as any;
 
           return (
             <Link
