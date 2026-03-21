@@ -20,22 +20,22 @@ async function main() {
   await prisma.product.deleteMany();
 
   const categories = [
-    { name: "CPU" },
-    { name: "Motherboard" },
-    { name: "RAM" },
-    { name: "GPU" },
-    { name: "Power Supply" },
-    { name: "Case" },
-    { name: "Storage" },
-    { name: "CPU Cooler" },
-    { name: "OS" },
+    { name: "CPU", icon: "Cpu", description: "High-performance processing units." },
+    { name: "Motherboard", icon: "CircuitBoard", description: "Central system connection boards." },
+    { name: "RAM", icon: "MemoryStick", description: "Volatile operating memory." },
+    { name: "GPU", icon: "MonitorPlay", description: "Dedicated graphics cards." },
+    { name: "Power Supply", icon: "PlugZap", description: "Power delivery units." },
+    { name: "Case", icon: "Server", description: "Chassis and PC enclosures." },
+    { name: "Storage", icon: "HardDrive", description: "Solid state and mechanical drives." },
+    { name: "CPU Cooler", icon: "Fan", description: "Thermal management systems." },
+    { name: "OS", icon: "Disc", description: "Operating system licenses." },
   ];
 
   const categoryMap = new Map();
   for (const cat of categories) {
     const created = await prisma.category.upsert({
       where: { name: cat.name },
-      update: {},
+      update: { icon: cat.icon, description: cat.description },
       create: cat,
     });
     categoryMap.set(cat.name, created.id);
