@@ -132,7 +132,7 @@ export async function createCategory(
 ) {
   try {
     const newCategory = await prisma.category.create({
-      data: { name, fieldsJson, icon, description },
+      data: { name, fieldsJson, icon, description } as any,
     });
 
     revalidatePath("/admin/inventory");
@@ -314,3 +314,35 @@ export async function updateCustomer(
     return { success: false, error: "Failed to update customer" };
   }
 }
+
+export async function getOrdersForMonth(yearMonth: string) {
+  try {
+    const [year, month] = yearMonth.split("-").map(Number);
+    const startDate = new Date(Date.UTC(year, month - 1, 1));
+    const endDate = new Date(Date.UTC(year, month, 1)); 
+
+    const orders = await prisma.order.findMany({
+      where: {
+        createdAt: {
+          gte: startDate,
+          lt: endDate,
+        },
+      },
+      include: {
+        customer: true,
+        items: {
+          include: {
+            product: true,
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return { success: true, orders };
+  } catch (error) {
+    console.error("Failed to fetch orders for month:", error);
+    return { success: false, error: "Failed to fetch orders" };
+  }
+}
+
