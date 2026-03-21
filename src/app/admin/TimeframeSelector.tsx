@@ -1,11 +1,11 @@
 "use client";
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from "next/navigation";
 
 export function TimeframeSelector() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const currentTimeframe = searchParams.get('timeframe') || 'all';
+  const currentTimeframe = searchParams.get("timeframe") || "all";
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newTimeframe = e.target.value;
@@ -21,7 +21,7 @@ export function TimeframeSelector() {
         id="timeframe"
         value={currentTimeframe}
         onChange={handleChange}
-        className="bg-dark-surface border border-dark-border rounded-lg px-3 py-1.5 text-sm text-white focus:outline-none focus:border-brand-500 hover:bg-white/5 transition-colors cursor-pointer"
+        className="bg-dark-surface border border-dark-border  px-3 py-1.5 text-sm text-white focus:outline-none focus:border-brand-500 hover:bg-white/5 transition-colors cursor-pointer"
       >
         <option value="all">All Time</option>
         <option value="year">Past Year</option>

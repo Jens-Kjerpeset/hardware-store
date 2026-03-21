@@ -7,9 +7,12 @@ generator client {
 }
 
 model Category {
-  id       String    @id @default(uuid())
-  name     String    @unique
-  products Product[]
+  id          String    @id @default(uuid())
+  name        String    @unique
+  fieldsJson  String    @default("[]") // Defines the custom specification fields required for this category (e.g. [{"name": "Capacity", "type": "string"}])
+  icon        String    @default("LayoutGrid")
+  description String?
+  products    Product[]
 }
 
 model Product {
@@ -24,13 +27,25 @@ model Product {
   
   specsJson   String   // JSON string storing spec info (socket, memoryType, wattage, etc)
   
-  stock       Int      @default(10)
-  cost        Float    @default(0) // Internal cost used to calculate margins
+  stock             Int      @default(10)
+  cost              Float    @default(0) // Internal cost used to calculate margins
+  
+  sku               String?  @unique
+  isActive          Boolean  @default(true)
+  lowStockThreshold Int      @default(5)
+  supplier          String?
+  
+  discountPercent   Int?
+  discountEndsAt    DateTime?
 
   orderItems  OrderItem[]
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([brand])
+  @@index([price])
 }
 
 model Order {
@@ -38,10 +53,84 @@ model Order {
   totalAmount Float
   status      String   @default("completed") // e.g., 'pending', 'completed', 'refunded'
   
+  customerId  String?
+  customer    Customer? @relation(fields: [customerId], references: [id])
+  
+  shippingAddress String?
+  trackingNumber  String?
+  shippingGateway String?
+  shippingStatus  String @default("pending") // e.g., 'pending', 'processing', 'shipped', 'delivered'
+  
   items       OrderItem[]
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Customer {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  address   String?
+  
+  orders    Order[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StoreSettings {
+  id               String   @id @default(uuid())
+  storeName        String   @default("Hardware Store")
+  contactEmail     String   @default("contact@example.com")
+  taxRate          Float    @default(0.25) // e.g. 25% VAT
+  shippingFlatRate Float    @default(99.0) // Deprecated, keeping for legacy carts
+  
+  // Localization
+  defaultCurrency  String   @default("NOK")
+  timezone         String   @default("Europe/Oslo")
+  measurementUnit  String   @default("metric")
+
+  // Payment Gateways
+  paymentProviderStripeKey    String?
+  paymentProviderPaypalKey    String?
+
+  // Notifications
+  notifyNewOrder   Boolean  @default(true)
+  notifyLowStock   Boolean  @default(true)
+
+  shippingMethods  ShippingMethod[]
+
+  updatedAt        DateTime @updatedAt
+}
+
+model ShippingMethod {
+  id              String   @id @default(uuid())
+  name            String   
+  price           Float
+  conditionsJson  String   @default("{}") // e.g {"minOrderValue": 5000}
+  
+  storeSettingsId String
+  storeSettings   StoreSettings @relation(fields: [storeSettingsId], references: [id], onDelete: Cascade)
+}
+
+model DiscountCode {
+  id              String   @id @default(uuid())
+  code            String   @unique
+  discountType    String   @default("PERCENTAGE")
+  discountPercent Int?
+  discountAmount  Float?
+  isActive        Boolean  @default(true)
+  maxUses         Int?
+  usedCount       Int      @default(0)
+  expiresAt       DateTime?
+  
+  minOrderValue   Float?
+  applicableCategoryIds String? // JSON array or comma separated
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Expenditure {
