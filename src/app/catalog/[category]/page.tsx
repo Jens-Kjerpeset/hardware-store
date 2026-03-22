@@ -444,7 +444,7 @@ export default function CategoryGrid({
 
   const fetchProducts = useCallback(async () => {
     setLoading(true);
-    let url = `/api/products?sort=${sort}`;
+    let url = `/api/products?sort=${sort}&t=${Date.now()}`;
     if (query) url += `&q=${encodeURIComponent(query)}`;
     url += `&category=${encodeURIComponent(decodedCategory)}`;
     if (brands.length > 0)
