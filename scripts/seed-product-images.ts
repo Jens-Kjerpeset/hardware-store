@@ -1,7 +1,6 @@
 import prisma from "../src/lib/prisma";
 import * as fs from "fs";
 import * as path from "path";
-// @ts-expect-error no types for googlethis
 import google from "googlethis";
 
 async function delay(ms: number) {
