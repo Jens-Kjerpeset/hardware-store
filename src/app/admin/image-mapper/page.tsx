@@ -42,7 +42,7 @@ export default function ImageMapper() {
              <div className="w-full aspect-square relative bg-dark-bg p-4 flex items-center justify-center border border-dark-border/50">
                <img src={`/products/${img}`} className="w-full h-full object-contain" />
              </div>
-             <p className="text-xs text-gray-500 font-mono break-all text-center">{img.replace('_v2.png', '')}</p>
+             <p className="text-xs text-gray-500 font-mono break-all text-center">{img.replace('_FINAL.png', '')}</p>
              <select 
                className="w-full bg-dark-bg border border-dark-border text-white p-2 text-sm focus:border-brand-500 outline-none"
                onChange={e => setMapping({...mapping, [img]: e.target.value})}

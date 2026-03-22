@@ -5,7 +5,7 @@ import path from 'path';
 
 export async function GET() {
   const dir = path.join(process.cwd(), 'public', 'products');
-  const files = fs.readdirSync(dir).filter(f => f.endsWith('_v2.png'));
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('_FINAL.png'));
   const products = await prisma.product.findMany({ select: { id: true, name: true }, orderBy: { name: 'asc' } });
   return NextResponse.json({ images: files, products });
 }
@@ -18,7 +18,8 @@ export async function POST(req: Request) {
      if (prodId) {
        const prod = await prisma.product.findUnique({ where: { id: (prodId as string) } });
        if (prod) {
-           const newName = `${prod.name}_v4.png`;
+           const safeName = prod.name.replace(/[^a-zA-Z0-9_.-]+/g, '-').replace(/-+/g, '-');
+           const newName = `${safeName}_FINAL.png`;
            try {
              fs.renameSync(path.join(dir, img), path.join(dir, newName));
              await prisma.product.update({ where: { id: prod.id }, data: { imageUrl: `/products/${newName}` } });
