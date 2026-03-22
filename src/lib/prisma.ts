@@ -3,8 +3,8 @@ import { PrismaLibSql } from "@prisma/adapter-libsql";
 
 const prismaClientSingleton = () => {
   const adapter = new PrismaLibSql({
-    url: process.env.TURSO_DATABASE_URL || "file:./dev.db",
-    authToken: process.env.TURSO_AUTH_TOKEN,
+    url: process.env.TURSO_DATABASE_URL || "libsql://hardware-store-jens-kjerpeset.aws-eu-west-1.turso.io",
+    authToken: process.env.TURSO_AUTH_TOKEN || "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NzM3MDA3NTksImlkIjoiMDE5Y2Y4Y2MtNzAwMS03Y2NmLWIzZGQtN2MzYTU2M2YwNTdjIiwicmlkIjoiOGQ3YjZlNTUtZTc5Ny00ZjJlLWExNmItZjkwMTY0OTVkYTgwIn0._zIe_AptGz9NhnLZM4YXRX6MIivfIZhPw_uus0L0sg00FRAOjFeqwC_Nccp59DYFOAmaxAhZNnq9PyXef9RBDQ",
   });
   return new PrismaClient({ adapter });
 };
