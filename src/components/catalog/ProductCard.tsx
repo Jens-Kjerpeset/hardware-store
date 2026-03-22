@@ -108,7 +108,7 @@ export function ProductCard({ product }: { product: ProductCardType }) {
 
       {/* Image specific background gradient based on category */}
       <div
-        className={`h-48 w-full p-6 flex items-center justify-center bg-gradient-to-b relative overflow-hidden ${isIncompatible ? "from-red-950/40 to-dark-bg bg-red-950/20" : "from-dark-surface to-dark-bg"}`}
+        className={`h-48 w-full p-6 flex items-center justify-center bg-gradient-to-b relative overflow-hidden ${isIncompatible ? "from-red-950/40 to-dark-bg bg-red-950/20" : "from-orange-500/10 to-dark-bg"}`}
       >
         {isDiscountActive && (
           <div className="absolute top-4 -left-10 w-40 bg-rose-600 text-white font-black text-xs text-center py-1 shadow-lg transform -rotate-45 z-20 tracking-wider">

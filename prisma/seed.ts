@@ -48,7 +48,7 @@ async function main() {
       description:
         "24 cores (8 P-cores + 16 E-cores), 32 threads, up to 6.0 GHz.",
       price: 589.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Intel Core i9-14900K_FINAL.png",
       brand: "Intel",
       categoryId: categoryMap.get("CPU"),
       specsJson: JSON.stringify({
@@ -64,7 +64,7 @@ async function main() {
       description:
         "16-core, 32-thread Desktop Processor with AMD 3D V-Cache Technology.",
       price: 649.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/AMD Ryzen 9 7950X3D_FINAL.png",
       brand: "AMD",
       categoryId: categoryMap.get("CPU"),
       specsJson: JSON.stringify({
@@ -80,7 +80,7 @@ async function main() {
       description:
         "14 cores (6 P-cores + 8 E-cores), 20 threads, up to 5.1 GHz.",
       price: 319.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Intel Core i5-13600K_FINAL.png",
       brand: "Intel",
       categoryId: categoryMap.get("CPU"),
       specsJson: JSON.stringify({
@@ -96,7 +96,7 @@ async function main() {
       description:
         "8-core, 16-thread Desktop Processor with AMD 3D V-Cache Technology. The ultimate gaming CPU.",
       price: 399.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/AMD Ryzen 7 7800X3D_FINAL.png",
       brand: "AMD",
       categoryId: categoryMap.get("CPU"),
       specsJson: JSON.stringify({
@@ -112,7 +112,7 @@ async function main() {
       description:
         "6-core, 12-thread unlocked desktop processor. Built for high framerate gaming.",
       price: 229.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/AMD Ryzen 5 7600X_FINAL.png",
       brand: "AMD",
       categoryId: categoryMap.get("CPU"),
       specsJson: JSON.stringify({
@@ -128,7 +128,7 @@ async function main() {
       description:
         "16-core, 32-thread flagship Zen 5 processor for creators and gamers.",
       price: 649.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/AMD Ryzen 9 9950X_FINAL.png",
       brand: "AMD",
       categoryId: categoryMap.get("CPU"),
       specsJson: JSON.stringify({
@@ -144,7 +144,7 @@ async function main() {
       description:
         "20 cores (8 P-cores + 12 E-cores), 28 threads, up to 5.6 GHz. Phenomenal multitasking.",
       price: 399.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Intel Core i7-14700K_FINAL.png",
       brand: "Intel",
       categoryId: categoryMap.get("CPU"),
       specsJson: JSON.stringify({
@@ -160,7 +160,7 @@ async function main() {
       description:
         "Next-gen desktop processor with NPU, unlocking advanced AI and elite performance.",
       price: 589.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Intel Core Ultra 9 285K_FINAL.png",
       brand: "Intel",
       categoryId: categoryMap.get("CPU"),
       specsJson: JSON.stringify({
@@ -176,7 +176,7 @@ async function main() {
       description:
         "14-core desktop processor built for efficient, high-performance gaming.",
       price: 309.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Intel Core Ultra 5 245K_FINAL.png",
       brand: "Intel",
       categoryId: categoryMap.get("CPU"),
       specsJson: JSON.stringify({
@@ -194,7 +194,7 @@ async function main() {
       description:
         "Intel Z790 ATX motherboard with 20+1 power stages, PCIe 5.0, DDR5, Wi-Fi 6E.",
       price: 599.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/ASUS ROG Maximus Z790 Hero_FINAL.png",
       brand: "ASUS",
       categoryId: categoryMap.get("Motherboard"),
       specsJson: JSON.stringify({
@@ -211,7 +211,7 @@ async function main() {
       name: "MSI MAG B650 TOMAHAWK WIFI",
       description: "AMD B650 ATX Motherboard with Wi-Fi 6E, DDR5.",
       price: 219.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/MSI MAG B650 TOMAHAWK WIFI_FINAL.png",
       brand: "MSI",
       categoryId: categoryMap.get("Motherboard"),
       specsJson: JSON.stringify({
@@ -229,7 +229,7 @@ async function main() {
       description:
         "Premium Intel Z790 motherboard with advanced thermal design.",
       price: 259.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Gigabyte Z790 AORUS ELITE AX_FINAL.png",
       brand: "Gigabyte",
       categoryId: categoryMap.get("Motherboard"),
       specsJson: JSON.stringify({
@@ -247,7 +247,7 @@ async function main() {
       description:
         "Extreme enthusiast Intel Core Ultra motherboard. E-ATX form factor featuring massive heatsinks and WiFi 7.",
       price: 699.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/ASUS ROG Maximus Z890 Hero_FINAL.png",
       brand: "ASUS",
       categoryId: categoryMap.get("Motherboard"),
       specsJson: JSON.stringify({
@@ -265,7 +265,7 @@ async function main() {
       description:
         "Compact mini-ITX powerhouse for Ryzen 7000 processors. Features PCIe 5.0 and DDR5 in a tiny footprint.",
       price: 329.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/ASUS ROG Strix B650E-I Gaming WiFi_FINAL.png",
       brand: "ASUS",
       categoryId: categoryMap.get("Motherboard"),
       specsJson: JSON.stringify({
@@ -282,7 +282,7 @@ async function main() {
       name: "Gigabyte B550 AORUS ELITE",
       description: "AMD B550 AM4 ATX Motherboard for classic older builds.",
       price: 149.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Gigabyte B550 AORUS ELITE_FINAL.png",
       brand: "Gigabyte",
       categoryId: categoryMap.get("Motherboard"),
       specsJson: JSON.stringify({
@@ -300,7 +300,7 @@ async function main() {
       description:
         "Affordable Micro ATX board for Intel 13th & 12th Gen. Supports DDR4 memory and dual M.2 slots.",
       price: 94.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/ASRock B760M-HDV/M.2 D4_FINAL.png",
       brand: "ASRock",
       categoryId: categoryMap.get("Motherboard"),
       specsJson: JSON.stringify({
@@ -319,7 +319,7 @@ async function main() {
       name: "Corsair Vengeance 32GB (2 x 16GB) DDR5-6000",
       description: "High performance DDR5 memory kit for the latest builds.",
       price: 114.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Corsair Vengeance 32GB (2 x 16GB) DDR5-6000_FINAL.png",
       brand: "Corsair",
       categoryId: categoryMap.get("RAM"),
       specsJson: JSON.stringify({
@@ -335,7 +335,7 @@ async function main() {
       name: "G.Skill Ripjaws V 16GB (2 x 8GB) DDR4-3600",
       description: "Classic reliable DDR4 memory kit.",
       price: 45.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/G.Skill Ripjaws V 16GB (2 x 8GB) DDR4-3600_FINAL.png",
       brand: "G.Skill",
       categoryId: categoryMap.get("RAM"),
       specsJson: JSON.stringify({
@@ -352,7 +352,7 @@ async function main() {
       description:
         "Ultra high capacity, low latency DDR5 memory engineered for AMD EXPO.",
       price: 219.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/G.Skill Trident Z5 Neo RGB 64GB (2 x 32GB) DDR5-6000_FINAL.png",
       brand: "G.Skill",
       categoryId: categoryMap.get("RAM"),
       specsJson: JSON.stringify({
@@ -368,7 +368,7 @@ async function main() {
       name: "Crucial Pro 32GB (2 x 16GB) DDR4-3200",
       description: "Plug-and-play DDR4 memory for stable, no-fuss performance.",
       price: 65.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Crucial Pro 32GB (2 x 16GB) DDR4-3200_FINAL.png",
       brand: "Crucial",
       categoryId: categoryMap.get("RAM"),
       specsJson: JSON.stringify({
@@ -385,7 +385,7 @@ async function main() {
       description:
         "Push your system to the limit with ultra-fast premium memory.",
       price: 189.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Corsair Dominator Titanium 32GB (2 x 16GB) DDR5-7200_FINAL.png",
       brand: "Corsair",
       categoryId: categoryMap.get("RAM"),
       specsJson: JSON.stringify({
@@ -401,7 +401,7 @@ async function main() {
       name: "Kingston FURY Beast 16GB (2 x 8GB) DDR5-5200",
       description: "Affordable entry into DDR5 performance.",
       price: 59.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Kingston FURY Beast 16GB (2 x 8GB) DDR5-5200_FINAL.png",
       brand: "Kingston",
       categoryId: categoryMap.get("RAM"),
       specsJson: JSON.stringify({
@@ -420,7 +420,7 @@ async function main() {
       description:
         "The ultimate GeForce GPU. It brings an enormous leap in performance, efficiency, and AI-powered graphics.",
       price: 1599.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/NVIDIA GeForce RTX 4090 Founders Edition_FINAL.png",
       brand: "NVIDIA",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -438,7 +438,7 @@ async function main() {
       description:
         "Experience unprecedented performance, visuals, and efficiency at 4K and beyond with AMD RDNA 3 architecture.",
       price: 999.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/AMD Radeon RX 7900 XTX Reference_FINAL.png",
       brand: "AMD",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -456,7 +456,7 @@ async function main() {
       description:
         "Buffed-up design with chart-topping thermal performance and massive heat sink.",
       price: 1199.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/ASUS ROG Strix GeForce RTX 4080 SUPER OC_FINAL.png",
       brand: "ASUS",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -474,7 +474,7 @@ async function main() {
       description:
         "Play with style. GAMING is upgraded with TRI FROZR 3 to sustain intense performance.",
       price: 849.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/MSI Gaming X Trio GeForce RTX 4070 Ti_FINAL.png",
       brand: "MSI",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -492,7 +492,7 @@ async function main() {
       description:
         "Powered by Radeon RX 7800 XT, integrated with 16GB GDDR256-bit memory interface, WINDFORCE cooling system.",
       price: 499.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Gigabyte Radeon RX 7800 XT GAMING OC_FINAL.png",
       brand: "Gigabyte",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -510,7 +510,7 @@ async function main() {
       description:
         "2x Axial-tech fans. 2x Fun. ASUS Dual delivers a plug-and-play premium gaming experience.",
       price: 299.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/ASUS Dual GeForce RTX 4060 OC_FINAL.png",
       brand: "ASUS",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -528,7 +528,7 @@ async function main() {
       description:
         "Arm yourself for the latest games with the sleek, sharp MECH styling engineered for reliability.",
       price: 269.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/MSI Radeon RX 7600 MECH 2X Classic_FINAL.png",
       brand: "MSI",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -546,7 +546,7 @@ async function main() {
       description:
         "Supercharged for stellar 1440p gaming. Powered by the ultra-efficient NVIDIA Ada Lovelace architecture.",
       price: 599.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Gigabyte GeForce RTX 4070 SUPER WINDFORCE OC_FINAL.png",
       brand: "Gigabyte",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -564,7 +564,7 @@ async function main() {
       description:
         "Built TUF. The RTX 4070 Ti SUPER gets a massive memory upgrade to 16GB for elite 4K performance.",
       price: 849.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/ASUS TUF Gaming GeForce RTX 4070 Ti SUPER OC_FINAL.png",
       brand: "ASUS",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -582,7 +582,7 @@ async function main() {
       description:
         "Breakthrough AMD RDNA 3 architecture with chiplet technology for next-gen performance and visuals.",
       price: 699.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Sapphire PULSE AMD Radeon RX 7900 XT_FINAL.png",
       brand: "Sapphire",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -600,7 +600,7 @@ async function main() {
       description:
         "Incredible 1440p performance. Streamlined triple-fan design for maximum cooling efficiency.",
       price: 419.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/XFX Speedster QICK 319 Radeon RX 7700 XT Black_FINAL.png",
       brand: "XFX",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -618,7 +618,7 @@ async function main() {
       description:
         "Intel enters the game. Delivering high-performance hardware ray tracing and XeSS AI upscaling.",
       price: 289.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/ASRock Intel Arc A770 Phantom Gaming D_FINAL.png",
       brand: "ASRock",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -636,7 +636,7 @@ async function main() {
       description:
         "The monumental Blackwell architecture arrives. 32GB of ultra-fast GDDR7 memory for unmatched 4K and AI performance.",
       price: 1999.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/NVIDIA GeForce RTX 5090 Founders Edition_FINAL.png",
       brand: "NVIDIA",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -654,7 +654,7 @@ async function main() {
       description:
         "Next-generation elite performance. Delivering unprecedented frame-rates powered by the Blackwell architecture.",
       price: 1199.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/NVIDIA GeForce RTX 5080 Founders Edition_FINAL.png",
       brand: "NVIDIA",
       categoryId: categoryMap.get("GPU"),
       specsJson: JSON.stringify({
@@ -673,7 +673,7 @@ async function main() {
       name: "Corsair RM1000x",
       description: "1000 Watt 80 PLUS Gold Certified Fully Modular PSU.",
       price: 189.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Corsair RM1000x_FINAL.png",
       brand: "Corsair",
       categoryId: categoryMap.get("Power Supply"),
       specsJson: JSON.stringify({
@@ -688,7 +688,7 @@ async function main() {
       name: "EVGA SuperNOVA 750 G6",
       description: "750W 80 Plus Gold Power Supply, fully modular.",
       price: 119.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/EVGA SuperNOVA 750 G6_FINAL.png",
       brand: "EVGA",
       categoryId: categoryMap.get("Power Supply"),
       specsJson: JSON.stringify({
@@ -704,7 +704,7 @@ async function main() {
       description:
         "750 Watt 80 PLUS Platinum Certified High Performance SFX PSU.",
       price: 184.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Corsair SF750_FINAL.png",
       brand: "Corsair",
       categoryId: categoryMap.get("Power Supply"),
       specsJson: JSON.stringify({
@@ -720,7 +720,7 @@ async function main() {
       description:
         "850W 80+ Gold, Full-Modular, Fan Control in Fanless, Silent, and Cooling Mode.",
       price: 139.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Seasonic FOCUS GX-850_FINAL.png",
       brand: "Seasonic",
       categoryId: categoryMap.get("Power Supply"),
       specsJson: JSON.stringify({
@@ -735,7 +735,7 @@ async function main() {
       name: "Thermaltake Smart 500W",
       description: "500W 80+ White Certified PSU, Continuous Power.",
       price: 39.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Thermaltake Smart 500W_FINAL.png",
       brand: "Thermaltake",
       categoryId: categoryMap.get("Power Supply"),
       specsJson: JSON.stringify({
@@ -747,10 +747,10 @@ async function main() {
       }),
     },
     {
-      name: "Cosair CX650M",
+      name: "Corsair CX650M",
       description: "650 Watt 80 PLUS Bronze Semi-Modular ATX PSU.",
       price: 79.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Corsair CX650M_FINAL.png",
       brand: "Corsair",
       categoryId: categoryMap.get("Power Supply"),
       specsJson: JSON.stringify({
@@ -765,7 +765,7 @@ async function main() {
       name: "be quiet! Dark Power 13 1000W",
       description: "1000W ATX 3.0 Power Supply, 80 PLUS Titanium efficiency.",
       price: 289.9,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/be quiet! Dark Power 13 1000W_FINAL.png",
       brand: "be quiet!",
       categoryId: categoryMap.get("Power Supply"),
       specsJson: JSON.stringify({
@@ -783,7 +783,7 @@ async function main() {
       description:
         "Compact ATX Mid-Tower PC Gaming Case with excellent airflow.",
       price: 94.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/NZXT H5 Flow_FINAL.png",
       brand: "NZXT",
       categoryId: categoryMap.get("Case"),
       specsJson: JSON.stringify({
@@ -799,7 +799,7 @@ async function main() {
       description:
         "A mid-tower ATX case with exceptional airflow, featuring a steel front panel.",
       price: 104.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Corsair 4000D Airflow_FINAL.png",
       brand: "Corsair",
       categoryId: categoryMap.get("Case"),
       specsJson: JSON.stringify({
@@ -815,7 +815,7 @@ async function main() {
       description:
         "Features real walnut or oak wood on the front panel with excellent airflow.",
       price: 139.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Fractal Design North_FINAL.png",
       brand: "Fractal Design",
       categoryId: categoryMap.get("Case"),
       specsJson: JSON.stringify({
@@ -831,7 +831,7 @@ async function main() {
       description:
         "Dual-chamber chassis with a completely reversible design. Supports massive cooling setups.",
       price: 159.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Lian Li O11 Dynamic EVO_FINAL.png",
       brand: "Lian Li",
       categoryId: categoryMap.get("Case"),
       specsJson: JSON.stringify({
@@ -847,7 +847,7 @@ async function main() {
       description:
         "Small form factor mini-ITX case with premium features and immense cooling support.",
       price: 99.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Cooler Master NR200P_FINAL.png",
       brand: "Cooler Master",
       categoryId: categoryMap.get("Case"),
       specsJson: JSON.stringify({
@@ -865,7 +865,7 @@ async function main() {
       description:
         "Internal PCIe Gen 4.0 x4, NVMe 2.0 SSD for ultimate performance.",
       price: 169.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Samsung 990 PRO 2TB_FINAL.png",
       brand: "Samsung",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -882,7 +882,7 @@ async function main() {
       name: "Western Digital WD_BLACK SN850X 1TB",
       description: "High-speed NVMe SSD with insane load times for gamers.",
       price: 84.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Western Digital WD_BLACK SN850X 1TB_FINAL.png",
       brand: "Western Digital",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -900,7 +900,7 @@ async function main() {
       description:
         "Extreme performance PCIe Gen5 NVMe SSD. Blazing fast sequential speeds.",
       price: 269.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Crucial T700 2TB Gen5_FINAL.png",
       brand: "Crucial",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -918,7 +918,7 @@ async function main() {
       description:
         "The pinnacle of storage performance with a massive heatsink for PCIe 5.0 speeds.",
       price: 299.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Corsair MP700 PRO 2TB Gen5_FINAL.png",
       brand: "Corsair",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -936,7 +936,7 @@ async function main() {
       description:
         "Incredible PCIe 4.0 performance for gaming and demanding workloads.",
       price: 154.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Kingston FURY Renegade 2TB_FINAL.png",
       brand: "Kingston",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -953,7 +953,7 @@ async function main() {
       name: "Samsung 980 PRO 1TB",
       description: "The reliable and wildly popular Gen4 workhorse.",
       price: 89.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Samsung 980 PRO 1TB_FINAL.png",
       brand: "Samsung",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -972,7 +972,7 @@ async function main() {
       description:
         "High-capacity 7200 RPM SATA 6Gb/s HDD for massive storage arrays.",
       price: 369.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Seagate IronWolf Pro 20TB_FINAL.png",
       brand: "Seagate",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -990,7 +990,7 @@ async function main() {
       description:
         "Reliable 5400 RPM HDD for bulk storage of movies, games, and photos.",
       price: 79.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Western Digital WD Blue 4TB_FINAL.png",
       brand: "Western Digital",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -1008,7 +1008,7 @@ async function main() {
       description:
         "Reliable 2.5-inch SATA SSD for secondary storage and game libraries.",
       price: 119.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Crucial MX500 2TB_FINAL.png",
       brand: "Crucial",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -1026,7 +1026,7 @@ async function main() {
       description:
         "Industry-leading reliability and performance in a SATA SSD.",
       price: 249.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Samsung 870 EVO 4TB_FINAL.png",
       brand: "Samsung",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -1044,7 +1044,7 @@ async function main() {
       description:
         "Versatile HDDs for all your PC needs bring you industry-leading excellence in personal computing.",
       price: 129.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Seagate Barracuda 8TB_FINAL.png",
       brand: "Seagate",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -1062,7 +1062,7 @@ async function main() {
       description:
         "Performance hard drive designed for professional or gaming PC builders.",
       price: 269.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Toshiba X300 14TB_FINAL.png",
       brand: "Toshiba",
       categoryId: categoryMap.get("Storage"),
       specsJson: JSON.stringify({
@@ -1081,7 +1081,7 @@ async function main() {
       name: "Noctua NH-D15",
       description: "Premium dual-tower CPU cooler with two quiet NF-A15 fans.",
       price: 119.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Noctua NH-D15_FINAL.png",
       brand: "Noctua",
       categoryId: categoryMap.get("CPU Cooler"),
       specsJson: JSON.stringify({
@@ -1100,7 +1100,7 @@ async function main() {
       name: "NZXT Kraken Elite 360 RGB",
       description: "360mm AIO Liquid Cooler with LCD Display and RGB fans.",
       price: 289.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/NZXT Kraken Elite 360 RGB_FINAL.png",
       brand: "NZXT",
       categoryId: categoryMap.get("CPU Cooler"),
       specsJson: JSON.stringify({
@@ -1120,7 +1120,7 @@ async function main() {
       description:
         "High-performance 360mm liquid CPU cooler with ultra-bright CAPELLIX RGB LEDs.",
       price: 219.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Corsair iCUE H150i ELITE CAPELLIX XT_FINAL.png",
       brand: "Corsair",
       categoryId: categoryMap.get("CPU Cooler"),
       specsJson: JSON.stringify({
@@ -1140,7 +1140,7 @@ async function main() {
       description:
         "No compromise silence and performance with two virtually inaudible Silent Wings PWM fans.",
       price: 89.9,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/be quiet! Dark Rock Pro 4_FINAL.png",
       brand: "Be Quiet!",
       categoryId: categoryMap.get("CPU Cooler"),
       specsJson: JSON.stringify({
@@ -1159,7 +1159,7 @@ async function main() {
       name: "NZXT Kraken 240",
       description: "240mm AIO Liquid Cooler with a 1.54” square LCD screen.",
       price: 139.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/NZXT Kraken 240_FINAL.png",
       brand: "NZXT",
       categoryId: categoryMap.get("CPU Cooler"),
       specsJson: JSON.stringify({
@@ -1180,7 +1180,7 @@ async function main() {
       name: "Windows 11 Home",
       description: "Microsoft OS - 64-bit OEM USB Flash Drive.",
       price: 139.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Windows 11 Home_FINAL.png",
       brand: "Microsoft",
       categoryId: categoryMap.get("OS"),
       specsJson: JSON.stringify({ type: "os" }),
@@ -1189,7 +1189,7 @@ async function main() {
       name: "Windows 11 Pro",
       description: "Microsoft OS for professionals and businesses.",
       price: 159.99,
-      imageUrl: "/placeholder.svg",
+      imageUrl: "/products/Windows 11 Pro_FINAL.png",
       brand: "Microsoft",
       categoryId: categoryMap.get("OS"),
       specsJson: JSON.stringify({ type: "os" }),

@@ -1,0 +1,95 @@
+=== HARDWARE STORE: PRODUCTS NEEDING IMAGES ===
+
+[ CPU ]
+------------------------------------------------
+- AMD AMD Ryzen 5 7600X
+- AMD AMD Ryzen 7 7800X3D
+- AMD AMD Ryzen 9 7950X3D
+- AMD AMD Ryzen 9 9950X
+- Intel Intel Core Ultra 5 245K
+- Intel Intel Core Ultra 9 285K
+- Intel Intel Core i5-13600K
+- Intel Intel Core i7-14700K
+- Intel Intel Core i9-14900K
+
+[ CPU COOLER ]
+------------------------------------------------
+- Be Quiet! be quiet! Dark Rock Pro 4
+- Corsair Corsair iCUE H150i ELITE CAPELLIX XT
+- NZXT NZXT Kraken 240
+- NZXT NZXT Kraken Elite 360 RGB
+- Noctua Noctua NH-D15
+
+[ CASE ]
+------------------------------------------------
+- Cooler Master Cooler Master NR200P
+- Corsair Corsair 4000D Airflow
+- Fractal Design Fractal Design North
+- Lian Li Lian Li O11 Dynamic EVO
+- NZXT NZXT H5 Flow
+
+[ GPU ]
+------------------------------------------------
+- AMD AMD Radeon RX 7900 XTX Reference
+- ASRock ASRock Intel Arc A770 Phantom Gaming D
+- ASUS ASUS Dual GeForce RTX 4060 OC
+- ASUS ASUS ROG Strix GeForce RTX 4080 SUPER OC
+- ASUS ASUS TUF Gaming GeForce RTX 4070 Ti SUPER OC
+- Gigabyte Gigabyte GeForce RTX 4070 SUPER WINDFORCE OC
+- Gigabyte Gigabyte Radeon RX 7800 XT GAMING OC
+- MSI MSI Gaming X Trio GeForce RTX 4070 Ti
+- MSI MSI Radeon RX 7600 MECH 2X Classic
+- NVIDIA NVIDIA GeForce RTX 4090 Founders Edition
+- NVIDIA NVIDIA GeForce RTX 5080 Founders Edition
+- NVIDIA NVIDIA GeForce RTX 5090 Founders Edition
+- Sapphire Sapphire PULSE AMD Radeon RX 7900 XT
+- XFX XFX Speedster QICK 319 Radeon RX 7700 XT Black
+
+[ MOTHERBOARD ]
+------------------------------------------------
+- ASRock ASRock B760M-HDV/M.2 D4
+- ASUS ASUS ROG Maximus Z790 Hero
+- ASUS ASUS ROG Maximus Z890 Hero
+- ASUS ASUS ROG Strix B650E-I Gaming WiFi
+- Gigabyte Gigabyte B550 AORUS ELITE
+- Gigabyte Gigabyte Z790 AORUS ELITE AX
+- MSI MSI MAG B650 TOMAHAWK WIFI
+
+[ OS ]
+------------------------------------------------
+- Microsoft Windows 11 Home
+- Microsoft Windows 11 Pro
+
+[ POWER SUPPLY ]
+------------------------------------------------
+- Corsair Corsair RM1000x
+- Corsair Corsair SF750
+- Corsair Cosair CX650M
+- EVGA EVGA SuperNOVA 750 G6
+- Seasonic Seasonic FOCUS GX-850
+- Thermaltake Thermaltake Smart 500W
+- be quiet! be quiet! Dark Power 13 1000W
+
+[ RAM ]
+------------------------------------------------
+- Corsair Corsair Dominator Titanium 32GB (2 x 16GB) DDR5-7200
+- Corsair Corsair Vengeance 32GB (2 x 16GB) DDR5-6000
+- Crucial Crucial Pro 32GB (2 x 16GB) DDR4-3200
+- G.Skill G.Skill Ripjaws V 16GB (2 x 8GB) DDR4-3600
+- G.Skill G.Skill Trident Z5 Neo RGB 64GB (2 x 32GB) DDR5-6000
+- Kingston Kingston FURY Beast 16GB (2 x 8GB) DDR5-5200
+
+[ STORAGE ]
+------------------------------------------------
+- Corsair Corsair MP700 PRO 2TB Gen5
+- Crucial Crucial MX500 2TB
+- Crucial Crucial T700 2TB Gen5
+- Kingston Kingston FURY Renegade 2TB
+- Samsung Samsung 870 EVO 4TB
+- Samsung Samsung 980 PRO 1TB
+- Samsung Samsung 990 PRO 2TB
+- Seagate Seagate Barracuda 8TB
+- Seagate Seagate IronWolf Pro 20TB
+- Toshiba Toshiba X300 14TB
+- Western Digital Western Digital WD Blue 4TB
+- Western Digital Western Digital WD_BLACK SN850X 1TB

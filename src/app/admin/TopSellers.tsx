@@ -57,7 +57,7 @@ export default async function TopSellers({ dateLimit }: { dateLimit?: Date }) {
                   src={product.imageUrl}
                   alt={product.name}
                   fill
-                  className="object-contain p-1.5 bg-white"
+                  className="object-contain p-1.5 bg-transparent"
                   sizes="56px"
                 />
               ) : (
