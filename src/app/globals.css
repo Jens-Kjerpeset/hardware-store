@@ -24,8 +24,7 @@
     color-scheme: dark;
   }
   html, body {
-    overflow-x: hidden;
-    width: 100vw;
+    /* overflow-x: hidden; Removed because it breaks position: sticky for all children */
   }
   body {
     background-color: var(--color-background);

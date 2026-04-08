@@ -26,7 +26,7 @@ export function ShippingMethodManager({ storeSettingsId, methods }: { storeSetti
   const [errorLine, setErrorLine] = useState('');
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(shippingSchema),
+    resolver: zodResolver(shippingSchema) as any,
     defaultValues: { storeSettingsId, isActive: true, price: 0 }
   });
 
@@ -109,7 +109,7 @@ export function ShippingMethodManager({ storeSettingsId, methods }: { storeSetti
             <h3 className="text-white font-bold mb-4">{isCreating ? 'Add New Shipping Method' : 'Edit Shipping Method'}</h3>
             {errorLine && <p className="text-red-400 text-xs mb-4">{errorLine}</p>}
             
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit as any)} className="space-y-4">
                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                  <div>
                    <label className="block text-sm font-semibold text-zinc-400 mb-1">Method Name</label>

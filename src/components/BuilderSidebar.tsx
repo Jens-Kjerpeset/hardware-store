@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useBuilderStore } from "@/store/useBuilderStore";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
-import { Trash2, AlertTriangle, ShoppingCart, ChevronRight, X } from "lucide-react";
+import { Trash2, AlertTriangle, ShoppingCart, ChevronRight, X, Share2, Check } from "lucide-react";
 import Link from "next/link";
 
 const REQUIRED_CATEGORIES = [
@@ -14,6 +14,7 @@ const REQUIRED_CATEGORIES = [
 export function BuilderSidebar() {
   const { components, buildStorage, issues, clearBuilder, getTotalPrice, mode, setMode, isMobileCartOpen, setMobileCartOpen } = useBuilderStore();
   const sidebarRef = useRef<HTMLElement>(null);
+  const [copied, setCopied] = useState(false);
 
   useFocusTrap(sidebarRef, isMobileCartOpen, () => setMobileCartOpen(false));
 
@@ -42,7 +43,21 @@ export function BuilderSidebar() {
   // Derived validation strictly gates the checkout pipeline
   const isReadyToCheckout = missingCategories.length === 0 && issues.length === 0 && (assignedKeys.length > 0 || buildStorage.length > 0);
 
-
+  const handleShare = () => {
+    try {
+      const baseUrl = window.location.origin;
+      const params = new URLSearchParams();
+      params.set('title', 'My PC Build');
+      params.set('price', totalPrice.toLocaleString('no-NO'));
+      if (components["CPU"]) params.set('cpu', components["CPU"].name);
+      if (components["GPU"]) params.set('gpu', components["GPU"].name);
+      
+      const shareUrl = `${baseUrl}/api/og?${params.toString()}`;
+      navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch(e) {}
+  };
 
   return (
     <>
@@ -53,7 +68,7 @@ export function BuilderSidebar() {
         onClick={() => setMobileCartOpen(false)}
       />
     )}
-    <aside ref={sidebarRef} className={`w-full lg:w-[320px] shrink-0 bg-surface border-x-0 lg:border-x border-y-0 lg:border-y border-border lg:rounded-lg h-full lg:h-fit max-h-[100vh] lg:max-h-[calc(100vh-8rem)] flex-col lg:sticky top-0 lg:top-24 shadow-2xl z-[70] lg:z-auto transition-transform ${isMobileCartOpen ? 'fixed right-0 inset-y-0 flex animate-in slide-in-from-right-8 duration-300' : 'hidden lg:flex'}`}>
+    <aside ref={sidebarRef} className={`w-full lg:w-[320px] shrink-0 bg-surface border-x-0 lg:border-x border-y-0 lg:border-y border-border lg:rounded-lg h-full lg:h-fit max-h-[100vh] lg:max-h-[calc(100vh-2rem)] flex-col lg:sticky top-0 lg:top-4 shadow-2xl z-[70] lg:z-auto transition-transform ${isMobileCartOpen ? 'fixed right-0 inset-y-0 flex animate-in slide-in-from-right-8 duration-300' : 'hidden lg:flex'}`}>
       {/* Screen Reader Live Region */}
       <div className="sr-only" aria-live="polite">
         Cart updated. {assignedKeys.length} items assigned. {issues.length} compatibility {issues.length === 1 ? 'issue' : 'issues'} detected.
@@ -196,6 +211,15 @@ export function BuilderSidebar() {
             Resolve Issues to Checkout
           </button>
         )}
+        
+        <button 
+          onClick={handleShare}
+          className="w-full flex items-center justify-center gap-2 p-2 rounded text-sm font-medium transition-colors bg-zinc-800 hover:bg-zinc-700 text-zinc-300"
+        >
+          {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Share2 className="w-4 h-4" />}
+          {copied ? 'Copied Image Link!' : 'Share Build Image'}
+        </button>
+
         <button 
           onClick={() => setMode('loose')}
           className="w-full text-center text-sm text-amber-500 font-medium hover:text-amber-400 transition-colors"

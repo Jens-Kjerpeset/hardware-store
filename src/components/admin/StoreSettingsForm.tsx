@@ -29,7 +29,7 @@ export function StoreSettingsForm({ target }: { target: any }) {
   const parsedTaxRate = target.taxRate ? Number((target.taxRate * 100).toFixed(2)) : 0;
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as any,
     defaultValues: {
       id: target.id,
       storeName: target.storeName || '',
@@ -65,7 +65,7 @@ export function StoreSettingsForm({ target }: { target: any }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 w-full opacity-100 transition-opacity" style={{ opacity: isPending ? 0.5 : 1 }}>
+    <form onSubmit={handleSubmit(onSubmit as any)} className="space-y-6 w-full opacity-100 transition-opacity" style={{ opacity: isPending ? 0.5 : 1 }}>
       {errorLine && (
          <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-sm font-medium">
            {errorLine}

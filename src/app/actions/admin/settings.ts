@@ -22,7 +22,12 @@ export async function updateStoreSettings(payload: unknown) {
     return { success: false, error: parsed.error.issues[0].message };
   }
 
-  const { id, ...data } = parsed.data;
+  const { id, contactEmail, ...rest } = parsed.data;
+  
+  const data = {
+    ...rest,
+    ...(contactEmail ? { contactEmail } : {})
+  };
 
   try {
     await requireAdminAuth();

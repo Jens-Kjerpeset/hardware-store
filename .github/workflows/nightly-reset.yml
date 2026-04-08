@@ -1,0 +1,37 @@
+name: Nightly Database Reset
+
+on:
+  schedule:
+    # Runs at 03:00 UTC every day
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    # Allows manual triggering from the GitHub Actions tab
+
+jobs:
+  reset-db:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # LTS version
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Force Database Reset & Seed
+        run: |
+          # Push the schema and force reset to drop all existing rogue data
+          npx prisma db push --force-reset --accept-data-loss
+          # Execute the local seed file to populate with clean default data
+          npx tsx prisma/seed.ts
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}

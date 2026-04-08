@@ -35,6 +35,32 @@ export type FilterConfig = {
   ranges: Record<string, { min: number, max: number }>;
 };
 
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params;
+  const decodedCategory = decodeURIComponent(category).replace(/-/g, ' ');
+  const title = decodedCategory.replace(/\b\w/g, l => l.toUpperCase());
+
+  return {
+    title: `${title} | Hardware Store`,
+    description: `Browse our selection of ${title} products in the Hardware Store.`,
+    openGraph: {
+      title: `${title} | Hardware Store`,
+      description: `Browse our selection of ${title} products in the Hardware Store.`,
+      images: [
+        {
+          url: `/api/og?title=${encodeURIComponent(title)}&category=true`,
+          width: 1200,
+          height: 630,
+          alt: `${title} Category`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+    },
+  };
+}
+
 export default async function CategoryPage({
   params,
   searchParams,

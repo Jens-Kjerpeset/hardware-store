@@ -35,7 +35,7 @@ export function LooseCartSidebar() {
         onClick={() => setMobileCartOpen(false)}
       />
     )}
-    <aside ref={sidebarRef} className={`w-full lg:w-[320px] shrink-0 bg-surface border-x-0 lg:border-x border-y-0 lg:border-y border-border lg:rounded-lg h-full lg:h-fit max-h-[100vh] lg:max-h-[calc(100vh-8rem)] flex-col lg:sticky top-0 lg:top-24 shadow-2xl z-[70] lg:z-auto transition-transform ${isMobileCartOpen ? 'fixed right-0 inset-y-0 flex animate-in slide-in-from-right-8 duration-300' : 'hidden lg:flex'}`}>
+    <aside ref={sidebarRef} className={`w-full lg:w-[320px] shrink-0 bg-surface border-x-0 lg:border-x border-y-0 lg:border-y border-border lg:rounded-lg h-full lg:h-fit max-h-[100vh] lg:max-h-[calc(100vh-2rem)] flex-col lg:sticky top-0 lg:top-4 shadow-2xl z-[70] lg:z-auto transition-transform ${isMobileCartOpen ? 'fixed right-0 inset-y-0 flex animate-in slide-in-from-right-8 duration-300' : 'hidden lg:flex'}`}>
       {/* Header */}
       <div className="p-4 border-b border-border flex items-center justify-between">
         <h2 className="text-lg font-semibold text-white">Loose Cart</h2>

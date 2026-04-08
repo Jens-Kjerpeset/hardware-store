@@ -51,6 +51,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const [isAdded, setIsAdded] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
+  
   const handleOptimisticAdd = (action: () => void) => {
     action();
     setIsAdded(true);
@@ -154,13 +156,19 @@ export function ProductCard({ product }: ProductCardProps) {
 
       {/* Image Area */}
       <div className="bg-[#1f1614] h-[220px] shrink-0 w-full flex items-center justify-center p-6 relative">
+        {!imgLoaded && (
+           <div className="absolute inset-0 flex items-center justify-center">
+             <div className="w-12 h-12 rounded-full border-2 border-brand/20 border-t-brand animate-spin" />
+           </div>
+        )}
         <Image 
           src={product.imageUrl.replace('/products/', '/assets/').replace('_FINAL', '')} 
           alt={product.name}
           width={200}
           height={200}
-          className="object-contain h-full w-full drop-shadow-2xl"
+          className={`object-contain h-full w-full drop-shadow-2xl transition-opacity duration-300 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           unoptimized
+          onLoad={() => setImgLoaded(true)}
         />
       </div>
 

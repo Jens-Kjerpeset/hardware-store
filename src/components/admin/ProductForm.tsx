@@ -45,7 +45,7 @@ export function ProductForm({ target, categories }: { target: any, categories: a
   } catch (e) {}
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as any,
     defaultValues: {
       id: target?.id,
       name: target?.name || '',
@@ -118,7 +118,7 @@ export function ProductForm({ target, categories }: { target: any, categories: a
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 w-full max-w-4xl opacity-100 transition-opacity" style={{ opacity: isPending ? 0.5 : 1 }}>
+    <form onSubmit={handleSubmit(onSubmit as any)} className="space-y-8 w-full max-w-4xl opacity-100 transition-opacity" style={{ opacity: isPending ? 0.5 : 1 }}>
       {errorLine && (
          <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-sm font-medium">
            {errorLine}
