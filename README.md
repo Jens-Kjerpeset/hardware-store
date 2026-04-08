@@ -40,7 +40,7 @@ npx tsx prisma/seed.ts
 npm run dev
 ```
 
-The application will be available at [http://localhost:3000](http://localhost:3000).
+The local development server will spin up on [http://localhost:3000](http://localhost:3000).
 
 ## Testing
 
