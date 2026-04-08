@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand: #ea580c; /* Orange-600 approx */
+  --color-brand-hover: #c2410c;
+  --color-background: #0a0a0a;
+  --color-surface: #171717;
+  --color-surface-hover: #262626;
+  --color-border: #262626;
+
+  /* Global Sharp Corners Enforcement */
+  --radius-sm: 0px;
+  --radius: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-full: 0px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+  }
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+  }
+  body {
+    background-color: var(--color-background);
+    color: #e5e5e5;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .multi-thumb-slider {
+    @apply absolute w-full appearance-none bg-transparent pointer-events-none outline-none;
+  }
+  .multi-thumb-slider::-webkit-slider-thumb {
+    @apply pointer-events-auto appearance-none w-3 h-4 bg-brand rounded-sm cursor-pointer z-50 relative;
+  }
+  .multi-thumb-slider::-moz-range-thumb {
+    @apply pointer-events-auto border-none w-3 h-4 bg-brand rounded-sm cursor-pointer z-50 relative;
+  }
+  .multi-thumb-slider:focus-visible::-webkit-slider-thumb {
+    @apply outline outline-2 outline-offset-2 outline-brand;
+  }
+  .multi-thumb-slider:focus-visible::-moz-range-thumb {
+    @apply outline outline-2 outline-offset-2 outline-brand;
+  }
+
+  .tooltip-content {
+    @apply absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block w-56 p-2 bg-background border border-border text-xs text-zinc-300 z-50 normal-case tracking-normal text-center pointer-events-none rounded;
+  }
+}
+
+/* Hide number spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
