@@ -1,17 +1,17 @@
-# Hardware Store v2 💻
+# Hardware Store v2
 
-A performant, full-stack Next.js 16 e-commerce application demonstrating modern serverless architecture, edge computing, and complex state management.
+A full-stack Next.js 16 e-commerce application demonstrating serverless architecture, edge computing, and complex state management.
 
-## 🌟 Key Features
+## Key Features
 
-* **Dual-Mode Cart System (Zustand):** Seamlessly transition between buying "Loose Parts" and utilizing the strict "PC Builder" engine.
-* **Algorithmic Compatibility Checks:** Instant, strict validation comparing CPU sockets, memory types, form factors, and power supply wattage constraints.
-* **Serverless SQL (LibSQL/Turso):** Highly concurrent database schema powered by Prisma handling nested JSON specification attributes.
-* **Edge Open Graph Generation (`next/og`):** Share your cart dynamically! Vercel's edge network instantly generates customized visual image tags of your current build parameters for social sharing.
-* **Tested & Hardened:** Secured via Jest automated unit tests for business arithmetic and Playwright E2E suites for verifying the stripe checkout flows.
-* **Secure Nightly Resets:** GitHub Actions automatically wipes and re-seeds the demonstration environment every night.
+* **Dual-Mode Cart System (Zustand):** Supports transitioning between an unstructured cart and a constrained PC Builder mode.
+* **Component Compatibility Logic:** Algorithmic validation for CPU sockets, memory types, form factors, and power supply constraints.
+* **Serverless SQL (LibSQL/Turso):** Prisma configuration handling structured data and nested JSON attribute querying.
+* **Edge Open Graph Generation (`next/og`):** Dynamic generation of shareable build images using the Vercel edge network.
+* **Automated Testing:** Jest unit tests for pricing/compatibility engines and Playwright E2E suites for checkout workflows.
+* **Automated Resets:** Scheduled GitHub Actions workflow for daily database state resets.
 
-## 🚀 Tech Stack
+## Technology Stack
 
 * **Framework:** Next.js 16 (App Router)
 * **Language:** TypeScript
@@ -20,11 +20,10 @@ A performant, full-stack Next.js 16 e-commerce application demonstrating modern 
 * **Database:** Turso (LibSQL)
 * **ORM:** Prisma
 * **Testing:** Playwright (E2E), Jest (Unit)
-* **Hosting:** Vercel
 
-## 🛠 Local Development
+## Local Development
 
-First, ensure you have the correct Node version installed (`v20` recommended) and your `.env` configured with your `DATABASE_URL` and `TURSO_AUTH_TOKEN`.
+Ensure Node.js v20+ is installed and your `.env` contains the required `DATABASE_URL` and `TURSO_AUTH_TOKEN`.
 
 ```bash
 # Install dependencies
@@ -34,26 +33,24 @@ npm install
 npx prisma generate
 npx prisma db push
 
-# Seed the database with default Hardware
+# Seed the database
 npx tsx prisma/seed.ts
 
 # Start the dev server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-## 🧪 Testing
-
-To ensure the algorithmic boundaries and checkout pipelines remain secure:
+## Testing
 
 ```bash
-# Run unit tests (Zustand compatibility math & pricing logic)
+# Run unit tests (Zustand logic & pricing arithmetic)
 npm run test:unit
 
-# Run full end-to-end browser checkout verification
+# Run end-to-end browser checkout verification
 npm run test:e2e
 ```
 
-## 📜 Architecture Directives
-This repository strictly abides by human-first readability standards (no god-objects, localized state mutations, semantic naming, and Next.js server component defaults).
+## Architecture Directives
+This repository prioritizes strict React Server Components (RSC) defaults, semantic variable naming, and the Single Responsibility Principle over inline utility classes or monolithic files.
