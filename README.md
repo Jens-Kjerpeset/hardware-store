@@ -2,7 +2,7 @@
 
 A full-stack Next.js 16 e-commerce application demonstrating serverless architecture, edge computing, and complex state management.
 
-**[🌐 View Live Demonstration](https://hardware-store-v2-demo.vercel.app)** *(Replace with actual URL if different)*
+**[🌐 View Live Demonstration](https://hardware-store-alpha.vercel.app/)**
 
 ## Key Features
 
