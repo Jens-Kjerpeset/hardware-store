@@ -56,7 +56,7 @@ export function BuilderSidebar() {
       navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch(e) {}
+    } catch(e) { console.error('Failed to generate share link:', e); }
   };
 
   return (

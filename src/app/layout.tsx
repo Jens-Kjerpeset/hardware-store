@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Hardware Store",
   description: "E-commerce platform for high-end PC parts and system builder.",
+  generator: "Custom Engine",
 };
 
 export default function RootLayout({

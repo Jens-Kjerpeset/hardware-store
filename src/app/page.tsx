@@ -61,7 +61,7 @@ export default function Home() {
       </div>
       
       {/* Footer Text (Hidden for Prod Release) */}
-      <div className="pt-4 text-zinc-400 text-sm hidden">
+      <div className="pt-4 text-zinc-400 text-sm">
         <Link href="/hardware-store" className="underline decoration-zinc-700 underline-offset-4 cursor-pointer hover:text-zinc-300 transition-colors">
           I don't care about "cOmPuTeR hArDwArE", I'm here for the Hardware Store!!
         </Link>

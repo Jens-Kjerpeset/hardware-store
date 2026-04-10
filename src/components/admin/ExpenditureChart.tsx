@@ -26,8 +26,7 @@ export function ExpenditureChart({ data }: { data: any[] }) {
             fontSize={12} 
             tickLine={false}
             axisLine={false}
-            dy={10}
-            style={{ textTransform: 'capitalize' }}
+            className="capitalize"
           />
           <YAxis 
             stroke="#a1a1aa" 

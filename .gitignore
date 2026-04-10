@@ -52,3 +52,4 @@ blob-report/
 AGENTS.md
 CLAUDE.md
 GEMINI.md
+.env*.local

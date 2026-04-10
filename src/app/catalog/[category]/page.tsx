@@ -127,7 +127,7 @@ export default async function CategoryPage({
   absoluteProductsQuery.forEach((p: { brand: string, specsJson: string }) => {
     let specs: Record<string, any> = {};
     if (p.specsJson) {
-      try { specs = JSON.parse(p.specsJson); } catch(e) {}
+      try { specs = JSON.parse(p.specsJson); } catch(e) { console.error('Failed to parse product specs:', e); }
     }
     
     Object.entries(specs).forEach(([key, value]) => {
@@ -160,7 +160,7 @@ export default async function CategoryPage({
   const finalFilteredProducts = finalData.products.filter((product: any) => {
     let specs: Record<string, any> = {};
     if (product.specsJson) {
-       try { specs = JSON.parse(product.specsJson); } catch (e) {}
+       try { specs = JSON.parse(product.specsJson); } catch (e) { console.error('Failed to parse product specs:', e); }
     }
 
     // 0. Name/Brand text match

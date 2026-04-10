@@ -92,7 +92,7 @@ export function ShippingMethodManager({ storeSettingsId, methods }: { storeSetti
   const isFormActive = isCreating || isEditingId !== null;
 
   return (
-    <div className="w-full space-y-6 opacity-100 transition-opacity" style={{ opacity: isPending ? 0.5 : 1 }}>
+    <div className={`w-full space-y-6 transition-opacity ${isPending ? 'opacity-50' : 'opacity-100'}`}>
        <div className="flex items-center justify-between gap-4">
          <h2 className="text-lg font-bold tracking-tight text-white">Shipping Methods</h2>
          <button onClick={startCreate} disabled={isFormActive || isPending} className="mt-1 bg-surface border border-border hover:bg-zinc-800 text-white px-3 py-1.5 rounded text-sm font-bold flex items-center justify-center gap-1 transition-colors">
