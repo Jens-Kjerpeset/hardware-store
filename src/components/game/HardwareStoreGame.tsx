@@ -1,6 +1,52 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
+class WebAudioEngine {
+    static ctx: AudioContext | null = null;
+    static buffers: Map<string, AudioBuffer> = new Map();
+
+    static init() {
+        if (typeof window === 'undefined') return;
+        if (!this.ctx) {
+            const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+            if (AudioContextClass) this.ctx = new AudioContextClass();
+        }
+    }
+
+    static preload(src: string) {
+        if (typeof window === 'undefined') return;
+        if (!this.ctx) this.init();
+        if (this.buffers.has(src) || !this.ctx) return;
+        
+        // Cache the buffer instantly into explicit memory, skipping QuickTime wrappers
+        fetch(src)
+            .then(res => res.arrayBuffer())
+            .then(arrayBuffer => this.ctx!.decodeAudioData(arrayBuffer))
+            .then(audioBuffer => this.buffers.set(src, audioBuffer))
+            .catch(e => console.error("Audio decode error", src, e));
+    }
+
+    static play(src: string, volume: number) {
+        if (!this.ctx) this.init();
+        if (!this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        
+        const buffer = this.buffers.get(src);
+        if (!buffer) {
+            this.preload(src);
+            return;
+        }
+
+        const source = this.ctx.createBufferSource();
+        source.buffer = buffer;
+        const gainNode = this.ctx.createGain();
+        gainNode.gain.value = volume;
+        source.connect(gainNode);
+        gainNode.connect(this.ctx.destination);
+        source.start(0);
+    }
+}
+
 export default function HardwareStoreGame() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const skipRef = useRef<(() => void) | null>(null);
@@ -19,13 +65,19 @@ export default function HardwareStoreGame() {
   useEffect(() => { isSoundMutedRef.current = isSoundMuted; }, [isSoundMuted]);
 
   const createAudio = (src: string) => {
-      const audio = new Audio(src);
-      const originalPlay = audio.play.bind(audio);
-      audio.play = () => {
-          if (isSoundMutedRef.current) return Promise.resolve();
-          return originalPlay();
+      WebAudioEngine.preload(src);
+      
+      const fakePlayer = {
+          volume: 1.0,
+          play: () => {
+              if (isSoundMutedRef.current) return Promise.resolve();
+              WebAudioEngine.play(src, fakePlayer.volume);
+              return Promise.resolve();
+          }
       };
-      return audio;
+      
+      // Interface mapping to mimic standard HTML element APIs
+      return fakePlayer as unknown as HTMLAudioElement;
   };
 
 
