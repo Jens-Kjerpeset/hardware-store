@@ -14,7 +14,7 @@ export function CategorySwitcher({ currentCategoryName, categories }: CategorySw
   const [isPending, startTransition] = useTransition();
 
   return (
-    <div className="relative group px-4 py-2 bg-background border border-border rounded-md text-sm font-medium text-white flex items-center hover:border-zinc-500 transition-colors cursor-pointer">
+    <div className="relative group px-4 py-2 bg-background border border-border  text-sm font-medium text-white flex items-center hover:border-zinc-500 transition-colors cursor-pointer">
       <select
         data-testid="category-select"
         aria-label="Select category"

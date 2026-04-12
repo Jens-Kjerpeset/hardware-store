@@ -157,46 +157,46 @@ export default function HardwareStoreGame() {
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4 [@media(max-height:500px)]:space-y-0 w-full flex-1 pb-6 [@media(max-height:500px)]:pb-0 min-h-0">
-       <div className="bg-black border-4 border-zinc-800 [@media(max-height:500px)]:border-0 rounded-lg p-2 [@media(max-height:500px)]:p-0 shadow-2xl relative ring-1 ring-zinc-700/50 w-full h-full flex overflow-hidden">
+       <div className="bg-black border-4 border-zinc-800 [@media(max-height:500px)]:border-0  p-2 [@media(max-height:500px)]:p-0  relative ring-1 ring-zinc-700/50 w-full h-full flex overflow-hidden">
          {!isPlaying && (
-           <div className="absolute inset-0 z-20 flex flex-wrap items-center justify-center rounded bg-zinc-950/20 px-8 gap-x-12 gap-y-12 content-center [@media(max-height:500px)]:flex-nowrap [@media(max-height:500px)]:justify-between [@media(max-height:500px)]:gap-4 [@media(max-height:500px)]:px-6">
+           <div className="absolute inset-0 z-20 flex flex-wrap items-center justify-center  bg-zinc-950/20 px-8 gap-x-12 gap-y-12 content-center [@media(max-height:500px)]:flex-nowrap [@media(max-height:500px)]:justify-between [@media(max-height:500px)]:gap-4 [@media(max-height:500px)]:px-6">
                  <img 
                    src="/sprites/Hardware Store Game Logo.png" 
                    alt="Hardware Store Game" 
-                   className="w-[550px] [@media(max-height:500px)]:w-[35%] max-w-[55%] [@media(max-width:900px)]:max-w-[70%] order-1 object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.8)] hover:scale-105 transition-transform duration-[2000ms] ease-in-out shrink-0"
+                   className="w-[550px] [@media(max-height:500px)]:w-[35%] max-w-[55%] [@media(max-width:900px)]:max-w-[70%] order-1 object-contain )] hover:scale-105 transition-transform duration-[2000ms] ease-in-out shrink-0"
                  />
                  <button 
                    onClick={() => setIsPlaying(true)}
                    className="w-full [@media(max-height:500px)]:w-auto flex justify-center order-3 [@media(max-height:500px)]:order-2 hover:scale-105 active:scale-95 transition-transform duration-200 outline-none shrink-0"
                  >
-                   <img src="/sprites/Play_btn.png" alt="Play Game" className="h-[80px] [@media(max-height:500px)]:h-[65px] object-contain drop-shadow-[0_0_15px_rgba(220,38,38,0.4)]" />
+                   <img src="/sprites/Play_btn.png" alt="Play Game" className="h-[80px] [@media(max-height:500px)]:h-[65px] object-contain )]" />
                  </button>
                  <img 
                     src="/sprites/Lore_txt.png"
                     alt="Today is the GRAND OPENING of the HARDWARE STORE! Make haste, and don't let anything or anyone slow you down! Pick up any hardware you find strewn on the beach!"
-                    className="w-[320px] [@media(max-height:500px)]:w-[25%] max-w-[35%] [@media(max-width:900px)]:max-w-[60%] order-2 [@media(max-height:500px)]:order-3 object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] shrink-0"
+                    className="w-[320px] [@media(max-height:500px)]:w-[25%] max-w-[35%] [@media(max-width:900px)]:max-w-[60%] order-2 [@media(max-height:500px)]:order-3 object-contain )] shrink-0"
                  />
            </div>
          )}
          {isPlaying && isPaused && !isGameOver && (
-           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm rounded">
+           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm ">
               <img 
                  src="/sprites/Paused_btn.png" 
                  alt="PAUSED" 
-                 className="w-[450px] [@media(max-height:500px)]:w-[300px] max-w-[80%] object-contain mb-8 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]"
+                 className="w-[450px] [@media(max-height:500px)]:w-[300px] max-w-[80%] object-contain mb-8 )]"
               />
               <div className="flex gap-10">
                  <button 
                    onClick={togglePause}
                    className="hover:scale-105 active:scale-95 transition-transform duration-200 outline-none"
                  >
-                   <img src="/sprites/Resume_btn.png" alt="Resume Game" className="h-[80px] [@media(max-height:500px)]:h-[55px] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
+                   <img src="/sprites/Resume_btn.png" alt="Resume Game" className="h-[80px] [@media(max-height:500px)]:h-[55px] object-contain )]" />
                  </button>
                  <button 
                    onClick={restartGame}
                    className="hover:scale-105 active:scale-95 transition-transform duration-200 outline-none"
                  >
-                   <img src="/sprites/Restart_btn.png" alt="Restart Game" className="h-[80px] [@media(max-height:500px)]:h-[55px] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]" />
+                   <img src="/sprites/Restart_btn.png" alt="Restart Game" className="h-[80px] [@media(max-height:500px)]:h-[55px] object-contain )]" />
                  </button>
               </div>
            </div>
@@ -207,7 +207,7 @@ export default function HardwareStoreGame() {
                  onClick={restartGame}
                  className="hover:scale-105 active:scale-95 transition-transform duration-200 outline-none"
                >
-                 <img src="/sprites/Restart_btn.png" alt="Play Again" className="h-[80px] [@media(max-height:500px)]:h-[60px] object-contain drop-shadow-[0_0_15px_rgba(220,38,38,0.4)]" />
+                 <img src="/sprites/Restart_btn.png" alt="Play Again" className="h-[80px] [@media(max-height:500px)]:h-[60px] object-contain )]" />
                </button>
            </div>
          )}
@@ -216,19 +216,19 @@ export default function HardwareStoreGame() {
              <div className="absolute top-4 left-4 z-10 flex gap-2">
                  <button 
                    onClick={togglePause}
-                   className="bg-surface border border-border px-4 py-1.5 rounded-md text-xs font-bold tracking-widest hover:bg-surface-hover text-zinc-300 transition-colors"
+                   className="bg-surface border border-border px-4 py-1.5  text-xs font-bold tracking-widest hover:bg-surface-hover text-zinc-300 transition-colors"
                  >
                    PAUSE
                  </button>
                  <button 
                      onClick={() => setIsMusicMuted(m => !m)} 
-                     className={`px-3 py-1.5 rounded border text-xs font-bold tracking-widest transition-colors ${isMusicMuted ? 'bg-red-950 border-red-700 text-red-200' : 'bg-surface border-border text-zinc-300 hover:bg-surface-hover'}`}
+                     className={`px-3 py-1.5  border text-xs font-bold tracking-widest transition-colors ${isMusicMuted ? 'bg-red-950 border-red-700 text-red-200' : 'bg-surface border-border text-zinc-300 hover:bg-surface-hover'}`}
                  >
                      {isMusicMuted ? '🔇 MUSIC' : '🎵 MUSIC'}
                  </button>
                  <button 
                      onClick={() => setIsSoundMuted(m => !m)} 
-                     className={`px-3 py-1.5 rounded border text-xs font-bold tracking-widest transition-colors ${isSoundMuted ? 'bg-red-950 border-red-700 text-red-200' : 'bg-surface border-border text-zinc-300 hover:bg-surface-hover'}`}
+                     className={`px-3 py-1.5  border text-xs font-bold tracking-widest transition-colors ${isSoundMuted ? 'bg-red-950 border-red-700 text-red-200' : 'bg-surface border-border text-zinc-300 hover:bg-surface-hover'}`}
                  >
                      {isSoundMuted ? '🔇 SOUND' : '🔊 SOUND'}
                  </button>
@@ -240,15 +240,15 @@ export default function HardwareStoreGame() {
          <div style={{ fontFamily: '"Jersey 10", sans-serif', position: 'absolute', opacity: 0, pointerEvents: 'none' }}>.</div>
          <canvas 
             ref={canvasRef} 
-            className="w-full h-full bg-background block rounded [image-rendering:pixelated]"
+            className="w-full h-full bg-background block  [image-rendering:pixelated]"
           />
        </div>
        <div className="flex flex-wrap justify-center gap-4 text-xs font-mono text-zinc-500 [@media(max-height:500px)]:hidden">
-         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-300">W</kbd> / <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-300">↑</kbd> Up</div>
-         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-300">S</kbd> / <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-300">↓</kbd> Down</div>
-         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-300">A</kbd> / <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-300">←</kbd> Left</div>
-         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-300">D</kbd> / <kbd className="bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-300">→</kbd> Right</div>
-         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5 rounded text-zinc-300">Space</kbd> Jump</div>
+         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5  text-zinc-300">W</kbd> / <kbd className="bg-zinc-800 px-1.5 py-0.5  text-zinc-300">↑</kbd> Up</div>
+         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5  text-zinc-300">S</kbd> / <kbd className="bg-zinc-800 px-1.5 py-0.5  text-zinc-300">↓</kbd> Down</div>
+         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5  text-zinc-300">A</kbd> / <kbd className="bg-zinc-800 px-1.5 py-0.5  text-zinc-300">←</kbd> Left</div>
+         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5  text-zinc-300">D</kbd> / <kbd className="bg-zinc-800 px-1.5 py-0.5  text-zinc-300">→</kbd> Right</div>
+         <div className="flex items-center gap-1"><kbd className="bg-zinc-800 px-1.5 py-0.5  text-zinc-300">Space</kbd> Jump</div>
        </div>
     </div>
   );
@@ -295,7 +295,7 @@ function VirtualJoystick({ onMove }: { onMove: (x: number, y: number) => void })
 
     return (
         <div 
-           className="absolute bottom-6 left-6 z-[160] w-32 h-32 border-[2.5px] border-white rounded-full flex items-center justify-center md:hidden touch-none"
+           className="absolute bottom-6 left-6 z-[160] w-32 h-32 border-[2.5px] border-white  flex items-center justify-center md:hidden touch-none"
            ref={baseRef}
            onTouchStart={handleMove}
            onTouchMove={handleMove}
@@ -305,7 +305,7 @@ function VirtualJoystick({ onMove }: { onMove: (x: number, y: number) => void })
            onMouseUp={handleEnd}
            onMouseLeave={handleEnd}
         >
-           <div ref={stickRef} className="w-14 h-14 bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.8)] pointer-events-none transition-transform duration-75" />
+           <div ref={stickRef} className="w-14 h-14 bg-white  )] pointer-events-none transition-transform duration-75" />
         </div>
     );
 }

@@ -39,12 +39,12 @@ export function OrderTrackingInput({ orderId, initialTrackingNumber }: OrderTrac
           onChange={(e) => setTrackingNumber(e.target.value)} 
           placeholder="e.g. 1Z9999999999999999"
           disabled={isPending}
-          className="w-full bg-background border border-border rounded-md px-3 py-2 text-white text-sm focus:outline-none focus:border-brand"
+          className="w-full bg-background border border-border  px-3 py-2 text-white text-sm focus:outline-none focus:border-brand"
         />
         <button 
           onClick={handleSave}
           disabled={isPending || trackingNumber === (initialTrackingNumber || '')}
-          className="bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:hover:bg-zinc-800 text-white px-4 py-2 rounded-md text-sm font-bold flex items-center justify-center gap-2 min-w-[80px] transition-colors"
+          className="bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:hover:bg-zinc-800 text-white px-4 py-2  text-sm font-bold flex items-center justify-center gap-2 min-w-[80px] transition-colors"
         >
           {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : saved ? <Check className="w-4 h-4 text-green-400" /> : 'Save'}
         </button>

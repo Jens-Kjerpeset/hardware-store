@@ -30,7 +30,7 @@ export function OrderStatusSelect({ orderId, type, currentValue, options }: Prop
         value={value}
         onChange={handleChange}
         disabled={isPending}
-        className="appearance-none bg-background border border-border rounded-md px-3 py-1.5 pr-8 text-sm w-full focus:outline-none focus:border-brand transition-colors disabled:opacity-50 text-white font-medium capitalize"
+        className="appearance-none bg-background border border-border  px-3 py-1.5 pr-8 text-sm w-full focus:outline-none focus:border-brand transition-colors disabled:opacity-50 text-white font-medium capitalize"
       >
         {options.map(opt => (
           <option key={opt.value} value={opt.value}>{opt.label}</option>

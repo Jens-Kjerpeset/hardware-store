@@ -21,7 +21,7 @@ export function CatalogSort() {
   ];
   
   return (
-    <div className="relative group px-4 py-2 bg-background border border-border rounded-md text-sm font-medium text-zinc-400 flex items-center hover:border-zinc-500 transition-colors cursor-pointer shrink-0">
+    <div className="relative group px-4 py-2 bg-background border border-border  text-sm font-medium text-zinc-400 flex items-center hover:border-zinc-500 transition-colors cursor-pointer shrink-0">
       <select
         data-testid="sort-select"
         aria-label="Sort catalog items"

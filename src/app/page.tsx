@@ -12,17 +12,17 @@ export default function Home() {
         <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto">
           Buy PC parts. Individual components or full system validation.
         </p>
-        <div className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-md text-sm text-zinc-400">
-          Press <kbd className="font-mono bg-surface px-1 py-0.5 rounded text-xs border border-border text-zinc-300">⌘ CMD</kbd> + <kbd className="font-mono bg-surface px-1 py-0.5 rounded text-xs border border-border text-zinc-300">D</kbd> to Bookmark
+        <div className="inline-flex items-center gap-2 px-4 py-2 border border-border  text-sm text-zinc-400">
+          Press <kbd className="font-mono bg-surface px-1 py-0.5  text-xs border border-border text-zinc-300">⌘ CMD</kbd> + <kbd className="font-mono bg-surface px-1 py-0.5  text-xs border border-border text-zinc-300">D</kbd> to Bookmark
         </div>
       </div>
 
       {/* Choice Grid */}
       <div className="grid md:grid-cols-2 gap-6 w-full max-w-4xl">
         {/* Catalog Card */}
-        <Link href="/catalog?builder=false" className="group border border-border bg-surface hover:bg-surface-hover hover:border-zinc-700 transition-all rounded-lg overflow-hidden flex flex-col">
+        <Link href="/catalog?builder=false" className="group border border-border bg-surface hover:bg-surface-hover hover:border-zinc-700 transition-all  overflow-hidden flex flex-col">
           <div className="p-6 space-y-4 flex-1">
-            <div className="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
+            <div className="w-12 h-12  bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
               <Cpu className="w-6 h-6" />
             </div>
             <div>
@@ -40,9 +40,9 @@ export default function Home() {
         </Link>
 
         {/* Builder Card */}
-        <Link href="/catalog?builder=true" className="group border border-border bg-surface hover:bg-surface-hover hover:border-brand/40 transition-all rounded-lg overflow-hidden flex flex-col relative ring-1 ring-transparent hover:ring-brand/20 shadow-lg hover:shadow-brand/5">
+        <Link href="/catalog?builder=true" className="group border border-border bg-surface hover:bg-surface-hover hover:border-brand/40 transition-all  overflow-hidden flex flex-col relative ring-1 ring-transparent hover:ring-brand/20  /5">
           <div className="p-6 space-y-4 flex-1">
-            <div className="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-brand transition-colors">
+            <div className="w-12 h-12  bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-brand transition-colors">
               <Wrench className="w-6 h-6" />
             </div>
             <div>

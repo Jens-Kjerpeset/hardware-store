@@ -68,17 +68,17 @@ export default async function OrderSuccessPage({ params }: SuccessPageProps) {
       </div>
 
       {/* Hero Section */}
-      <div className="bg-emerald-950/20 border border-emerald-900 rounded-lg p-8 md:p-12 mb-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[100px] rounded-full pointer-events-none" />
+      <div className="bg-emerald-950/20 border border-emerald-900  p-8 md:p-12 mb-8 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 blur-[100px]  pointer-events-none" />
         <div className="flex flex-col items-center text-center relative z-10 space-y-4">
-          <div className="h-16 w-16 bg-emerald-500/10 rounded-full flex items-center justify-center mb-2 shadow-[0_0_30px_rgba(5,150,105,0.2)]">
+          <div className="h-16 w-16 bg-emerald-500/10  flex items-center justify-center mb-2 )]">
              <CheckCircle2 className="h-8 w-8 text-emerald-500" />
           </div>
           <h1 className="text-4xl pr-8 md:pr-0 md:text-5xl font-extrabold text-white tracking-tight">Order Confirmed</h1>
           <p className="text-zinc-400 text-lg max-w-lg">
             Your transaction was securely processed. We're getting your components ready for dispatch.
           </p>
-          <div className="mt-4 inline-flex items-center justify-center py-2 px-6 rounded-full bg-black/40 border border-emerald-900/50 backdrop-blur-sm">
+          <div className="mt-4 inline-flex items-center justify-center py-2 px-6  bg-black/40 border border-emerald-900/50 backdrop-blur-sm">
              <span className="text-sm text-zinc-400 mr-2">Reference ID:</span>
              <span className="font-mono text-emerald-400 font-bold">{order.id}</span>
           </div>
@@ -88,7 +88,7 @@ export default async function OrderSuccessPage({ params }: SuccessPageProps) {
       <div className="grid md:grid-cols-2 gap-8">
         
         {/* Block 1: Itemized Receipt */}
-        <div className="bg-surface border border-border rounded-lg overflow-hidden flex flex-col shadow-xl">
+        <div className="bg-surface border border-border  overflow-hidden flex flex-col ">
            <div className="p-6 border-b border-border bg-white/5 flex items-center gap-3">
              <Package className="h-5 w-5 text-brand" />
              <h2 className="text-lg font-bold text-white tracking-tight">Itemized Receipt</h2>
@@ -99,7 +99,7 @@ export default async function OrderSuccessPage({ params }: SuccessPageProps) {
                {order.items.map((item) => (
                  <div key={item.id} className="flex justify-between items-start gap-4 pb-4 border-b border-white/5 last:border-0 last:pb-0">
                     <div className="flex gap-3">
-                      <div className="mt-0.5 text-xs font-mono font-bold bg-zinc-800 text-brand px-2 py-1 rounded">
+                      <div className="mt-0.5 text-xs font-mono font-bold bg-zinc-800 text-brand px-2 py-1 ">
                         x{item.quantity}
                       </div>
                       <div className="text-sm font-medium text-zinc-200 leading-tight">
@@ -138,7 +138,7 @@ export default async function OrderSuccessPage({ params }: SuccessPageProps) {
         <div className="space-y-8 flex flex-col">
           
           {/* Block 2: Logistics Confirmation */}
-          <div className="bg-surface border border-border rounded-lg overflow-hidden shadow-xl">
+          <div className="bg-surface border border-border  overflow-hidden ">
              <div className="p-6 border-b border-border bg-white/5 flex items-center gap-3">
                <Truck className="h-5 w-5 text-brand" />
                <h2 className="text-lg font-bold text-white tracking-tight">Logistics Details</h2>
@@ -172,7 +172,7 @@ export default async function OrderSuccessPage({ params }: SuccessPageProps) {
           </div>
 
           {/* Block 3: Next Steps & Support */}
-          <div className="bg-background border border-border rounded-lg p-6 lg:p-8 relative overflow-hidden flex-1 flex flex-col justify-center">
+          <div className="bg-background border border-border  p-6 lg:p-8 relative overflow-hidden flex-1 flex flex-col justify-center">
              <div className="relative z-10 space-y-4">
                 <h3 className="text-lg font-bold text-white">What's Next?</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed">

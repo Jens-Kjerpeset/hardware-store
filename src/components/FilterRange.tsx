@@ -70,7 +70,7 @@ export function FilterRange({ paramName, min, max }: FilterRangeProps) {
           onChange={(e) => setLocalMin(e.target.value)}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
-          className="w-full bg-background border border-border rounded p-1.5 text-sm text-white focus:border-brand focus:ring-1 focus:ring-brand focus:outline-none text-center"
+          className="w-full bg-background border border-border  p-1.5 text-sm text-white focus:border-brand focus:ring-1 focus:ring-brand focus:outline-none text-center"
           aria-label={`Minimum ${paramName}`}
         />
         <span className="text-zinc-400">-</span>
@@ -82,7 +82,7 @@ export function FilterRange({ paramName, min, max }: FilterRangeProps) {
           onChange={(e) => setLocalMax(e.target.value)}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
-          className="w-full bg-background border border-border rounded p-1.5 text-sm text-white focus:border-brand focus:ring-1 focus:ring-brand focus:outline-none text-center"
+          className="w-full bg-background border border-border  p-1.5 text-sm text-white focus:border-brand focus:ring-1 focus:ring-brand focus:outline-none text-center"
           aria-label={`Maximum ${paramName}`}
         />
       </div>
@@ -90,11 +90,11 @@ export function FilterRange({ paramName, min, max }: FilterRangeProps) {
       {/* Interactive Dual-Range Slider */}
       <div className="relative w-full h-8 flex items-center group">
         {/* Track Base */}
-        <div className="absolute w-full h-1 bg-surface-hover rounded-full"></div>
+        <div className="absolute w-full h-1 bg-surface-hover "></div>
         
         {/* Active Range Highlight */}
         <div 
-          className="absolute h-1 bg-brand rounded-full pointer-events-none"
+          className="absolute h-1 bg-brand  pointer-events-none"
           style={{
              left: `${((parseFloat(localMin || min.toString()) - min) / (Math.max(0.1, max - min))) * 100}%`,
              right: `${100 - ((parseFloat(localMax || max.toString()) - min) / (Math.max(0.1, max - min))) * 100}%`

@@ -23,7 +23,7 @@ export default async function CatalogPage() {
   return (
     <div className="w-full">
       {/* Banner */}
-      <div className="bg-[#2D1610] rounded-xl py-8 px-4 md:p-12 text-center mb-6 md:mb-10 shadow-lg border border-[#402015]">
+      <div className="bg-[#2D1610]  py-8 px-4 md:p-12 text-center mb-6 md:mb-10  border border-[#402015]">
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white tracking-tight text-balance">
           Select a Component Category
         </h1>
@@ -38,7 +38,7 @@ export default async function CatalogPage() {
           <Link 
             key={category.id} 
             href={`/catalog/${encodeURIComponent(category.name.toLowerCase().replace(/ /g, '-'))}`}
-            className="flex flex-col items-center justify-center p-4 md:p-8 bg-[#0a0a0a] border border-border rounded-xl hover:bg-surface hover:border-zinc-700 transition-all text-center group"
+            className="flex flex-col items-center justify-center p-4 md:p-8 bg-[#0a0a0a] border border-border  hover:bg-surface hover:border-zinc-700 transition-all text-center group"
           >
             <div className="group-hover:scale-110 transition-transform duration-300">
                {ICON_MAP[category.icon] || <Grid2x2 className="w-8 h-8 md:w-10 md:h-10 mb-3 md:mb-4 text-zinc-300" />}

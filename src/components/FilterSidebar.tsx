@@ -53,7 +53,7 @@ export function FilterSidebar({ config }: { config: FilterConfig }) {
     )}
     <aside ref={sidebarRef} className={`shrink-0 lg:w-64 space-y-8 lg:bg-transparent overflow-y-auto ${
       isMobileFilterOpen 
-        ? 'fixed bottom-0 left-0 w-full h-[85vh] bg-surface border-t border-border rounded-t-2xl p-6 pb-28 flex flex-col z-[70] animate-in slide-in-from-bottom-12 duration-300 shadow-[0_-10px_60px_rgba(0,0,0,0.8)] lg:static lg:h-auto lg:bg-transparent lg:border-none lg:p-0 lg:shadow-none lg:flex lg:animate-none' 
+        ? 'fixed bottom-0 left-0 w-full h-[85vh] bg-surface border-t border-border  p-6 pb-28 flex flex-col z-[70] animate-in slide-in-from-bottom-12 duration-300 )] lg:static lg:h-auto lg:bg-transparent lg:border-none lg:p-0  lg:flex lg:animate-none' 
         : 'hidden lg:block lg:pl-2 lg:bg-transparent'
     }`}>
       <div className="flex items-center justify-between pb-4 border-b border-border">
@@ -62,7 +62,7 @@ export function FilterSidebar({ config }: { config: FilterConfig }) {
           {/* Clears all filters by linking to the base pathname without query params */}
           <Link onClick={() => setMobileFilterOpen(false)} href="?" scroll={false} className="text-xs text-zinc-400 hover:text-white flex items-center gap-1 transition-colors">
             Clear filters
-            <XCircle className="w-4 h-4 text-brand bg-brand/20 rounded p-0.5" />
+            <XCircle className="w-4 h-4 text-brand bg-brand/20  p-0.5" />
           </Link>
           <button onClick={() => setMobileFilterOpen(false)} className="lg:hidden text-zinc-400 hover:text-white" aria-label="Close Filters">
             <X className="w-6 h-6" />

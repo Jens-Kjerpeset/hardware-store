@@ -49,7 +49,7 @@ export function FilterCheckbox({ paramName, value }: FilterCheckboxProps) {
           onChange={toggleFilter}
           aria-label={`Filter by ${value}`}
         />
-        <div className={`w-4 h-4 border rounded transition-colors ${
+        <div className={`w-4 h-4 border  transition-colors ${
           isChecked 
             ? 'bg-brand border-brand' 
             : 'border-border bg-surface group-hover:border-brand peer-focus-visible:ring-2 peer-focus-visible:ring-brand peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background'

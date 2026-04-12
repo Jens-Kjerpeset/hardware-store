@@ -58,13 +58,13 @@ export default async function AdminOrdersPage({
 
         {/* Basic native filter linking */}
         <div className="flex flex-wrap gap-2">
-           <Link href="/admin/orders" className={`px-4 py-2 text-sm font-medium rounded-md border ${!statusFilter ? 'bg-brand text-white border-brand' : 'bg-surface border-border text-zinc-300 hover:bg-zinc-800'}`}>All</Link>
-           <Link href="/admin/orders?status=pending" className={`px-4 py-2 text-sm font-medium rounded-md border ${statusFilter === 'pending' ? 'bg-brand text-white border-brand' : 'bg-surface border-border text-zinc-300 hover:bg-zinc-800'}`}>Pending</Link>
-           <Link href="/admin/orders?status=completed" className={`px-4 py-2 text-sm font-medium rounded-md border ${statusFilter === 'completed' ? 'bg-brand text-white border-brand' : 'bg-surface border-border text-zinc-300 hover:bg-zinc-800'}`}>Completed</Link>
+           <Link href="/admin/orders" className={`px-4 py-2 text-sm font-medium  border ${!statusFilter ? 'bg-brand text-white border-brand' : 'bg-surface border-border text-zinc-300 hover:bg-zinc-800'}`}>All</Link>
+           <Link href="/admin/orders?status=pending" className={`px-4 py-2 text-sm font-medium  border ${statusFilter === 'pending' ? 'bg-brand text-white border-brand' : 'bg-surface border-border text-zinc-300 hover:bg-zinc-800'}`}>Pending</Link>
+           <Link href="/admin/orders?status=completed" className={`px-4 py-2 text-sm font-medium  border ${statusFilter === 'completed' ? 'bg-brand text-white border-brand' : 'bg-surface border-border text-zinc-300 hover:bg-zinc-800'}`}>Completed</Link>
         </div>
       </div>
 
-      <div className="w-full overflow-x-auto bg-surface border border-border rounded-xl">
+      <div className="w-full overflow-x-auto bg-surface border border-border ">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-border bg-[#141414]">

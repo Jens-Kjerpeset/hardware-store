@@ -22,14 +22,14 @@ export function OrderSummary({ cartItems, shippingMethod, isPending, isLocked }:
   const vat = finalTotal * 0.2; // 25% inclusive VAT extraction
 
   return (
-      <div className="bg-surface border border-border p-6 rounded-lg sticky top-6 shadow-2xl space-y-6 w-full">
+      <div className="bg-surface border border-border p-6  sticky top-6  space-y-6 w-full">
         <h3 className="text-lg font-bold text-white border-b border-border pb-4">Order Summary</h3>
         
         <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
           {cartItems.map((item, idx) => {
              const derivedPrice = getActivePrice(item);
              return (
-               <div key={`${item.id}-${idx}`} className="flex justify-between items-start gap-3 text-sm border border-transparent hover:bg-white/5 p-1 -mx-1 rounded transition-colors">
+               <div key={`${item.id}-${idx}`} className="flex justify-between items-start gap-3 text-sm border border-transparent hover:bg-white/5 p-1 -mx-1  transition-colors">
                   <div className="text-zinc-300 leading-snug">
                     <span className="text-brand mr-2 font-mono font-bold">x{item.quantity}</span>
                     {item.name}
@@ -70,12 +70,12 @@ export function OrderSummary({ cartItems, shippingMethod, isPending, isLocked }:
              type="submit"
              data-testid="checkout-submit-btn"
              disabled={isPending || isLocked}
-             className={`w-full py-4 rounded font-bold tracking-widest flex items-center justify-center transition-all ${
+             className={`w-full py-4  font-bold tracking-widest flex items-center justify-center transition-all ${
                isPending
                  ? 'bg-emerald-600/50 border-emerald-500/50 text-white cursor-wait'
                  : isLocked
                    ? 'bg-zinc-800 border-zinc-700 text-zinc-400 cursor-not-allowed'
-                   : 'bg-emerald-600 hover:bg-emerald-500 border border-emerald-500 text-white shadow-[0_0_20px_rgba(5,150,105,0.4)] hover:shadow-[0_0_30px_rgba(5,150,105,0.6)]'
+                   : 'bg-emerald-600 hover:bg-emerald-500 border border-emerald-500 text-white )] )]'
              }`}
            >
              {isPending ? 'Processing...' : 'Place Order'}

@@ -21,7 +21,7 @@ export function Navbar() {
           
           <Link 
             href="/admin" 
-            className="hidden min-[400px]:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-red-950/30 text-xs font-semibold text-red-500 border border-red-900/50 hover:bg-red-950/50 transition-colors shrink-0"
+            className="hidden min-[400px]:flex items-center gap-1.5 px-2.5 py-1  bg-red-950/30 text-xs font-semibold text-red-500 border border-red-900/50 hover:bg-red-950/50 transition-colors shrink-0"
             title="Shielded administration panel"
           >
             <Shield className="w-3.5 h-3.5" />
@@ -51,7 +51,7 @@ export function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 border-b border-border bg-surface md:hidden flex flex-col px-4 py-4 space-y-4 shadow-xl">
+        <div className="absolute top-16 left-0 right-0 border-b border-border bg-surface md:hidden flex flex-col px-4 py-4 space-y-4 ">
           <Link 
             href="/catalog?builder=false" 
             className="text-base font-medium text-zinc-300 hover:text-white transition-colors py-2"
@@ -70,7 +70,7 @@ export function Navbar() {
           <div className="pt-2 border-t border-border">
             <Link 
               href="/admin" 
-              className="flex items-center p-3 rounded-lg bg-red-950/20 text-sm font-semibold text-red-400 border border-red-900/30 hover:bg-red-950/40 transition-colors"
+              className="flex items-center p-3  bg-red-950/20 text-sm font-semibold text-red-400 border border-red-900/30 hover:bg-red-950/40 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Shield className="w-4 h-4 mr-2" />

@@ -52,14 +52,14 @@ export default async function AdminProductsPage({
           </div>
           <Link 
              href="/admin/products/new" 
-             className="bg-brand border border-brand hover:bg-brand-hover text-white px-4 py-2 rounded-md text-sm font-bold flex items-center justify-center gap-2 whitespace-nowrap transition-colors"
+             className="bg-brand border border-brand hover:bg-brand-hover text-white px-4 py-2  text-sm font-bold flex items-center justify-center gap-2 whitespace-nowrap transition-colors"
           >
             <Plus className="w-4 h-4" /> Add Product
           </Link>
         </div>
       </div>
 
-      <div className="w-full overflow-x-auto bg-surface border border-border rounded-xl">
+      <div className="w-full overflow-x-auto bg-surface border border-border ">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-border bg-[#141414]">
@@ -79,7 +79,7 @@ export default async function AdminProductsPage({
               return (
                 <tr key={product.id} className="hover:bg-zinc-800/50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="w-10 h-10 rounded border border-border bg-background overflow-hidden relative">
+                    <div className="w-10 h-10  border border-border bg-background overflow-hidden relative">
                       {product.imageUrl && <img src={product.imageUrl.replace('/products/', '/assets/').replace('_FINAL', '')} alt={product.name} className="object-contain p-1 w-full h-full" />}
                     </div>
                   </td>
@@ -99,9 +99,9 @@ export default async function AdminProductsPage({
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
                     {product.isActive ? (
-                      <span className="inline-flex py-1 px-2 text-[10px] font-bold rounded-full bg-green-500/10 text-green-400 border border-green-500/20">Active</span>
+                      <span className="inline-flex py-1 px-2 text-[10px] font-bold  bg-green-500/10 text-green-400 border border-green-500/20">Active</span>
                     ) : (
-                      <span className="inline-flex py-1 px-2 text-[10px] font-bold rounded-full bg-zinc-500/10 text-zinc-400 border border-zinc-500/20">Offline</span>
+                      <span className="inline-flex py-1 px-2 text-[10px] font-bold  bg-zinc-500/10 text-zinc-400 border border-zinc-500/20">Offline</span>
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">

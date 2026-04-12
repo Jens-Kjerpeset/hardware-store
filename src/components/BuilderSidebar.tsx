@@ -68,7 +68,7 @@ export function BuilderSidebar() {
         onClick={() => setMobileCartOpen(false)}
       />
     )}
-    <aside ref={sidebarRef} className={`w-full lg:w-[320px] shrink-0 bg-surface border-x-0 lg:border-x border-y-0 lg:border-y border-border lg:rounded-lg h-full lg:h-fit max-h-[100vh] lg:max-h-[calc(100vh-2rem)] flex-col lg:sticky top-0 lg:top-4 shadow-2xl z-[70] lg:z-auto transition-transform ${isMobileCartOpen ? 'fixed right-0 inset-y-0 flex animate-in slide-in-from-right-8 duration-300' : 'hidden lg:flex'}`}>
+    <aside ref={sidebarRef} className={`w-full lg:w-[320px] shrink-0 bg-surface border-x-0 lg:border-x border-y-0 lg:border-y border-border lg: h-full lg:h-fit max-h-[100vh] lg:max-h-[calc(100vh-2rem)] flex-col lg:sticky top-0 lg:top-4  z-[70] lg:z-auto transition-transform ${isMobileCartOpen ? 'fixed right-0 inset-y-0 flex animate-in slide-in-from-right-8 duration-300' : 'hidden lg:flex'}`}>
       {/* Screen Reader Live Region */}
       <div className="sr-only" aria-live="polite">
         Cart updated. {assignedKeys.length} items assigned. {issues.length} compatibility {issues.length === 1 ? 'issue' : 'issues'} detected.
@@ -87,7 +87,7 @@ export function BuilderSidebar() {
           </button>
           <div className="relative text-zinc-400">
             <ShoppingCart className="w-5 h-5" />
-            <span className="absolute -top-2 -right-2 bg-brand text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+            <span className="absolute -top-2 -right-2 bg-brand text-white text-[10px] font-bold px-1.5 py-0.5 ">
               {assignedKeys.length}
             </span>
           </div>
@@ -107,7 +107,7 @@ export function BuilderSidebar() {
           {/* Dynamic Conflicts Warning */}
           {issues.length > 0 && (
              <div 
-                className="text-sm p-3 bg-red-950/20 border border-red-900/50 rounded-md text-red-400 space-y-2"
+                className="text-sm p-3 bg-red-950/20 border border-red-900/50  text-red-400 space-y-2"
                 role="alert"
                 aria-live="assertive"
              >
@@ -131,7 +131,7 @@ export function BuilderSidebar() {
                 <Link 
                   key={cat} 
                   href={`/catalog/${cat.toLowerCase().replace(/ /g, '-')}`}
-                  className="text-[10px] font-semibold tracking-wide border border-amber-900/50 text-amber-600 px-2 py-1 rounded bg-amber-950/10 hover:bg-amber-900/30 hover:text-amber-400 transition-colors"
+                  className="text-[10px] font-semibold tracking-wide border border-amber-900/50 text-amber-600 px-2 py-1  bg-amber-950/10 hover:bg-amber-900/30 hover:text-amber-400 transition-colors"
                 >
                   {cat}
                 </Link>
@@ -152,7 +152,7 @@ export function BuilderSidebar() {
                   const isConflicting = issues.some(issue => issue.involvedCategories.includes(key));
                   
                   return (
-                    <div key={key} className={`p-3 border rounded-md transition-colors group relative ${
+                    <div key={key} className={`p-3 border  transition-colors group relative ${
                       isConflicting 
                         ? 'border-red-900/50 bg-red-950/10 hover:border-red-500/50' 
                         : 'border-border bg-surface hover:border-zinc-500'
@@ -172,7 +172,7 @@ export function BuilderSidebar() {
                 })}
                 {buildStorage.map(item => {
                   return (
-                    <div key={item.id} className="p-3 border rounded-md transition-colors group relative border-border bg-surface hover:border-zinc-500">
+                    <div key={item.id} className="p-3 border  transition-colors group relative border-border bg-surface hover:border-zinc-500">
                        <div className="text-[10px] flex items-center gap-1 mb-1 font-semibold text-zinc-400">
                           Storage {item.quantity > 1 ? `(x${item.quantity})` : ''} 
                        </div>
@@ -199,14 +199,14 @@ export function BuilderSidebar() {
         {isReadyToCheckout ? (
           <Link
             href="/checkout"
-            className="w-full flex items-center justify-center p-3 rounded font-medium transition-colors border bg-emerald-600 hover:bg-emerald-500 border-emerald-500 hover:border-emerald-400 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+            className="w-full flex items-center justify-center p-3  font-medium transition-colors border bg-emerald-600 hover:bg-emerald-500 border-emerald-500 hover:border-emerald-400 text-white )]"
           >
             Checkout Securely
           </Link>
         ) : (
           <button 
             disabled
-            className="w-full flex items-center justify-center p-3 rounded font-medium transition-colors border bg-surface border-border text-zinc-400 cursor-not-allowed"
+            className="w-full flex items-center justify-center p-3  font-medium transition-colors border bg-surface border-border text-zinc-400 cursor-not-allowed"
           >
             Resolve Issues to Checkout
           </button>
@@ -214,7 +214,7 @@ export function BuilderSidebar() {
         
         <button 
           onClick={handleShare}
-          className="w-full flex items-center justify-center gap-2 p-2 rounded text-sm font-medium transition-colors bg-zinc-800 hover:bg-zinc-700 text-zinc-300"
+          className="w-full flex items-center justify-center gap-2 p-2  text-sm font-medium transition-colors bg-zinc-800 hover:bg-zinc-700 text-zinc-300"
         >
           {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Share2 className="w-4 h-4" />}
           {copied ? 'Copied Image Link!' : 'Share Build Image'}

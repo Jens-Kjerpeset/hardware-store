@@ -30,7 +30,7 @@ export default async function AdminSettingsPage() {
          </div>
 
          <div className="lg:col-span-1 space-y-8">
-           <div className="bg-background border border-border p-6 rounded-xl">
+           <div className="bg-background border border-border p-6 ">
               <ShippingMethodManager storeSettingsId={target.id} methods={target.shippingMethods} />
            </div>
          </div>

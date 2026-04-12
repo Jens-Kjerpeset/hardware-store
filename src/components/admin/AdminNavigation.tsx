@@ -41,7 +41,7 @@ export function AdminNavigation() {
 
         {/* Mobile View: Dropdown Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden flex flex-col py-2 border-t border-border absolute left-0 right-0 bg-[#141414] shadow-2xl">
+          <div className="md:hidden flex flex-col py-2 border-t border-border absolute left-0 right-0 bg-[#141414] ">
             {ADMIN_LINKS.map(link => {
               const Icon = link.icon;
               const isActive = link.href === '/admin' ? pathname === '/admin' : pathname.startsWith(link.href);

@@ -11,13 +11,13 @@ export default function HardwareStorePage() {
          <RotateCcw className="w-16 h-16 text-brand mb-6 animate-pulse mx-auto" />
          <h2 className="text-2xl font-black mb-2 uppercase tracking-tight text-white">Rotate Device</h2>
          <p className="text-zinc-400">Please rotate your phone to landscape mode to play.</p>
-         <Link href="/" className="mt-8 px-6 py-3 border border-zinc-700/50 rounded-lg text-sm font-bold text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors inline-block">
+         <Link href="/" className="mt-8 px-6 py-3 border border-zinc-700/50  text-sm font-bold text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors inline-block">
             Exit
          </Link>
       </div>
 
       {/* Floating Exit Button natively embedded solely for Mobile Landscape */}
-      <Link href="/" className="md:hidden absolute top-4 right-4 z-[150] bg-black/60 border border-zinc-800 p-2 rounded-full text-zinc-400 hover:text-white hover:bg-black/80 transition-colors outline-none shadow-lg backdrop-blur-md">
+      <Link href="/" className="md:hidden absolute top-4 right-4 z-[150] bg-black/60 border border-zinc-800 p-2  text-zinc-400 hover:text-white hover:bg-black/80 transition-colors outline-none  backdrop-blur-md">
           <X className="w-5 h-5" />
       </Link>
 
@@ -26,7 +26,7 @@ export default function HardwareStorePage() {
             <h1 className="text-3xl font-black tracking-widest text-brand uppercase">Hardware Store</h1>
             <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">Endurance Run</p>
          </div>
-         <Link href="/" className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors bg-surface border border-border px-4 py-2 rounded-lg font-medium text-sm">
+         <Link href="/" className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors bg-surface border border-border px-4 py-2  font-medium text-sm">
             <ArrowLeft className="w-4 h-4" /> Return to Store
          </Link>
       </div>

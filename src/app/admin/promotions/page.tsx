@@ -36,13 +36,13 @@ export default async function AdminPromotionsPage({
 
         <Link 
            href="/admin/promotions/new" 
-           className="bg-brand border border-brand hover:bg-brand-hover text-white px-4 py-2 rounded-md text-sm font-bold flex items-center gap-2 whitespace-nowrap transition-colors"
+           className="bg-brand border border-brand hover:bg-brand-hover text-white px-4 py-2  text-sm font-bold flex items-center gap-2 whitespace-nowrap transition-colors"
         >
           <Plus className="w-4 h-4" /> Create Promotion
         </Link>
       </div>
 
-      <div className="w-full overflow-x-auto bg-surface border border-border rounded-xl">
+      <div className="w-full overflow-x-auto bg-surface border border-border ">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-border bg-[#141414]">
@@ -83,13 +83,13 @@ export default async function AdminPromotionsPage({
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-center">
                     {!promo.isActive ? (
-                      <span className="inline-flex py-1 px-2 text-[10px] font-bold rounded-full bg-zinc-500/10 text-zinc-400 border border-zinc-500/20">Archived</span>
+                      <span className="inline-flex py-1 px-2 text-[10px] font-bold  bg-zinc-500/10 text-zinc-400 border border-zinc-500/20">Archived</span>
                     ) : conditionExhausted ? (
-                      <span className="inline-flex py-1 px-2 text-[10px] font-bold rounded-full bg-amber-500/10 text-amber-500 border border-amber-500/20">Cap Exceeded</span>
+                      <span className="inline-flex py-1 px-2 text-[10px] font-bold  bg-amber-500/10 text-amber-500 border border-amber-500/20">Cap Exceeded</span>
                     ) : conditionExpired ? (
-                      <span className="inline-flex py-1 px-2 text-[10px] font-bold rounded-full bg-red-500/10 text-red-500 border border-red-500/20">Expired</span>
+                      <span className="inline-flex py-1 px-2 text-[10px] font-bold  bg-red-500/10 text-red-500 border border-red-500/20">Expired</span>
                     ) : (
-                      <span className="inline-flex py-1 px-2 text-[10px] font-bold rounded-full bg-green-500/10 text-green-400 border border-green-500/20">Active</span>
+                      <span className="inline-flex py-1 px-2 text-[10px] font-bold  bg-green-500/10 text-green-400 border border-green-500/20">Active</span>
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right">

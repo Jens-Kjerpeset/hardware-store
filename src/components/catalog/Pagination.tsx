@@ -35,7 +35,7 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
       <button
         onClick={() => handleNavigate(currentPage - 1)}
         disabled={currentPage <= 1 || isPending}
-        className="flex items-center gap-1.5 px-3 py-2 border border-border bg-surface text-sm font-medium rounded-md hover:bg-zinc-800 disabled:opacity-50 disabled:pointer-events-none transition-colors"
+        className="flex items-center gap-1.5 px-3 py-2 border border-border bg-surface text-sm font-medium  hover:bg-zinc-800 disabled:opacity-50 disabled:pointer-events-none transition-colors"
       >
         <ChevronLeft className="w-4 h-4" />
         Previous
@@ -48,7 +48,7 @@ export function Pagination({ currentPage, totalPages }: PaginationProps) {
       <button
         onClick={() => handleNavigate(currentPage + 1)}
         disabled={currentPage >= totalPages || isPending}
-        className="flex items-center gap-1.5 px-3 py-2 border border-border bg-surface text-sm font-medium rounded-md hover:bg-zinc-800 disabled:opacity-50 disabled:pointer-events-none transition-colors"
+        className="flex items-center gap-1.5 px-3 py-2 border border-border bg-surface text-sm font-medium  hover:bg-zinc-800 disabled:opacity-50 disabled:pointer-events-none transition-colors"
       >
         Next
         <ChevronRight className="w-4 h-4" />

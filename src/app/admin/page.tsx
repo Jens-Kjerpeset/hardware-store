@@ -79,24 +79,24 @@ async function DashboardMetrics() {
     <>
       {/* Top-Level Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-         <div className="bg-surface border border-border p-6 rounded-xl relative overflow-hidden">
+         <div className="bg-surface border border-border p-6  relative overflow-hidden">
             <div className="text-zinc-400 text-sm font-semibold mb-2">Total Gross Revenue</div>
             <div className="text-2xl font-bold text-white">{formatCurrency(totalRevenue)}</div>
-            <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-brand/10 rounded-full blur-2xl"></div>
+            <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-brand/10  blur-2xl"></div>
          </div>
          
-         <div className="bg-surface border border-border p-6 rounded-xl">
+         <div className="bg-surface border border-border p-6 ">
             <div className="text-zinc-400 text-sm font-semibold mb-2">Cost of Goods Sold (COGS)</div>
             <div className="text-2xl font-bold text-white">{formatCurrency(totalCOGS)}</div>
          </div>
 
-         <div className="bg-surface border border-border p-6 rounded-xl relative overflow-hidden">
+         <div className="bg-surface border border-border p-6  relative overflow-hidden">
             <div className="text-zinc-400 text-sm font-semibold mb-2">Operating Expenses (OPEX)</div>
             <div className="text-2xl font-bold text-white">{formatCurrency(totalOPEX)}</div>
-            <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-red-500/10 rounded-full blur-2xl"></div>
+            <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-red-500/10  blur-2xl"></div>
          </div>
 
-         <div className="bg-background border border-brand/50 p-6 rounded-xl relative overflow-hidden">
+         <div className="bg-background border border-brand/50 p-6  relative overflow-hidden">
             <div className="text-brand text-sm font-bold mb-2">Net Profit</div>
             <div className="text-3xl font-black text-white">{formatCurrency(netProfit)}</div>
             <div className="absolute right-0 bottom-0 top-0 w-2 bg-brand/20"></div>
@@ -106,7 +106,7 @@ async function DashboardMetrics() {
       {/* Operations Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
          {/* Pending Orders Action Card */}
-         <div className="bg-brand/10 border border-brand/20 p-6 rounded-xl flex flex-col justify-between">
+         <div className="bg-brand/10 border border-brand/20 p-6  flex flex-col justify-between">
             <div>
                <h2 className="text-xl font-bold text-brand mb-1">Action Required</h2>
                <p className="text-sm text-brand-hover mb-4">Orders pending fulfillment</p>
@@ -114,14 +114,14 @@ async function DashboardMetrics() {
             </div>
             <Link 
                href="/admin/orders?status=pending" 
-               className="bg-brand hover:bg-brand-hover text-white px-4 py-2 text-center rounded-lg font-bold transition-colors"
+               className="bg-brand hover:bg-brand-hover text-white px-4 py-2 text-center  font-bold transition-colors"
             >
                View Orders
             </Link>
          </div>
 
          {/* Inventory Alerts */}
-         <div className="bg-surface border border-border p-6 rounded-xl flex flex-col justify-between">
+         <div className="bg-surface border border-border p-6  flex flex-col justify-between">
             <div>
                <h2 className="text-lg font-bold text-white mb-4">Inventory Alerts</h2>
                {lowStockItems.length > 0 ? (
@@ -145,7 +145,7 @@ async function DashboardMetrics() {
          </div>
 
          {/* Recent Orders */}
-         <div className="bg-surface border border-border p-6 rounded-xl flex flex-col justify-between">
+         <div className="bg-surface border border-border p-6  flex flex-col justify-between">
             <div>
                <h2 className="text-lg font-bold text-white mb-4">Recent Orders</h2>
                <div className="space-y-3">
@@ -170,7 +170,7 @@ async function DashboardMetrics() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
          
-         <div className="lg:col-span-2 bg-surface border border-border p-6 rounded-xl space-y-6">
+         <div className="lg:col-span-2 bg-surface border border-border p-6  space-y-6">
             <div>
                <h2 className="text-lg font-bold text-white">Revenue & Profit Timeline</h2>
                <p className="text-sm text-zinc-400 mt-1">Chronological mapping of completed orders.</p>
@@ -179,13 +179,13 @@ async function DashboardMetrics() {
             {revenueTimeline.length > 0 ? (
                <RevenueChart data={revenueTimeline} />
             ) : (
-               <div className="h-80 w-full flex items-center justify-center border border-dashed border-border rounded-lg text-zinc-500 text-sm">
+               <div className="h-80 w-full flex items-center justify-center border border-dashed border-border  text-zinc-500 text-sm">
                   No revenue data available
                </div>
             )}
          </div>
 
-         <div className="lg:col-span-1 bg-surface border border-border p-6 rounded-xl space-y-6">
+         <div className="lg:col-span-1 bg-surface border border-border p-6  space-y-6">
             <div>
                <h2 className="text-lg font-bold text-white">Operating Expenses Breakdown</h2>
                <p className="text-sm text-zinc-400 mt-1">Operating expenses categorized.</p>
@@ -194,7 +194,7 @@ async function DashboardMetrics() {
             {formattedExpenditures.length > 0 ? (
                <ExpenditureChart data={formattedExpenditures} />
             ) : (
-               <div className="h-80 w-full flex items-center justify-center border border-dashed border-border rounded-lg text-zinc-500 text-sm">
+               <div className="h-80 w-full flex items-center justify-center border border-dashed border-border  text-zinc-500 text-sm">
                   No expenditures recorded
                </div>
             )}

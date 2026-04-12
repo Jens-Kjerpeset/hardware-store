@@ -133,14 +133,14 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className={`flex flex-col bg-[#0f0f0f] border ${isSelected ? (isConflicting ? 'border-red-500' : 'border-brand') : 'border-border'} rounded-lg overflow-hidden group md:hover:border-brand/50 transition-colors relative`}>
+    <div className={`flex flex-col bg-[#0f0f0f] border ${isSelected ? (isConflicting ? 'border-red-500' : 'border-brand') : 'border-border'}  overflow-hidden group md:hover:border-brand/50 transition-colors relative`}>
       {/* Dynamic Compatibility Warning */}
       {(isSelected && isConflicting) || (!isSelected && potentialIssues.length > 0) ? (
-         <div className="absolute top-3 right-3 text-red-500 z-20 bg-red-950/90 p-1.5 rounded-md border border-red-900 shadow-lg group/warning cursor-help">
+         <div className="absolute top-3 right-3 text-red-500 z-20 bg-red-950/90 p-1.5  border border-red-900  group/warning cursor-help">
            <AlertTriangle className="w-5 h-5" />
            
            {/* Hover Tooltip */}
-           <div className="absolute right-0 top-full mt-2 w-56 bg-[#1a0f0f] border border-red-900/50 rounded-md shadow-2xl p-3 opacity-0 group-hover/warning:opacity-100 transition-opacity pointer-events-none z-30 flex flex-col">
+           <div className="absolute right-0 top-full mt-2 w-56 bg-[#1a0f0f] border border-red-900/50   p-3 opacity-0 group-hover/warning:opacity-100 transition-opacity pointer-events-none z-30 flex flex-col">
               <span className="text-xs font-semibold text-red-500 mb-2 tracking-wide">
                 {isSelected ? "Current Conflicts" : "Potential Conflicts"}
               </span>
@@ -158,7 +158,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="bg-[#1f1614] h-[220px] shrink-0 w-full flex items-center justify-center p-6 relative">
         {!imgLoaded && (
            <div className="absolute inset-0 flex items-center justify-center">
-             <div className="w-12 h-12 rounded-full border-2 border-brand/20 border-t-brand animate-spin" />
+             <div className="w-12 h-12  border-2 border-brand/20 border-t-brand animate-spin" />
            </div>
         )}
         <Image 
@@ -166,7 +166,7 @@ export function ProductCard({ product }: ProductCardProps) {
           alt={product.name}
           width={200}
           height={200}
-          className={`object-contain h-full w-full drop-shadow-2xl transition-opacity duration-300 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`object-contain h-full w-full  transition-opacity duration-300 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           unoptimized
           onLoad={() => setImgLoaded(true)}
         />
@@ -188,7 +188,7 @@ export function ProductCard({ product }: ProductCardProps) {
             const formattedValue = formatHardwareSpec(key, value, type);
 
             return (
-              <div key={key} className="px-2 py-1 bg-surface border border-border text-zinc-400 text-[10px] font-semibold rounded tracking-wide">
+              <div key={key} className="px-2 py-1 bg-surface border border-border text-zinc-400 text-[10px] font-semibold  tracking-wide">
                 {formattedValue}
               </div>
             );
@@ -213,7 +213,7 @@ export function ProductCard({ product }: ProductCardProps) {
              const storageItem = buildStorage.find(s => s.id === product.id);
              if (storageItem) {
                return (
-                 <div className="w-full h-[42px] flex items-center bg-emerald-600 rounded font-medium tracking-tight text-white overflow-hidden shadow-[0_0_15px_rgba(5,150,105,0.4)]">
+                 <div className="w-full h-[42px] flex items-center bg-emerald-600  font-medium tracking-tight text-white overflow-hidden )]">
                    <button aria-label="Decrease quantity"
                      data-testid="qty-decrease"
                      onClick={(e) => {
@@ -252,7 +252,7 @@ export function ProductCard({ product }: ProductCardProps) {
                      discountEndsAt: product.discountEndsAt,
                      specs: specs
                    }))}
-                   className="w-full h-11 rounded font-medium flex items-center justify-center gap-2 transition-all bg-amber-600 md:hover:bg-amber-500 text-white"
+                   className="w-full h-11  font-medium flex items-center justify-center gap-2 transition-all bg-amber-600 md:hover:bg-amber-500 text-white"
                  >
                    {isAdded ? <><CheckCircle className="w-4 h-4"/> Added!</> : "Select"}
                  </button>
@@ -261,7 +261,7 @@ export function ProductCard({ product }: ProductCardProps) {
           })() : mode === "loose" && looseCart.some(i => i.id === product.id) ? (() => {
              const cartItem = looseCart.find(i => i.id === product.id)!;
              return (
-               <div className="w-full h-[42px] flex items-center bg-zinc-800 rounded font-medium tracking-tight text-white overflow-hidden border border-border">
+               <div className="w-full h-[42px] flex items-center bg-zinc-800  font-medium tracking-tight text-white overflow-hidden border border-border">
                  <button aria-label="Decrease quantity"
                    data-testid="qty-decrease"
                    onClick={(e) => {
@@ -295,10 +295,10 @@ export function ProductCard({ product }: ProductCardProps) {
             <button
               data-testid="add-to-cart-btn"
               onClick={() => handleOptimisticAdd(() => handleToggle())}
-              className={`w-full h-11 rounded font-medium flex items-center justify-center gap-2 transition-all ${
+              className={`w-full h-11  font-medium flex items-center justify-center gap-2 transition-all ${
                 mode === "build" 
                   ? (isSelected 
-                      ? 'bg-emerald-600 md:hover:bg-emerald-700 text-white shadow-[0_0_15px_rgba(5,150,105,0.4)]'
+                      ? 'bg-emerald-600 md:hover:bg-emerald-700 text-white )]'
                       : 'bg-brand md:hover:bg-brand-hover text-white')
                   : 'bg-zinc-800 md:hover:bg-zinc-700 border border-border text-white md:hover:border-brand/50'
               }`}

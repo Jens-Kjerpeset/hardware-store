@@ -35,7 +35,7 @@ export function LooseCartSidebar() {
         onClick={() => setMobileCartOpen(false)}
       />
     )}
-    <aside ref={sidebarRef} className={`w-full lg:w-[320px] shrink-0 bg-surface border-x-0 lg:border-x border-y-0 lg:border-y border-border lg:rounded-lg h-full lg:h-fit max-h-[100vh] lg:max-h-[calc(100vh-2rem)] flex-col lg:sticky top-0 lg:top-4 shadow-2xl z-[70] lg:z-auto transition-transform ${isMobileCartOpen ? 'fixed right-0 inset-y-0 flex animate-in slide-in-from-right-8 duration-300' : 'hidden lg:flex'}`}>
+    <aside ref={sidebarRef} className={`w-full lg:w-[320px] shrink-0 bg-surface border-x-0 lg:border-x border-y-0 lg:border-y border-border lg: h-full lg:h-fit max-h-[100vh] lg:max-h-[calc(100vh-2rem)] flex-col lg:sticky top-0 lg:top-4  z-[70] lg:z-auto transition-transform ${isMobileCartOpen ? 'fixed right-0 inset-y-0 flex animate-in slide-in-from-right-8 duration-300' : 'hidden lg:flex'}`}>
       {/* Header */}
       <div className="p-4 border-b border-border flex items-center justify-between">
         <h2 className="text-lg font-semibold text-white">Loose Cart</h2>
@@ -49,7 +49,7 @@ export function LooseCartSidebar() {
           </button>
           <div className="relative text-zinc-400">
             <ShoppingCart className="w-5 h-5" />
-            <span className="absolute -top-2 -right-2 bg-brand text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+            <span className="absolute -top-2 -right-2 bg-brand text-white text-[10px] font-bold px-1.5 py-0.5 ">
               {totalItems}
             </span>
           </div>
@@ -73,7 +73,7 @@ export function LooseCartSidebar() {
                 {looseCart.map(item => {
                   const finalPrice = getActivePrice(item);
                   return (
-                    <div key={item.id} className="p-3 border rounded-md transition-colors group relative border-border bg-surface hover:border-zinc-500">
+                    <div key={item.id} className="p-3 border  transition-colors group relative border-border bg-surface hover:border-zinc-500">
                        <div className="text-[10px] flex items-center gap-1 mb-1 font-semibold text-zinc-400">
                           {item.category} {item.quantity > 1 ? `(x${item.quantity})` : ''} 
                        </div>
@@ -100,14 +100,14 @@ export function LooseCartSidebar() {
         {looseCart.length > 0 ? (
           <Link
             href="/checkout"
-            className="w-full flex items-center justify-center p-3 rounded font-medium transition-colors border bg-brand hover:brightness-110 border-brand text-white shadow-[0_0_15px_rgba(234,88,12,0.3)]"
+            className="w-full flex items-center justify-center p-3  font-medium transition-colors border bg-brand hover:brightness-110 border-brand text-white )]"
           >
             Checkout Securely
           </Link>
         ) : (
           <button 
             disabled
-            className="w-full flex items-center justify-center p-3 rounded font-medium transition-colors border bg-surface border-border text-zinc-400 cursor-not-allowed"
+            className="w-full flex items-center justify-center p-3  font-medium transition-colors border bg-surface border-border text-zinc-400 cursor-not-allowed"
           >
             Add items to checkout
           </button>

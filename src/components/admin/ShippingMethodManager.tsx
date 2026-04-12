@@ -95,14 +95,14 @@ export function ShippingMethodManager({ storeSettingsId, methods }: { storeSetti
     <div className={`w-full space-y-6 transition-opacity ${isPending ? 'opacity-50' : 'opacity-100'}`}>
        <div className="flex items-center justify-between gap-4">
          <h2 className="text-lg font-bold tracking-tight text-white">Shipping Methods</h2>
-         <button onClick={startCreate} disabled={isFormActive || isPending} className="mt-1 bg-surface border border-border hover:bg-zinc-800 text-white px-3 py-1.5 rounded text-sm font-bold flex items-center justify-center gap-1 transition-colors">
+         <button onClick={startCreate} disabled={isFormActive || isPending} className="mt-1 bg-surface border border-border hover:bg-zinc-800 text-white px-3 py-1.5  text-sm font-bold flex items-center justify-center gap-1 transition-colors">
             <Plus className="w-3.5 h-3.5" /> Add Method
          </button>
        </div>
 
        {/* Form Overlay Area vertically nested inside the bounds */}
        {isFormActive && (
-          <div className="bg-[#141414] border border-brand/50 rounded-xl p-6 relative">
+          <div className="bg-[#141414] border border-brand/50  p-6 relative">
             <button onClick={cancelForm} className="absolute top-4 right-4 text-zinc-500 hover:text-white transition-colors">
                <X className="w-5 h-5" />
             </button>
@@ -113,27 +113,27 @@ export function ShippingMethodManager({ storeSettingsId, methods }: { storeSetti
                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                  <div>
                    <label className="block text-sm font-semibold text-zinc-400 mb-1">Method Name</label>
-                   <input disabled={isPending} {...form.register('name')} placeholder="Express Next-Day Tracking" className="w-full bg-background border border-border rounded-md px-3 py-2 text-white focus:outline-none focus:border-brand" />
+                   <input disabled={isPending} {...form.register('name')} placeholder="Express Next-Day Tracking" className="w-full bg-background border border-border  px-3 py-2 text-white focus:outline-none focus:border-brand" />
                  </div>
                  
                  <div>
                    <label className="block text-sm font-semibold text-zinc-400 mb-1">Price (Kr)</label>
-                   <input disabled={isPending} type="number" step="0.01" {...form.register('price')} className="w-full bg-background border border-border rounded-md px-3 py-2 text-white focus:outline-none focus:border-brand" />
+                   <input disabled={isPending} type="number" step="0.01" {...form.register('price')} className="w-full bg-background border border-border  px-3 py-2 text-white focus:outline-none focus:border-brand" />
                  </div>
 
                  <div className="md:col-span-2">
                    <label className="block text-sm font-semibold text-zinc-400 mb-1">Estimated Delivery Time (Optional)</label>
-                   <input disabled={isPending} {...form.register('estimatedDays')} placeholder="2-5 Business Days" className="w-full bg-background border border-border rounded-md px-3 py-2 text-white focus:outline-none focus:border-brand" />
+                   <input disabled={isPending} {...form.register('estimatedDays')} placeholder="2-5 Business Days" className="w-full bg-background border border-border  px-3 py-2 text-white focus:outline-none focus:border-brand" />
                  </div>
                </div>
 
                <div className="flex items-center gap-3 pt-4 border-t border-border mt-4">
-                 <input type="checkbox" disabled={isPending} id="isActiveShip" {...form.register('isActive')} className="w-4 h-4 rounded bg-background accent-brand" />
+                 <input type="checkbox" disabled={isPending} id="isActiveShip" {...form.register('isActive')} className="w-4 h-4  bg-background accent-brand" />
                  <label htmlFor="isActiveShip" className="text-sm font-semibold text-zinc-300">Active and available during checkout.</label>
                </div>
 
                <div className="flex justify-end pt-4">
-                 <button type="submit" disabled={isPending} className="bg-brand hover:bg-brand-hover text-white px-6 py-2 rounded font-bold transition-colors flex items-center gap-2">
+                 <button type="submit" disabled={isPending} className="bg-brand hover:bg-brand-hover text-white px-6 py-2  font-bold transition-colors flex items-center gap-2">
                    {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : null} Save Method
                  </button>
                </div>
@@ -143,21 +143,21 @@ export function ShippingMethodManager({ storeSettingsId, methods }: { storeSetti
 
        <div className="grid grid-cols-1 gap-4">
           {methods.length === 0 && !isFormActive ? (
-             <div className="text-zinc-500 text-sm text-center py-6 border border-border bg-surface rounded-xl">No shipping methods configured. Customers won't be able to checkout!</div>
+             <div className="text-zinc-500 text-sm text-center py-6 border border-border bg-surface ">No shipping methods configured. Customers won't be able to checkout!</div>
           ) : (
              methods.map(m => (
-                <div key={m.id} className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-surface border border-border p-4 rounded-xl">
+                <div key={m.id} className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-surface border border-border p-4 ">
                    <div>
                       <h4 className="text-white font-bold text-sm tracking-tight flex items-center gap-2">
                         {m.name} 
-                        {!m.isActive && <span className="text-[10px] bg-red-500/10 text-red-500 px-1.5 py-0.5 rounded ">Suspended</span>}
+                        {!m.isActive && <span className="text-[10px] bg-red-500/10 text-red-500 px-1.5 py-0.5  ">Suspended</span>}
                       </h4>
                       <div className="text-xs text-zinc-500 mt-1">
                         Price: Kr {m.price.toFixed(2)} {m.estimatedDays ? `— ${m.estimatedDays}` : ''}
                       </div>
                    </div>
                    <div className="flex items-center gap-2 w-full md:w-auto">
-                      <button disabled={isPending} onClick={() => startEdit(m)} className="text-xs font-semibold text-brand hover:text-brand-hover transition-colors px-2 py-1 bg-brand/10 rounded">Edit</button>
+                      <button disabled={isPending} onClick={() => startEdit(m)} className="text-xs font-semibold text-brand hover:text-brand-hover transition-colors px-2 py-1 bg-brand/10 ">Edit</button>
                       <button disabled={isPending} onClick={() => handleDelete(m.id)} className="text-xs text-red-400 hover:text-red-300 transition-colors p-1.5"><Trash2 className="w-4 h-4" /></button>
                    </div>
                 </div>

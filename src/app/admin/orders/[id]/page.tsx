@@ -39,14 +39,14 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
     <div className="flex flex-col w-full max-w-5xl mx-auto py-8 text-zinc-100 space-y-8">
       
       {/* Header controls */}
-      <div className="flex items-center justify-between bg-surface p-4 rounded-xl border border-border">
+      <div className="flex items-center justify-between bg-surface p-4  border border-border">
         <Link href="/admin/orders" className="flex items-center gap-2 text-zinc-400 hover:text-white font-medium text-sm transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Orders
         </Link>
         <Link 
           href={`/api/orders/${order.id}/invoice`}
           target="_blank"
-          className="flex items-center gap-2 bg-zinc-100 text-zinc-900 border border-transparent hover:bg-white px-4 py-2 rounded-md font-bold text-sm transition-colors"
+          className="flex items-center gap-2 bg-zinc-100 text-zinc-900 border border-transparent hover:bg-white px-4 py-2  font-bold text-sm transition-colors"
         >
           <Download className="w-4 h-4" /> Download PDF Invoice
         </Link>
@@ -56,7 +56,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
         {/* Left Column: Details & Items */}
         <div className="lg:col-span-2 space-y-8">
           
-          <div className="bg-surface border border-border p-8 rounded-xl space-y-6">
+          <div className="bg-surface border border-border p-8  space-y-6">
              <div className="flex justify-between items-start">
                <div>
                  <h2 className="text-xl font-bold text-white tracking-tight">Order #{order.id.split('-')[0].toUpperCase()}</h2>
@@ -69,13 +69,13 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
              </div>
           </div>
 
-          <div className="bg-surface border border-border p-6 rounded-xl space-y-4">
+          <div className="bg-surface border border-border p-6  space-y-4">
              <h3 className="font-bold text-white text-lg border-b border-border pb-4">Line Items</h3>
              <div className="space-y-4">
                {order.items.map((item) => (
                  <div key={item.id} className="flex justify-between items-center gap-4 py-2 border-b border-border/50 last:border-0">
                     <div className="flex-1 min-w-0 flex items-center gap-4">
-                       <div className="w-12 h-12 bg-background border border-border rounded shrink-0 overflow-hidden relative">
+                       <div className="w-12 h-12 bg-background border border-border  shrink-0 overflow-hidden relative">
                          {item.product.imageUrl && <img src={item.product.imageUrl.replace('/products/', '/assets/').replace('_FINAL', '')} alt={item.product.name} className="w-full h-full object-contain p-1" />}
                        </div>
                        <div className="min-w-0 flex-1">
@@ -97,7 +97,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
         {/* Right Column: Customer & Status Map */}
         <div className="space-y-8">
            
-           <div className="bg-surface border border-border p-6 rounded-xl space-y-6">
+           <div className="bg-surface border border-border p-6  space-y-6">
               <h3 className="font-bold text-white text-lg border-b border-border pb-4">Order Fulfillment</h3>
               
               <div className="space-y-4">
@@ -128,7 +128,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
               </div>
            </div>
 
-           <div className="bg-surface border border-border p-6 rounded-xl space-y-4 text-sm">
+           <div className="bg-surface border border-border p-6  space-y-4 text-sm">
               <h3 className="font-bold text-white text-lg border-b border-border pb-4">Customer Details</h3>
               
               <div>
@@ -139,7 +139,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
 
               <div className="pt-2">
                 <p className="text-zinc-500 font-medium text-xs mb-1 tracking-wide">Shipping Address</p>
-                <p className="text-zinc-300 bg-background border border-border rounded p-3 whitespace-pre-line mt-2 break-words">
+                <p className="text-zinc-300 bg-background border border-border  p-3 whitespace-pre-line mt-2 break-words">
                   {order.shippingAddress || 'No shipment required (Digital/Pickup)'}
                 </p>
               </div>

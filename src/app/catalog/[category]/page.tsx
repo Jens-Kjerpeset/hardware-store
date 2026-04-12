@@ -253,7 +253,7 @@ export default async function CategoryPage({
       <div className="flex-1 space-y-6 min-w-0 w-full">
         
         {/* Top Header Controls */}
-        <div className="flex items-center justify-between gap-2 bg-surface p-2 rounded-lg border border-border relative z-40">
+        <div className="flex items-center justify-between gap-2 bg-surface p-2  border border-border relative z-40">
           <Link href="/catalog" className="flex items-center gap-2 text-zinc-400 hover:text-white font-medium text-sm px-2 sm:px-4 shrink-0" aria-label="Back to Categories">
             <ArrowLeft className="w-4 h-4" />
             <span className="hidden md:inline">Back to Categories</span>
@@ -272,7 +272,7 @@ export default async function CategoryPage({
         {/* Active Search Indicator */}
         {searchQuery && (
           <div className="flex items-center gap-2 px-2 text-sm text-zinc-400 mt-2 mb-4 animate-in fade-in duration-300">
-            <span className="shrink-0 flex items-center justify-center w-6 h-6 rounded-full border border-border bg-surface text-brand">
+            <span className="shrink-0 flex items-center justify-center w-6 h-6  border border-border bg-surface text-brand">
               <Search className="w-3 h-3" />
             </span>
             <span className="truncate">
