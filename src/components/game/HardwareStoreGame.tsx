@@ -224,7 +224,7 @@ export default function HardwareStoreGame() {
                      onClick={() => setIsMusicMuted(m => !m)} 
                      className={`px-3 py-1.5 rounded border text-xs font-bold tracking-widest transition-colors ${isMusicMuted ? 'bg-red-950 border-red-700 text-red-200' : 'bg-surface border-border text-zinc-300 hover:bg-surface-hover'}`}
                  >
-                     {isMusicMuted ? '🔇 MUSIC' : '🔊 MUSIC'}
+                     {isMusicMuted ? '🔇 MUSIC' : '🎵 MUSIC'}
                  </button>
                  <button 
                      onClick={() => setIsSoundMuted(m => !m)} 
@@ -236,6 +236,8 @@ export default function HardwareStoreGame() {
              <VirtualJoystick onMove={(x, y) => { joystickDeltaRef.current = { x, y }; }} />
            </>
          )}
+         {/* Invisible font loader to force the browser to eagerly download the Canvas font */}
+         <div style={{ fontFamily: '"Jersey 10", sans-serif', position: 'absolute', opacity: 0, pointerEvents: 'none' }}>.</div>
          <canvas 
             ref={canvasRef} 
             className="w-full h-full bg-background block rounded [image-rendering:pixelated]"

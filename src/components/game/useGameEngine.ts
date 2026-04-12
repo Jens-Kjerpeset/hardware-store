@@ -58,10 +58,10 @@ export function useGameEngine({
       { id: 'Assassin', walk: loadImg('/sprites/Assassin-walk.png') },
       { id: 'Roc', walk: loadImg('/sprites/Roc-walk.png') },
       { id: 'Stinger', walk: loadImg('/sprites/Stinger-walk.png'), flipDefault: true, scaleModifier: 1.5 },
-      // Basilisk inherently walks backwards so we flip it by default and scale it 2x
+      // Flip Basilisk scaling modifier
       { id: 'Basilisk', walk: loadImg('/sprites/Basilisk-walk.png'), idle: loadImg('/sprites/Basilisk-idle.png'), scaleModifier: 2, flipDefault: true },
       { id: 'Hyena', walk: loadImg('/sprites/Hyena-walk.png'), idle: loadImg('/sprites/Hyena-idle.png') },
-      // Sea Giant is towering (4x) and moves slowly (half fps)
+      // Giant moves at half force
       { id: 'Sea giant', walk: loadImg('/sprites/Sea giant-walk.png'), idle: loadImg('/sprites/Sea giant-idle.png'), scaleModifier: 4, fpsModifier: 0.5 },
       { id: 'Silithid', walk: loadImg('/sprites/Silithid-walk.png'), idle: loadImg('/sprites/Silithid-idle.png'), scaleModifier: 1.5, fpsModifier: 4.0 },
       { id: 'Wringing Thorns', idle: loadImg('/sprites/Wringing Thorns-spritesheet.png'), scaleModifier: 0.8 },
@@ -101,7 +101,7 @@ export function useGameEngine({
       sitTimer: 0,
       width: 24,
       height: 24,
-      speed: 300, // pixels per second vertically
+      speed: 300,
       frameTimer: 0,
       currentFrame: 0,
       facingLeft: false,
@@ -130,7 +130,7 @@ export function useGameEngine({
     let distanceTraveled = 0;
     let timeRemaining = INITIAL_TIME_REMAINING; // 3 minutes 43 seconds
     let hasSpawnedDragon = false;
-    let dragonSpawnTime = 30.0 + (Math.random() * 30.0); // 30s to 60s window natively
+    let dragonSpawnTime = 30.0 + (Math.random() * 30.0); // 30s to 60s window
     let hasSpawnedStrider1 = false;
     let hasSpawnedStrider2 = false;
     let isCinematicOutro = false;
@@ -221,7 +221,6 @@ export function useGameEngine({
          
          // User requested Jump animation to snap to specific indices
          if (player.sitTimer > 0 && !player.isFrozen) {
-            // Sit uses a custom mapped time sequence, so let currentFrame count up infinitely
             minFrame = 0;
             maxFrame = 999999;
          } else if (player.isJumping) {
@@ -241,7 +240,7 @@ export function useGameEngine({
          player.frameTimer -= fpsThreshold;
       }
 
-      // Global Quest Failure Hook!
+      // Global Quest Failure Hook
       if (player.knockbackTimer > 0 || player.sitTimer > 0) {
           const follower = entities.find(e => e.parentId === 10001 && e.isFollowing);
           if (follower) {
@@ -257,7 +256,7 @@ export function useGameEngine({
       // Handle active tracking debuffs and buffs
       if (player.knockbackTimer > 0) {
           player.knockbackTimer -= deltaTime;
-          player.x -= 400 * deltaTime; // physically shove player backward
+          player.x -= 400 * deltaTime; // Shove player backward
           if (player.knockbackTimer < 0) player.knockbackTimer = 0;
       }
       if (player.isTrappedTimer > 0) {
@@ -355,7 +354,7 @@ export function useGameEngine({
         }
       }
 
-      // Clamp player bounds tightly to canvas
+      // Clamp player bounds to canvas
       const skyHeight = SKY_HEIGHT; // 160 pixels (top 5 squares)
       // Visual padding to prevent floating in the sky zone
       const playerMinY = skyHeight + (96 * 0.35); 
@@ -528,7 +527,7 @@ export function useGameEngine({
           if (localOffset > 0) localOffset -= renderWidth; // guarantee negative shift
           
           try {
-             // Draw enough tiles to safely cover dynamically resizing ultra-wide monitors
+             // Draw tiles to cover ultra-wide monitors
              ctx.drawImage(floorImg, 0, 0, floorImg.naturalWidth, floorImg.naturalHeight, localOffset, skyHeight, renderWidth, groundHeight);
              ctx.drawImage(floorImg, 0, 0, floorImg.naturalWidth, floorImg.naturalHeight, localOffset + renderWidth, skyHeight, renderWidth, groundHeight);
              ctx.drawImage(floorImg, 0, 0, floorImg.naturalWidth, floorImg.naturalHeight, localOffset + renderWidth * 2, skyHeight, renderWidth, groundHeight);
@@ -539,13 +538,13 @@ export function useGameEngine({
           ctx.fillRect(0, skyHeight, canvas.width, groundHeight);
       }
 
-      // Draw Troll Hut securely mapped to visual scrolling coordinates
+      // Draw Troll Hut
       if (hutImg.complete && hutImg.naturalWidth > 0) {
           const targetHutHeight = Math.min(canvas.height * 0.45, hutImg.naturalHeight);
           const hutRatio = targetHutHeight / hutImg.naturalHeight;
           const hutWidth = hutImg.naturalWidth * hutRatio;
           
-          // Mathematically slide it off mechanically against physical scroll data mapping the Center dynamically over Reapz!
+          // Center the hut based on scroll position and player distance.
           const scrollOffX = (canvas.width / 2) - (hutWidth * 0.73) - 450 - distanceTraveled;
           if (scrollOffX + hutWidth > 0) {
               try {
@@ -555,7 +554,7 @@ export function useGameEngine({
           }
       }
       
-      // Draw Cinematic Outro Town physically natively perfectly
+      // Draw Cinematic Outro Town
       if (isCinematicOutro && townImg.complete && townImg.naturalWidth > 0) {
           const targetTownHeight = Math.min(canvas.height * 0.65, townImg.naturalHeight);
           const townRatio = targetTownHeight / townImg.naturalHeight;
@@ -668,7 +667,7 @@ export function useGameEngine({
             height = 80;
         }
 
-        // Calculate a safe minimum Y spawn so scaled sprites don't visually float in the sky 
+        // Calculate safe minimum Y spawn
         const scaleMod = npcType.scaleModifier || 1;
         const minSpawnY = skyHeight + ((96 * scaleMod) * 0.35); 
 
@@ -677,7 +676,7 @@ export function useGameEngine({
         let localSpeedY = 0;
         if (startState === 'walk') {
             if (npcType.id === 'Roc') {
-                localSpeedX = 0; // Rocs do not pace horizontally
+                localSpeedX = 0;
                 localSpeedY = Math.random() > 0.5 ? 90 : -90; // Start pacing Y
             } else if (npcType.id === 'Stinger') {
                 localSpeedX = Math.random() * 160 - 100; // Normal wandering
@@ -709,7 +708,7 @@ export function useGameEngine({
           frameTimer: 0
         });
 
-        // Bog Lord spawns 3 Wringing Thorns in the area around him automatically
+        // Bog Lord spawns 3 Wringing Thorns
         if (npcType.id === 'Bog Lord') {
             const thornType = npcTypes.find(n => n.id === 'Wringing Thorns');
             if (thornType) {
@@ -721,7 +720,7 @@ export function useGameEngine({
                         childSpawnTimer: 0,
                         x: spawnX + (Math.random() * 300 - 150),
                         y: tY,
-                        width: 40, // thorns have smaller functional hitbox logic
+                        width: 40,
                         height: 40,
                         hit: false,
                         type: 'sit_hazard',
@@ -739,7 +738,7 @@ export function useGameEngine({
             }
         }
         
-        // Slower spawn timer so the screen isn't entirely flooded with instant sits
+        // Limit spawn rate
         spawnTimer = 1.0 + Math.random() * 2.5; 
       }
 
@@ -747,7 +746,6 @@ export function useGameEngine({
       for (let i = entities.length - 1; i >= 0; i--) {
         const ent = entities[i];
         
-        // Handle explicit Toroise overriding Logic cleanly structurally seamlessly!
         if (ent.npcType.id === 'Tortoise' && (ent.isFollowing || ent.isRunningToTarget)) {
             let targetX = player.x - 70;
             let targetY = player.y;
@@ -761,7 +759,7 @@ export function useGameEngine({
                     const distCheck = Math.hypot(targetX - ent.x, targetY - ent.y);
                     if (distCheck < 50) {
                         floatingTexts.push({ id: globalIdCounter++, text: '+150', x: ent.x + ent.width / 2, y: ent.y - 40, life: 2.0, maxLife: 2.0 });
-                        ent.x = -9999; // Yeet seamlessly cleanly!
+                        ent.x = -9999;
                         questEnd.x = -9999;
                         ent.hit = true;
                         questEnd.hit = true;
@@ -799,19 +797,19 @@ export function useGameEngine({
                 ent.state = 'idle';
                 ent.sprite = ent.npcType.idle!;
             }
-            // Universally bind the frame counter to the literal engine tick of the player's active physical frame, avoiding any discrete de-syncing gaps during interpolation 
+            // Sync frame counter to player frame
             ent.currentFrame = player.currentFrame;
         } else if (ent.npcType.id === 'Robot Chicken' && ent.parentId === 10003 && ent.isFollowing) {
             ent.facingLeft = false; 
             ent.state = 'walk';
             ent.sprite = ent.npcType.walk!;
             
-            // Scale native pacing speed dynamically so it never natively outruns a perfectly pacing player
+            // Match player pace
             if (!ent.isRunningToTarget) {
                 ent.localSpeedX = player.isMounted ? 320 : 200;
             }
 
-            // If it visibly out-paces the screen natively, fail out
+            // Fail if off screen
             if (ent.x > canvas.width && !ent.isRunningToTarget && !chickenQuestFailed) {
                 chickenQuestFailed = true;
                 ent.x = -9999;
@@ -840,12 +838,12 @@ export function useGameEngine({
             }
         }
         
-        // Dynamically Spawn Baby Silithids!
+        // Spawn Baby Silithids
         if (!isCinematicOutro && ent.npcType.id === 'Silithid' && !ent.isBaby && ent.childSpawnTimer !== 0) {
             if (ent.childSpawnTimer === -1.0) {
                 // Wait until the mother is fully visible on screen before spawning the first baby
                 if (ent.x + ent.width < canvas.width) {
-                    ent.childSpawnTimer = 0.01; // Trigger instantly next tick
+                    ent.childSpawnTimer = 0.01; // Trigger next tick
                 }
             } else {
                 ent.childSpawnTimer -= deltaTime;
@@ -856,7 +854,7 @@ export function useGameEngine({
                       isBaby: true,
                       enragedTimer: 0,
                       childSpawnTimer: 0,
-                      x: ent.x + ent.width / 2, // Spawn physically out of mother
+                      x: ent.x + ent.width / 2, // Spawn from mother
                       y: ent.y + ent.height / 2,
                       width: 24, // Tighter hitbox
                       height: 24,
@@ -920,12 +918,15 @@ export function useGameEngine({
           else if (ent.npcType.id === 'Hyena') enemyHeadMargin = 35 * scaleMod; // Quadrupedal
           else if (ent.npcType.id === 'Stinger') enemyHeadMargin = 30 * scaleMod;
           else if (ent.npcType.id === 'Bog Lord') enemyHeadMargin = 25 * scaleMod;
-          else if (ent.npcType.id === 'Pirate') enemyHeadMargin = 20 * scaleMod;
+          else if (ent.npcType.id === 'Pirate') enemyHeadMargin = 25 * scaleMod;
+          else if (ent.npcType.id === 'Assassin') enemyHeadMargin = 25 * scaleMod;
           
           let enemyFootMargin = 0;
           if (ent.npcType.id === 'Sea giant') enemyFootMargin = 30 * scaleMod; // Pull bottom boundary upwards from empty ocean floor/toe shadows
           else if (ent.npcType.id === 'Stinger') enemyFootMargin = 20 * scaleMod; // Pull up from drop shadows below flyer
           else if (ent.npcType.id === 'Basilisk') enemyFootMargin = 30 * scaleMod; // Extra-heavy bottom trimming for horizontal lizard
+          else if (ent.npcType.id === 'Silithid') enemyFootMargin = 25 * scaleMod; // Reduce Silithid bottom hitbox
+          else if (ent.npcType.id === 'Pirate') enemyFootMargin = 15 * scaleMod;
           
           const hitEDrawY = eDrawY + enemyHeadMargin;
           const hitEDrawH = eDrawH - enemyHeadMargin - enemyFootMargin;
@@ -946,7 +947,7 @@ export function useGameEngine({
           const hitEX = eDrawX + eInsetX;
           const hitEW = eDrawW - (eInsetX * 2);
 
-          // 1. Broad Phase AABB collision on the visual footprint (Disabled absolutely cleanly structurally perfectly during Outro sequence!)
+          // Broad Phase AABB collision on visual footprint
           if (!isCinematicOutro && hitPX < hitEX + hitEW && hitPX + hitPW > hitEX && 
               hitPDrawY < hitEDrawY + hitEDrawH && hitPDrawY + hitPDrawH > hitEDrawY) {
             
@@ -955,7 +956,7 @@ export function useGameEngine({
                   ent.hit = true;
                   player.knockbackTimer = 0.5; // Short half-second airtime
                   player.isJumping = true;
-                  player.vz = 400; // Propel physically backwards and upwards!
+                  player.vz = 400; // Propel backwards and upwards
                   player.sitTimer = 0; // Do not apply hard sit stun
                   player.isFrozen = false;
                   hazardsHit++;
@@ -986,7 +987,7 @@ export function useGameEngine({
                               ent.hit = false;
                               if (!ent.isFollowing && !ent.isRunningToTarget) {
                                   ent.isFollowing = true;
-                                  ent.localSpeedX = 200; // Match passive player speed mathematically
+                                  ent.localSpeedX = 200; // Match passive player speed
                                   const sfx = createAudio('/sounds/iQuestActivate.ogg');
                                   sfx.volume = 0.4;
                                   sfx.play().catch(() => {});
@@ -1023,7 +1024,7 @@ export function useGameEngine({
                           
                           // Custom AI Traps
                           if (ent.isBaby && ent.parentId !== undefined) {
-                              // Enrage the Mother!
+                              // Enrage Mother
                               const mother = entities.find(e => e.id === ent.parentId);
                               if (mother) {
                                   if (mother.enragedTimer <= 0) {
@@ -1065,12 +1066,12 @@ export function useGameEngine({
                           } else if (ent.npcType.id === 'Sea giant') {
                               player.knockbackTimer = 1.0;
                               player.isJumping = true;
-                              player.vz = 800; // Super jump!
+                              player.vz = 800; // Super jump
                               player.sitTimer = 0; // Ensure no sit override 
                               player.isFrozen = false;
                           } else if (ent.npcType.id === 'Basilisk') {
                               if (!player.isFrozen) {
-                                  // Cache visual state exactly as it was!
+                                  // Cache visual state
                                   player.frozenSpriteId = (pSpriteSheet === sitImg ? 'sit' : pSpriteSheet === jumpImg ? 'jump' : pSpriteSheet === idleImg ? 'idle' : 'run');
                                   player.frozenFrame = pDrawnFrame;
                               }
@@ -1135,7 +1136,7 @@ export function useGameEngine({
                  const dy = (player.y + player.height/2) - (ent.y + ent.height/2);
                  const distance = Math.max(1, Math.sqrt(dx * dx + dy * dy));
                  
-                 const aggroSpeed = 400; // Terrifyingly fast Mother
+                 const aggroSpeed = 400; // Aggro speed
                  ent.y += (dy / distance) * aggroSpeed * deltaTime;
                  
                  const scaleMod = ent.npcType.scaleModifier || 1;
@@ -1169,7 +1170,7 @@ export function useGameEngine({
                      localSpeedY = Math.random() > 0.5 ? 90 : -90; 
                  } else if (ent.npcType.id === 'Stinger') {
                      if (Math.random() < 0.25) { 
-                         // 25% chance to furiously ZOOM diagonally
+                         // 25% chance to move diagonally
                          localSpeedX = Math.random() > 0.5 ? 350 : -350;
                          localSpeedY = Math.random() > 0.5 ? 250 : -250;
                      } else {
@@ -1204,7 +1205,7 @@ export function useGameEngine({
              ent.currentFrame++;
              
              if (ent.npcType.id === 'Pirate') {
-                 ent.currentFrame = ent.currentFrame % 10; // Truncate explicitly to first 10 sprite frames
+                 ent.currentFrame = ent.currentFrame % 10;
                  // Check if animation just rolled onto Frame 1
                  if (!ent.hit && !isCinematicOutro && ent.currentFrame === 1 && ent.x > 0 && ent.x + ent.width < canvas.width) {
                      // Execute procedural gunfire SFX payload bypassing cache locks
@@ -1239,7 +1240,7 @@ export function useGameEngine({
              else if (ent.npcType.id !== 'Wringing Thorns') {
                  ent.currentFrame = ent.currentFrame % 25;
              } else {
-                 ent.currentFrame = ent.currentFrame % 38; // Ping-pong bounds strictly 0-19 and back
+                 ent.currentFrame = ent.currentFrame % 38; // Ping-pong bounds between 0-19
              }
              
              ent.frameTimer -= finalFPS;
@@ -1278,7 +1279,7 @@ export function useGameEngine({
                              ctx.globalAlpha = 1.0 - ((distance - fullyVisibleDist) / (fadeStartDist - fullyVisibleDist));
                          }
 
-                         // Only play specific transition asset precisely once as transparency breaks
+                         // Play transition asset once
                          if (!ent.hasPlayedStealthSound) {
                              ent.hasPlayedStealthSound = true;
                              const sfx = createAudio('/sounds/Stealth.ogg');
@@ -1324,7 +1325,7 @@ export function useGameEngine({
                  // Procedural Help Marker (Bouncing Green Arrow)
                  if (ent.npcType.id === 'Strider') {
                      const bobbingOffset = Math.sin(time / 150) * 8; // Organic vertical wave translation
-                     const arrowY = (-drawHeight / 2) - 30 + bobbingOffset; // Mapped inherently cleanly above the frame bounds
+                     const arrowY = (-drawHeight / 2) - 30 + bobbingOffset; // Mapped above frame bounds
                      
                      ctx.fillStyle = '#22c55e'; // Bright active green highlight
                      ctx.beginPath();
@@ -1343,7 +1344,7 @@ export function useGameEngine({
                      ctx.stroke();
                  }
 
-                 // Quest Interaction Icons seamlessly cleanly rendered
+                 // Quest Interaction Icons
                  if (ent.npcType.id === 'Robot Chicken' && ent.parentId === 10003 && !ent.isFollowing) {
                      const bobbingOffset = Math.sin(time / 150) * 8; 
                      const markY = (-drawHeight / 2) - 30 + bobbingOffset;
@@ -1365,7 +1366,7 @@ export function useGameEngine({
                          const markY = (-drawHeight / 2) - 30 + bobbingOffset;
                          
                          ctx.save();
-                         // Neutralize scale flipping so the math/text draws correctly globally mapping cleanly successfully identically flawlessly mathematically!
+                         // Revert scale modifier to prevent text flipping.
                          if (shouldFlip) ctx.scale(-1, 1);
                          ctx.fillStyle = '#fde047'; // Bright Yellow
                          ctx.font = 'bold 64px monospace'; // Massive icon
@@ -1507,7 +1508,7 @@ export function useGameEngine({
       if (timeRemaining < 0) timeRemaining = 0;
 
       if (timeRemaining <= nextPickupTime && unspawnedPickups.length > 0 && isPlaying) {
-          nextPickupTime -= 16.0; // 16 second intervals correctly evenly distributes precisely 13 drops mapping 223 - 5 sec cleanly mathematically smoothly!
+          nextPickupTime -= 16.0; // 16 second intervals
           const pickupId = unspawnedPickups.pop()!;
           const pType = npcTypes.find(n => n.id === pickupId)!;
           
@@ -1520,7 +1521,7 @@ export function useGameEngine({
               childSpawnTimer: 0,
               x: canvas.width + 50,
               y: newEntityY,
-              width: 48, // Generous collision boundary reliably natively!
+              width: 48, // Generous collision boundary
               height: 48,
               hit: false,
               type: 'sit_hazard',
@@ -1546,16 +1547,16 @@ export function useGameEngine({
               enragedTimer: 0,
               childSpawnTimer: 0,
               x: canvas.width + 200, // Starts off-screen right
-              y: canvas.height / 2 + 480, // Compensates for the 960px bottom-up scale offset, plotting its core visually down the centerline
+              y: canvas.height / 2 + 480, // Compensate for bottom-up scale offset
               width: 24, // Irrelevant logical boundary
               height: 24, // Irrelevant logical boundary
-              hit: false, // Ensures rendering pipeline explicitly paints the sequence
+              hit: false, // Ensures rendering pipeline paints the sequence
               type: 'sit_hazard',
               npcType: npcTypes.find(n => n.id === 'Dragon')!,
               state: 'walk',
               stateTimer: 999.0, // Permanent pacing
               localSpeedX: -800, // Supersonic flight velocity
-              localSpeedY: 0, // Perfectly level trajectory
+              localSpeedY: 0, // Level trajectory
               facingLeft: true,
               sprite: npcTypes.find(n => n.id === 'Dragon')!.walk!,
               currentFrame: 0,
@@ -1597,7 +1598,7 @@ export function useGameEngine({
               enragedTimer: 0,
               childSpawnTimer: 0,
               x: canvas.width + 50,
-              y: canvas.height - 180, // Walk securely along explicit bottom lower pathway natively logically explicitly structurally
+              y: canvas.height - 180, // Lock pathing to the bottom boundary.
               width: 90,
               height: 60,
               hit: false,
@@ -1613,7 +1614,7 @@ export function useGameEngine({
               frameTimer: 0,
               isFollowing: false,
               isRunningToTarget: false,
-              parentId: questType === 'quest_start' ? 10001 : 10002 // Abuse parent ID mapping elegantly reliably!
+              parentId: questType === 'quest_start' ? 10001 : 10002 // Alias parent id
           });
       };
 
@@ -1626,7 +1627,7 @@ export function useGameEngine({
           const chicken = entities.find(e => e.parentId === 10003 && e.isFollowing);
           if (chicken && !chicken.isRunningToTarget) {
               chicken.isRunningToTarget = true; 
-              chicken.localSpeedX = 600; // Zoom off 3x speed natively 
+              chicken.localSpeedX = 600; // Triple speed
               questBonusPoints += 250;
               const sfx = createAudio('/sounds/iQuestComplete.ogg');
               sfx.volume = 0.5;
@@ -1670,7 +1671,7 @@ export function useGameEngine({
               cheerSfx.volume = 0.3;
               cheerSfx.play().catch(() => {});
               outroTriggeredDistance = distanceTraveled;
-              entities.length = 0; // Obliterate all remaining entities cleanly organically naturally!
+              entities.length = 0; // Clear all entities.
           }
           
           if (engineHalt) {
@@ -1678,18 +1679,22 @@ export function useGameEngine({
              ctx.fillRect(0, 0, canvas.width, canvas.height);
              
              ctx.fillStyle = '#ea580c';
-             ctx.font = 'black 48px monospace';
-             ctx.fillText('ENDURANCE COMPLETE', canvas.width / 2, canvas.height / 2 - 40);
+             ctx.font = '48px "Jersey 10", sans-serif';
+             ctx.fillText('You made it on time!', canvas.width / 2, canvas.height / 2 - 40);
              
              ctx.fillStyle = '#ffffff';
-             ctx.font = 'bold 32px monospace';
+             ctx.font = '32px "Jersey 10", sans-serif';
              ctx.fillText(`FINAL SCORE: ${score.toString().padStart(5, '0')}`, canvas.width / 2, canvas.height / 2 + 20);
 
-             ctx.fillStyle = '#a1a1aa';
-             ctx.font = '20px monospace';
-             ctx.fillText(`Hazards hit: ${hazardsHit}  |  Items collected: ${pickupsCollected}/13`, canvas.width / 2, canvas.height / 2 + 60);
+             let questsCompleted = 0;
+             if (questBonusPoints === 150 || questBonusPoints === 250) questsCompleted = 1;
+             else if (questBonusPoints >= 400) questsCompleted = 2;
 
-             return; // Halts the requestAnimationFrame loop entirely
+             ctx.fillStyle = '#a1a1aa';
+             ctx.font = '24px "Jersey 10", sans-serif';
+             ctx.fillText(`Hazards hit: ${hazardsHit}  |  Items: ${pickupsCollected}/13  |  Quests: ${questsCompleted}/2`, canvas.width / 2, canvas.height / 2 + 60);
+
+             return; // Halt loop
           }
       }
 
