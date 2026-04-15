@@ -52,11 +52,14 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const [isAdded, setIsAdded] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
+  const [a11yMessage, setA11yMessage] = useState("");
   
   const handleOptimisticAdd = (action: () => void) => {
     action();
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 1000);
+    // Clear message after enough time for screen reader to announce it
+    setTimeout(() => setA11yMessage(""), 3000);
   };
 
   const { 
@@ -114,11 +117,13 @@ export function ProductCard({ product }: ProductCardProps) {
         discountEndsAt: product.discountEndsAt,
         specs: specs
       });
+      setA11yMessage(`Added ${product.name} to cart.`);
       return;
     }
 
     if (isSelected) {
       removeComponent(categoryName);
+      setA11yMessage(`Removed ${product.name} from build.`);
     } else {
       setComponent(categoryName, {
         id: product.id,
@@ -129,18 +134,26 @@ export function ProductCard({ product }: ProductCardProps) {
         discountEndsAt: product.discountEndsAt,
         specs: specs
       });
+      setA11yMessage(`Selected ${product.name} for your build.`);
     }
   };
 
   return (
     <div className={`flex flex-col bg-[#0f0f0f] border ${isSelected ? (isConflicting ? 'border-red-500' : 'border-brand') : 'border-border'}  overflow-hidden group md:hover:border-brand/50 transition-colors relative`}>
+      {/* Screen Reader Announcement Region */}
+      <div aria-live="polite" className="sr-only">
+        {a11yMessage}
+      </div>
       {/* Dynamic Compatibility Warning */}
       {(isSelected && isConflicting) || (!isSelected && potentialIssues.length > 0) ? (
-         <div className="absolute top-3 right-3 text-red-500 z-20 bg-red-950/90 p-1.5  border border-red-900  group/warning cursor-help">
+         <div 
+           className="absolute top-3 right-3 text-red-500 z-20 bg-red-950/90 p-1.5  border border-red-900  group/warning cursor-help focus:outline-none"
+           tabIndex={0}
+         >
            <AlertTriangle className="w-5 h-5" />
            
            {/* Hover Tooltip */}
-           <div className="absolute right-0 top-full mt-2 w-56 bg-[#1a0f0f] border border-red-900/50   p-3 opacity-0 group-hover/warning:opacity-100 transition-opacity pointer-events-none z-30 flex flex-col">
+           <div className="absolute right-0 top-full mt-2 w-56 bg-[#1a0f0f] border border-red-900/50   p-3 opacity-0 group-hover/warning:opacity-100 group-focus/warning:opacity-100 transition-opacity pointer-events-none z-30 flex flex-col">
               <span className="text-xs font-semibold text-red-500 mb-2 tracking-wide">
                 {isSelected ? "Current Conflicts" : "Potential Conflicts"}
               </span>
@@ -157,9 +170,7 @@ export function ProductCard({ product }: ProductCardProps) {
       {/* Image Area */}
       <div className="bg-[#1f1614] h-[220px] shrink-0 w-full flex items-center justify-center p-6 relative">
         {!imgLoaded && (
-           <div className="absolute inset-0 flex items-center justify-center">
-             <div className="w-12 h-12  border-2 border-brand/20 border-t-brand animate-spin" />
-           </div>
+           <div className="absolute inset-0 bg-white/5 animate-pulse" />
         )}
         <Image 
           src={product.imageUrl.replace('/products/', '/assets/').replace('_FINAL', '')} 
@@ -214,11 +225,12 @@ export function ProductCard({ product }: ProductCardProps) {
              if (storageItem) {
                return (
                  <div className="w-full h-[42px] flex items-center bg-emerald-600  font-medium tracking-tight text-white overflow-hidden )]">
-                   <button aria-label="Decrease quantity"
+                   <button aria-label={`Decrease quantity of ${product.name}`}
                      data-testid="qty-decrease"
                      onClick={(e) => {
                        e.stopPropagation();
                        updateBuildStorageQuantity(product.id, storageItem.quantity - 1);
+                       setA11yMessage(`Decreased quantity of ${product.name} to ${storageItem.quantity - 1}.`);
                      }}
                      className="flex-1 h-full md:hover:bg-emerald-700 active:bg-emerald-800 transition-colors flex items-center justify-center text-lg"
                    >
@@ -227,11 +239,12 @@ export function ProductCard({ product }: ProductCardProps) {
                    <div className="px-5 h-full flex items-center justify-center min-w-[3ch] font-mono text-sm bg-black/20 text-white font-bold border-x border-emerald-500/30">
                      {storageItem.quantity}
                    </div>
-                   <button aria-label="Increase quantity"
+                   <button aria-label={`Increase quantity of ${product.name}`}
                      data-testid="qty-increase"
                      onClick={(e) => {
                        e.stopPropagation();
                        updateBuildStorageQuantity(product.id, storageItem.quantity + 1);
+                       setA11yMessage(`Increased quantity of ${product.name} to ${storageItem.quantity + 1}.`);
                      }}
                      className="flex-1 h-full md:hover:bg-emerald-700 active:bg-emerald-800 transition-colors flex items-center justify-center text-lg"
                    >
@@ -241,20 +254,23 @@ export function ProductCard({ product }: ProductCardProps) {
                );
              } else {
                return (
-                 <button aria-label="Select product"
+                 <button aria-label={`Select ${product.name}`}
                    data-testid="add-to-cart-btn"
-                   onClick={() => handleOptimisticAdd(() => addBuildStorageComponent({
-                     id: product.id,
-                     name: product.name,
-                     price: product.price,
-                     category: categoryName,
-                     discountPercent: product.discountPercent,
-                     discountEndsAt: product.discountEndsAt,
-                     specs: specs
-                   }))}
+                   onClick={() => handleOptimisticAdd(() => {
+                     addBuildStorageComponent({
+                       id: product.id,
+                       name: product.name,
+                       price: product.price,
+                       category: categoryName,
+                       discountPercent: product.discountPercent,
+                       discountEndsAt: product.discountEndsAt,
+                       specs: specs
+                     });
+                     setA11yMessage(`Selected ${product.name} for your build.`);
+                   })}
                    className="w-full h-11  font-medium flex items-center justify-center gap-2 transition-all bg-amber-600 md:hover:bg-amber-500 text-white"
                  >
-                   {isAdded ? <><CheckCircle className="w-4 h-4"/> Added!</> : "Select"}
+                   {isAdded ? <><CheckCircle className="w-4 h-4"/> Added! <span className="sr-only">{product.name}</span></> : <><span aria-hidden="true">Select</span> <span className="sr-only">Select {product.name}</span></>}
                  </button>
                );
              }
@@ -262,14 +278,16 @@ export function ProductCard({ product }: ProductCardProps) {
              const cartItem = looseCart.find(i => i.id === product.id)!;
              return (
                <div className="w-full h-[42px] flex items-center bg-zinc-800  font-medium tracking-tight text-white overflow-hidden border border-border">
-                 <button aria-label="Decrease quantity"
+                 <button aria-label={`Decrease quantity of ${product.name}`}
                    data-testid="qty-decrease"
                    onClick={(e) => {
                      e.stopPropagation();
                      if (cartItem.quantity <= 1) {
                        removeFromLooseCart(product.id);
+                       setA11yMessage(`Removed ${product.name} from cart.`);
                      } else {
                        updateLooseQuantity(product.id, cartItem.quantity - 1);
+                       setA11yMessage(`Decreased quantity of ${product.name} to ${cartItem.quantity - 1}.`);
                      }
                    }}
                    className="flex-1 h-full md:hover:bg-zinc-700 active:bg-zinc-600 transition-colors flex items-center justify-center text-lg"
@@ -279,11 +297,12 @@ export function ProductCard({ product }: ProductCardProps) {
                  <div className="px-5 h-full flex items-center justify-center min-w-[3ch] font-mono text-sm bg-black/40 text-brand font-bold border-x border-border">
                    {cartItem.quantity}
                  </div>
-                 <button aria-label="Increase quantity"
+                 <button aria-label={`Increase quantity of ${product.name}`}
                    data-testid="qty-increase"
                    onClick={(e) => {
                      e.stopPropagation();
                      updateLooseQuantity(product.id, cartItem.quantity + 1);
+                     setA11yMessage(`Increased quantity of ${product.name} to ${cartItem.quantity + 1}.`);
                    }}
                    className="flex-1 h-full md:hover:bg-zinc-700 active:bg-zinc-600 transition-colors flex items-center justify-center text-lg"
                  >
@@ -295,6 +314,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <button
               data-testid="add-to-cart-btn"
               onClick={() => handleOptimisticAdd(() => handleToggle())}
+              aria-pressed={mode === "build" ? isSelected : undefined}
               className={`w-full h-11  font-medium flex items-center justify-center gap-2 transition-all ${
                 mode === "build" 
                   ? (isSelected 
@@ -303,7 +323,11 @@ export function ProductCard({ product }: ProductCardProps) {
                   : 'bg-zinc-800 md:hover:bg-zinc-700 border border-border text-white md:hover:border-brand/50'
               }`}
             >
-              {mode === "build" ? (isSelected ? "Selected" : "Select") : (isAdded ? <><CheckCircle className="w-4 h-4"/> Added!</> : <><ShoppingCart className="w-4 h-4"/> Add to Cart</>)}
+              {mode === "build" ? (
+                isSelected ? <><span aria-hidden="true">Selected</span> <span className="sr-only">Selected {product.name}</span></> : <><span aria-hidden="true">Select</span> <span className="sr-only">Select {product.name}</span></>
+              ) : (
+                isAdded ? <><CheckCircle className="w-4 h-4"/> <span aria-hidden="true">Added!</span> <span className="sr-only">Added {product.name} to cart</span></> : <><ShoppingCart className="w-4 h-4"/> <span aria-hidden="true">Add to Cart</span> <span className="sr-only">Add {product.name} to cart</span></>
+              )}
             </button>
           )}
         </div>

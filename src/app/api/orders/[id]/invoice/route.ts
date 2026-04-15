@@ -3,21 +3,36 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import puppeteerCore from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
+import { requireAdminAuth } from '@/lib/auth';
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   
-  const cookieStore = await cookies();
-  const customerSession = cookieStore.get('customer-session');
-  
-  if (!customerSession || !customerSession.value) {
-    return new NextResponse('Unauthorized access to order data', { status: 401 });
+  const url = new URL(req.url);
+  const isAdminRequest = url.searchParams.get('admin') === 'true';
+
+  let customerIdToFind = undefined;
+
+  if (isAdminRequest) {
+    try {
+      await requireAdminAuth();
+    } catch {
+      return new NextResponse('Unauthorized admin access', { status: 401 });
+    }
+  } else {
+    const cookieStore = await cookies();
+    const customerSession = cookieStore.get('customer-session');
+    
+    if (!customerSession || !customerSession.value) {
+      return new NextResponse('Unauthorized access to order data', { status: 401 });
+    }
+    customerIdToFind = customerSession.value;
   }
 
   const order = await prisma.order.findUnique({
     where: { 
       id,
-      customerId: customerSession.value
+      ...(customerIdToFind ? { customerId: customerIdToFind } : {})
     },
     include: {
       customer: true,

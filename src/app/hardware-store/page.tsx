@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import HardwareStoreGame from '@/components/game/HardwareStoreGame';
-import { ArrowLeft, RotateCcw, X } from 'lucide-react';
+import { ArrowLeft, RotateCcw } from 'lucide-react';
 
 export default function HardwareStorePage() {
   return (
@@ -16,10 +16,6 @@ export default function HardwareStorePage() {
          </Link>
       </div>
 
-      {/* Floating Exit Button natively embedded solely for Mobile Landscape */}
-      <Link href="/" className="md:hidden absolute top-4 right-4 z-[150] bg-black/60 border border-zinc-800 p-2  text-zinc-400 hover:text-white hover:bg-black/80 transition-colors outline-none  backdrop-blur-md">
-          <X className="w-5 h-5" />
-      </Link>
 
       <div className="max-w-4xl mx-auto w-full mb-8 hidden md:flex items-center justify-between gap-4 [@media(max-height:500px)]:!hidden [@media(max-height:500px)]:!mb-0 shrink-0">
          <div>

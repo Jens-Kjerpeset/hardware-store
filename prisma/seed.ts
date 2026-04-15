@@ -293,7 +293,7 @@ async function main() {
       description:
         "Affordable Micro ATX board for Intel 13th & 12th Gen. Supports DDR4 memory and dual M.2 slots.",
       price: 94.99,
-      imageUrl: "/products/ASRock B760M-HDV/M.2 D4_FINAL.png",
+      imageUrl: "/products/ASRock-B760M-HDV-M2-D4_FINAL.png",
       brand: "ASRock",
       categoryId: categoryMap.get("Motherboard"),
       specsJson: JSON.stringify({

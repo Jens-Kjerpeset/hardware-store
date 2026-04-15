@@ -183,9 +183,9 @@ export default function HardwareStoreGame() {
               <img 
                  src="/sprites/Paused_btn.png" 
                  alt="PAUSED" 
-                 className="w-[450px] [@media(max-height:500px)]:w-[300px] max-w-[80%] object-contain mb-8 )]"
+                 className="w-[450px] [@media(max-height:500px)]:w-[300px] max-w-[80%] object-contain mb-8 [@media(max-height:500px)]:mb-4 )]"
               />
-              <div className="flex gap-10">
+              <div className="flex gap-10 [@media(max-height:500px)]:gap-6">
                  <button 
                    onClick={togglePause}
                    className="hover:scale-105 active:scale-95 transition-transform duration-200 outline-none"
@@ -199,15 +199,27 @@ export default function HardwareStoreGame() {
                    <img src="/sprites/Restart_btn.png" alt="Restart Game" className="h-[80px] [@media(max-height:500px)]:h-[55px] object-contain )]" />
                  </button>
               </div>
+              <button
+                 onClick={() => window.location.href = '/'}
+                 className="mt-8 [@media(max-height:500px)]:mt-4 bg-black border-2 border-zinc-700 px-6 py-2 text-xl font-bold font-mono tracking-widest hover:bg-red-950 hover:border-red-800 hover:text-red-300 text-zinc-400 transition-colors uppercase outline-none"
+              >
+                 Exit Game
+              </button>
            </div>
          )}
          {isGameOver && (
-           <div className="absolute bottom-16 right-1/2 translate-x-1/2 z-20">
+           <div className="absolute bottom-8 right-1/2 translate-x-1/2 z-20 flex flex-col items-center gap-4">
                <button 
                  onClick={restartGame}
                  className="hover:scale-105 active:scale-95 transition-transform duration-200 outline-none"
                >
                  <img src="/sprites/Restart_btn.png" alt="Play Again" className="h-[80px] [@media(max-height:500px)]:h-[60px] object-contain )]" />
+               </button>
+               <button
+                 onClick={() => window.location.href = '/'}
+                 className="bg-black border-2 border-zinc-700 px-6 py-2 text-xl font-bold font-mono tracking-widest hover:bg-red-950 hover:border-red-800 hover:text-red-300 text-zinc-400 transition-colors uppercase outline-none"
+               >
+                 Exit Game
                </button>
            </div>
          )}

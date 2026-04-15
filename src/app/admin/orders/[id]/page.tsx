@@ -44,7 +44,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
           <ArrowLeft className="w-4 h-4" /> Back to Orders
         </Link>
         <Link 
-          href={`/api/orders/${order.id}/invoice`}
+          href={`/api/orders/${order.id}/invoice?admin=true`}
           target="_blank"
           className="flex items-center gap-2 bg-zinc-100 text-zinc-900 border border-transparent hover:bg-white px-4 py-2  font-bold text-sm transition-colors"
         >
